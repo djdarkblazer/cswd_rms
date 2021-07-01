@@ -95,7 +95,7 @@
 									</div>											
 									<div class="col-3">
 										<label for="pwd_brgy">Barangay</label>
-										<select class="form-control"name="pwd_brgy" id="opt_brgy">
+										<select id="rec_mode" class="form-control" name="pwd_brgy">
 										</select>
 									</div>										
 
