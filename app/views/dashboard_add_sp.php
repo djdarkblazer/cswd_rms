@@ -26,7 +26,7 @@
 		<section class="content">
 			<div class="container-fluid"> 
 				<div class="row">
-					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" enctype="multipart/form-data">>					
+					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" enctype="multipart/form-data">					
 						<!-- left column -->
 						<div class="col-md-12">
 

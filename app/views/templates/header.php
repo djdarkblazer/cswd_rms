@@ -138,7 +138,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url(); ?>admin/sp_addrecords" class="nav-link">
+                <a href="<?= site_url(); ?>admin/pwd_addrecords" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add PWD</p>
                 </a>

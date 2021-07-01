@@ -773,5 +773,15 @@ public function insert_coa()
 }
 
 
+public function pwd_addrecords()
+{
+	if($this->auth->is_logged_in()){
+		$this->call->view('dashboard_add_pwd');
+	} else {
+		$this->call->view('dashboard_login'); 
+	}
+}
+
+
 	//End	
 }
