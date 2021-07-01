@@ -52,7 +52,53 @@
 											<option value="Male">Male</option>
 											<option value="Female">Female</option>
 										</select>
-									</div>																						
+									</div>
+									<div class="col-4">
+										<label for="pwd_typedis">Type of Disability</label>
+										<select name="pwd_typedis" class="form-control" id="pwd_typedis">
+											<option value="Communication Disability">Communication Disability</option>
+											<option value="Learning Disability">Learning Disability</option>
+											<option value="Mental/Pyschosocial Disability">Mental/Pyschosocial Disability</option>
+											<option value="Visual">Visual</option>
+											<option value="Orthopedic(Musculoskeletal)">Orthopedic(Musculoskeletal)</option>
+											<option value="Intellectual Disability">Intellectual Disability</option>
+											<option value="Other">Other</option>
+										</select>
+									</div>											
+									<div class="col-3">
+										<label for="pwd_typespecify">Other Type of Disability</label>
+										<input type="text" class="form-control" value="none" name="pwd_typespecify" id="pwd_typespecify" readonly="">
+									</div>											
+									<div class="col-2">
+										<label for="pwd_causedis">Cause of Disability</label>
+										<select name="pwd_causedis" class="form-control" >
+											<option value="Inborn">Inborn</option>
+											<option value="Due to Accident">Due to Accident</option>
+											<option value="Due to Chronic Illness">Due to Chronic Illness</option>
+										</select>
+									</div>	
+									<div class="col-4">
+										<label for="pwd_address">Address/Number & Street</label>
+										<input type="text" class="form-control" placeholder="E.g. Quezon Drive Street" name="pwd_address">	
+									</div>
+									<div class="col-2">
+										<label for="pwd_region">Region</label>
+										<input type="text" class="form-control" placeholder="Region*" name="pwd_region">
+									</div>											
+									<div class="col-2">
+										<label for="pwd_province">Province</label>
+										<input type="text" class="form-control" placeholder="Province*" name="pwd_province">
+									</div>											
+									<div class="col-3">
+										<label for="pwd_city">City/Municipality</label>
+										<input type="text" class="form-control" placeholder="City/Municipality*" name="pwd_city">
+									</div>											
+									<div class="col-3">
+										<label for="pwd_brgy">Barangay</label>
+										<select class="form-control"name="pwd_brgy" id="opt_brgy">
+										</select>
+									</div>										
+
 								</div>
 							</div>
 							<!-- /.card-body -->

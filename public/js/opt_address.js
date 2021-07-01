@@ -1,4 +1,4 @@
-let optionList = document.getElementById('rec_mode').options;
+let optionList = document.getElementById("opt_brgy").options;
 let options = [
 {
 	text: '-- Choose your Barangay --',
@@ -258,11 +258,9 @@ let options = [
 }
 ];
 
-options.forEach(option =>
-	optionList.add(
-		new Option(option.text, option.value, option.selected)
-		)
-	);
+options.forEach(option => 
+	optionList.add(new Option
+		(option.text, option.value, option.selected)));
 
 
 
