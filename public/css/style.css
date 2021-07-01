@@ -1,0 +1,39 @@
+
+/*Basic Style */
+.h-banner {
+	height: 350px;
+	
+}
+.slider-style{
+	height: 700px;
+}
+.c-style-h{
+	height: 700px;
+}
+.b-bottom {
+	border-bottom: 5px solid #007bff;
+}
+.welcome-banner{
+  background-color: #007bff;        
+}
+
+.jumbotron1{
+  background-color: LightGray;
+  border: 2px ridge white;
+  color: white;
+}
+
+.jumbotron{
+  background-color: white;
+
+}
+
+/*//Basic*/
+
+/*Highlight Blue*/
+
+.acclist {
+  text-align: center;
+  padding-top: 10px;
+}
+
