@@ -100,18 +100,18 @@
   $(document).ready(function () {
     var Toast = Swal.mixin({
       toast: false,
-
+      position: 'center',
       showConfirmButton: false,
-      timer: 3000
+      timer: 1000
     });
-
     var Toasted = Swal.mixin({
+      toast: false,
+      position: 'center',
       showConfirmButton: true,
     });    
 
     <?php if($this->session->flashdata('success')) : ?>
       Toast.fire({
-
         text: "<?php echo $this->session->flashdata('success') ?>",
         icon: "success",
       });

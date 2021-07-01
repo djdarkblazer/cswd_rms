@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= site_url(); ?>/assets/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="margin-top: 10%">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
@@ -24,7 +24,7 @@
       <a class="h1" href="<?= SITE_URL('account/Login'); ?>"><b><span style="color: #EF3A25;">CSWD</span> <br><span style="color: #2990C3;">Change Password</span></a></b>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Change your Password to start your session</p>
 
       <form action="<?= SITE_URL('account/change_password'); ?>" method="post">
         <div class="input-group mb-3">

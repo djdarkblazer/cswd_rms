@@ -36,100 +36,85 @@
   <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/toastr/toastr.min.css">  
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?= site_url(); ?>assets/img/logo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="<?= site_url(); ?>assets/img/logo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand  navbar-primary navbar-dark">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?= site_url(); ?>admin" class="nav-link">Home</a>
-      </li>
-    </ul>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand  navbar-primary navbar-dark">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="<?= site_url(); ?>admin" class="nav-link">Home</a>
+        </li>
+      </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
 
-      <!-- Messages Dropdown Menu -->
+        <!-- Messages Dropdown Menu -->
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="<?= site_url(); ?>/assets/#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
+        <!-- Notifications Dropdown Menu -->
+<!--         <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="<?= site_url(); ?>/assets/#" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li> -->
+      </ul>
+    </nav>
+    <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="<?= site_url(); ?>admin" class="brand-link">
-      <img src="<?= site_url();?>assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ADMIN PANEL</span>
-    </a>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="<?= site_url(); ?>admin" class="brand-link">
+        <img src="<?= site_url();?>assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">ADMIN PANEL</span>
+      </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?= site_url(); ?>assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="<?= site_url(); ?>assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a>
           </div>
         </div>
-      </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column nav-compact" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+          <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-compact" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-header accent-blue"><strong>ADMIN PANEL</strong></li>     
-          <li class="nav-item menu-open">
+           with font-awesome or any other icon font library -->
+           <li class="nav-header accent-blue"><strong>ADMIN PANEL</strong></li>     
+           <li class="nav-item menu-open">
             <a href="<?= site_url(); ?>admin" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -204,15 +189,7 @@
             <a href="$" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
-                Information
-              </p>
-            </a>
-          </li>
-            <li class="nav-item">
-            <a href="$" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Assistance / Request
+                Post / Articles
               </p>
             </a>
           </li>
@@ -224,7 +201,7 @@
             </a>
           </li>
           <li class="nav-header"><strong>SETTINGS</strong></li>
-            <li class="nav-item">
+          <li class="nav-item">
             <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -232,7 +209,7 @@
               </p>
             </a>
           </li>
-            <li class="nav-item">
+          <li class="nav-item">
             <a href="<?= site_url('account/is_logout'); ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>

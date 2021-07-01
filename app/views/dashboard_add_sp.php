@@ -26,7 +26,7 @@
 		<section class="content">
 			<div class="container-fluid"> 
 				<div class="row">
-					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" onsubmit="setBlank()">					
+					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" enctype="multipart/form-data">>					
 						<!-- left column -->
 						<div class="col-md-12">
 
@@ -45,10 +45,7 @@
 										<div class="col-2">
 											<label for="sp_age">Age</label>
 											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Age*" name="sp_age" id="age">
-												<div class="input-group-prepend">
-													<span class="input-group-text">yrs. old</span>
-												</div>	
+												<input type="text" class="form-control" placeholder="Auto Calculate" name="sp_age" id="age" readonly="">
 											</div>										
 										</div>
 										<div class="col-2">
@@ -130,136 +127,136 @@
 												<!-- SPFC 1-->
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="spfc_fullname" value="none">
+														<input type="text" class="form-control" name="spfc_fullname" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_relationship" value="none">
+														<input type="text" class="form-control" name="spfc_relationship" value="">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="spfc_age" value="0">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_status" value="none">
+														<input type="text" class="form-control" name="spfc_status" value="">
 													</td>
 													<td>
 														<input type="date" class="form-control" name="spfc_dob" value="<?php echo date("Y-m-d"); ?>">
 													</td>										
 													<td>
-														<input type="text" class="form-control" name="spfc_educational" value="none">
+														<input type="text" class="form-control" name="spfc_educational" value="">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="spfc_occupation" value="none">
+														<input type="text" class="form-control" name="spfc_occupation" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_monthlyincome" value="none">
+														<input type="text" class="form-control" name="spfc_monthlyincome" value="">
 													</td>									
 												</tr>
 												<!-- SPFC 2-->
 												<tr>
 													<td>
-														<input type="text" class="form-control"  name="spfc_fullname_two" value="none">
+														<input type="text" class="form-control"  name="spfc_fullname_two" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_relationship_two" value="none">
+														<input type="text" class="form-control" name="spfc_relationship_two" value="">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="spfc_age_two" value="0">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_status_two" value="none">
+														<input type="text" class="form-control" name="spfc_status_two" value="">
 													</td>
 													<td>
 														<input type="date" class="form-control" name="spfc_dob_two" value="<?php echo date("Y-m-d"); ?>">
 													</td>										
 													<td>
-														<input type="text" class="form-control" name="spfc_educational_two" value="none">
+														<input type="text" class="form-control" name="spfc_educational_two" value="">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="spfc_occupation_two" value="none">
+														<input type="text" class="form-control" name="spfc_occupation_two" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_monthlyincome_two" value="none">
+														<input type="text" class="form-control" name="spfc_monthlyincome_two" value="">
 													</td>									
 												</tr>
 												<!-- SPFC 3-->
 												<tr>
 													<td>
-														<input type="text" class="form-control"  name="spfc_fullname_three" value="none">
+														<input type="text" class="form-control"  name="spfc_fullname_three" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_relationship_three" value="none">
+														<input type="text" class="form-control" name="spfc_relationship_three" value="">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="spfc_age_three" value="0">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_status_three" value="none">
+														<input type="text" class="form-control" name="spfc_status_three" value="">
 													</td>
 													<td>
 														<input type="date" class="form-control" name="spfc_dob_three" value="<?php echo date("Y-m-d"); ?>">
 													</td>										
 													<td>
-														<input type="text" class="form-control" name="spfc_educational_three" value="none">
+														<input type="text" class="form-control" name="spfc_educational_three" value="">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="spfc_occupation_three" value="none">
+														<input type="text" class="form-control" name="spfc_occupation_three" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_monthlyincome_three" value="none">
+														<input type="text" class="form-control" name="spfc_monthlyincome_three" value="">
 													</td>									
 												</tr>
 												<!-- SPFC 4-->
 												<tr>
 													<td>
-														<input type="text" class="form-control"  name="spfc_fullname_four" value="none">
+														<input type="text" class="form-control"  name="spfc_fullname_four" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_relationship_four" value="none">
+														<input type="text" class="form-control" name="spfc_relationship_four" value="">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="spfc_age_four" value="0">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_status_four" value="none">
+														<input type="text" class="form-control" name="spfc_status_four" value="">
 													</td>
 													<td>
 														<input type="date" class="form-control" name="spfc_dob_four" value="<?php echo date("Y-m-d"); ?>">
 													</td>										
 													<td>
-														<input type="text" class="form-control" name="spfc_educational_four" value="none">
+														<input type="text" class="form-control" name="spfc_educational_four" value="">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="spfc_occupation_four" value="none">
+														<input type="text" class="form-control" name="spfc_occupation_four" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_monthlyincome_four" value="none">
+														<input type="text" class="form-control" name="spfc_monthlyincome_four" value="">
 													</td>									
 												</tr>											
 												<!-- SPFC 5-->
 												<tr>
 													<td>
-														<input type="text" class="form-control"  name="spfc_fullname_five" value="none">
+														<input type="text" class="form-control"  name="spfc_fullname_five" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_relationship_five" value="none">
+														<input type="text" class="form-control" name="spfc_relationship_five" value="">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="spfc_age_five" value="0">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_status_five" value="none">
+														<input type="text" class="form-control" name="spfc_status_five" value="">
 													</td>
 													<td>
 														<input type="date" class="form-control" name="spfc_dob_five" value="<?php echo date("Y-m-d"); ?>">
 													</td>										
 													<td>
-														<input type="text" class="form-control" name="spfc_educational_five" value="none">
+														<input type="text" class="form-control" name="spfc_educational_five" value="">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="spfc_occupation_five" value="none">
+														<input type="text" class="form-control" name="spfc_occupation_five" value="">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="spfc_monthlyincome_five" value="none">
+														<input type="text" class="form-control" name="spfc_monthlyincome_five" value="">
 													</td>									
 												</tr>										
 											</tbody>
@@ -357,6 +354,10 @@
 										<div class="col-4" >
 											<label for="sp_signature">PRINTED NAME</label>
 											<input type="text" class="form-control" placeholder="PRINTED NAME*" name="sp_signature">
+										</div>										
+										<div class="col-4" >
+											<label for="fileToUpload">Upload Any Size ID Picture</label>
+											<input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px">
 										</div>												
 									</div>
 

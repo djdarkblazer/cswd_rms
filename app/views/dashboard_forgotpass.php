@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= site_url(); ?>/assets/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="margin-top: 10%">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
@@ -42,7 +42,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Send Code</button>
           </div>
           <!-- /.col -->
         </div>
