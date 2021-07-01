@@ -60,10 +60,17 @@ include(ROOT . 'templates/header.php');
                     <td><?=$row['sp_address']?></td>
                     <td><?=$row['sp_occupation']?></td>
                     <td><?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?></td>
-                    <td style="text-align: center;">
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <a href="<?=site_url('admin/sp_delrecords/'.$row['sp_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                        <a href="<?=site_url('admin/edit_records/'.$row['sp_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
+                        <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm"><i class="fa fa-fw fa-file"></i> PDF</a>                     
+                      </div>                      
+                    </td>
+<!--                     <td style="text-align: center;">
                      <a href="<?=site_url('admin/sp_delrecords/'.$row['sp_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                      <a href="<?=site_url('admin/edit_records/'.$row['sp_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                     <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm"><i class="fa fa-fw fa-file"></i>Form</a></td>
+                     <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm"><i class="fa fa-fw fa-file"></i>Form</a></td> -->
                    </td>
                  </tr>
                <?php endforeach;?> 
