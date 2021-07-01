@@ -24,75 +24,48 @@
 
 		<!-- Main content -->
 		<section class="content">
-			<div class="container-fluid"> 
+			<div class="container-fluid">
 				<div class="row">
-					<form action="<?= site_url('admin/pwd_insert'); ?>" method="POST" enctype="multipart/form-data">					
-						<!-- left column -->
-						<div class="col-md-12">
-							<div class="card card-primary">
-								<div class="card-header">
-									<h3 class="card-title">Identifying Information</h3>
-								</div>
-								<div class="card-body">
-									<div class="row">
-										
-									</div>                               
-								</div>
-								<!-- /.card-body -->
+					<div class="col-12">
+						<div class="card card-primary">
+							<div class="card-header ">
+								<h3 class="card-title">Identifying Information</h3>
 							</div>
-							<!-- /.card -->
-						</div>
-						<!--/.col (left) -->
-
-						<!-- right column -->
-						<div class="col-md-12">
-
-							<div class="card card-primary">
-								<div class="card-body">
-									<div class="row">
-										<!-- /.row -->		
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div class="row">
+									<div class="col-2">
+										<label for="pwd_lname">Last Name</label>
+										<input type="text" class="form-control" placeholder="Last Name" name="pwd_lname">
 									</div>
-
+									<div class="col-2">
+										<label for="pwd_fname">First Name</label>
+										<input type="text" class="form-control" placeholder="First Name" name="pwd_fname">
+									</div>											
+									<div class="col-2">
+										<label for="pwd_mname">Middle Name</label>
+										<input type="text" class="form-control" placeholder="Middle Name" name="pwd_mname">
+									</div>											
+									<div class="col-2">
+										<label for="pwd_sex">Sex</label>
+										<select name="pwd_sex" class="form-control">
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+										</select>
+									</div>																						
 								</div>
-								<!-- /.card-body -->
 							</div>
+							<!-- /.card-body -->
 						</div>
-						<!--/.col (right) -->
-
-						<!-- right column -->
-						<div class="col-md-12">
-
-							<div class="card card-primary">
-								<div class="card-body" style="align-items: center;">	
-									<div class="row">
-										
-									</div>
-
-								</div>
-								<!-- /.card-body -->
-							</div>
-						</div>
-						<!--/.col (right) -->
-
-						<div class="col-md-12">
-							<div class="card card-primary">
-								<div class="card-body" style="align-items: center;">
-									<div class="row">				
-									</div>
-
-								</div>
-								<!-- /.card-body -->
-							</div>
-						</div>					   					
+						<!-- /.card -->
 					</div>
-					<!-- /.row -->
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Submit Application Form</button>
-					</div>				
-				</form>
-			</div><!-- /.container-fluid -->
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
 		</section>
-		<!-- /.content -->
+		<!-- /.Main content -->
 
 	</div>
 	<!-- /.content-wrapper -->
