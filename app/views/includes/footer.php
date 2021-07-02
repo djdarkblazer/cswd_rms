@@ -59,6 +59,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 
+<script type="text/javascript" src="<?= site_url(); ?>assets/plugins/slick-1.8.1/slick/slick.min.js"></script>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/fontawesome.min.js" integrity="sha512-KCwrxBJebca0PPOaHELfqGtqkUlFUCuqCnmtydvBSTnJrBirJ55hRG5xcP4R9Rdx9Fz9IF3Yw6Rx40uhuAHR8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
@@ -69,6 +72,7 @@
   <!-- Custom JScript -->
 
   <?php echo load_js(array('js/preloader')); ?>
+  <?php echo load_js(array('js/slickpost')); ?>
   <!-- /.Custom JScript -->
 
   <script type="text/javascript" src="<?= SITE_URL()?>/assets/js/sweetalert.min.js"></script>
@@ -133,6 +137,9 @@
     });
   </script>
 
+<script type="text/javascript">
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,70 @@
+.page-wrapper a{
+	text-decoration: none;
+	color: inherit;
+}
+
+.page-wrapper a:hover{
+	color: #007bff;
+}
+
+
+/*POST SLIDER STYLE*/
+.post-slider{
+	position: relative;
+}
+
+.post-slider .slider-title{
+	text-align: center;
+	margin: 30px auto;
+}
+
+.post-slider .next {
+	position: absolute;
+	top: 50%;
+	right: 30px;
+	font-size: 2em;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.post-slider .prev {
+	position: absolute;
+	top: 50%;
+	left: 30px;
+	font-size: 2em;
+	color: #007bff;
+	cursor: pointer;
+}
+
+
+.post-slider .post-wrapper{
+	width: 85%;
+	height: 400px;
+	margin: 0px auto;
+	padding: 10px 0px 10px 0px;
+	overflow: hidden;
+
+}
+.post-slider .post-wrapper .post{
+	width: 300px;
+	height: 375px;
+	margin: 0px 10px 10px;
+	display: inline-block;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 6px 8px 6px -6px black;
+}
+
+.post-slider .post-wrapper .post .post-info {
+	height: 130px;
+	padding: 50px 5px;
+	text-align: center;
+
+}
+
+.post-slider .post-wrapper .post .slider-image {
+	width: 100%;
+	height: 200px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}

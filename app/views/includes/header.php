@@ -32,10 +32,15 @@
   <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom CSS -->
-  
+  <?php echo load_css(array('css/slickpost')); ?>
   <?php echo load_css(array('css/style')); ?>
   <?php echo load_css(array('css/footer')); ?>
   <?php echo load_css(array('css/preloader')); ?>
+
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="<?= site_url(); ?>assets/plugins/slick-1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<!-- <link rel="stylesheet" type="text/css" href="<?= site_url(); ?>assets/plugins/slick-1.8.1/slick/slick-theme.css"/> -->
 
   <!-- /.Custom JScript -->
 </head>

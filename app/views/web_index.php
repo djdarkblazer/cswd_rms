@@ -41,8 +41,8 @@ include(ROOT . 'includes/topnav.php');
 <div class="welcome-banner h-100 d-inline-block w-100 p-2">
   <div class="w-100 p-2">
     <hr/>
-      <h1 class="text-center" style="color: white;">Calapan City Social Welfare and Development</h1>
-      <p class="text-center" style="color: white;">The Department of Calapan City Social Welfare and Development (CSWD) is the primary government agency mandated to develop, implement, and coordinate social protection and poverty-reduction solutions for and with the poor, vulnerable, and disadvantaged.</p>    
+    <h1 class="text-center" style="color: white;">Calapan City Social Welfare and Development</h1>
+    <p class="text-center" style="color: white;">The Department of Calapan City Social Welfare and Development (CSWD) is the primary government agency mandated to develop, implement, and coordinate social protection and poverty-reduction solutions for and with the poor, vulnerable, and disadvantaged.</p>    
     <hr/>  
     <div class="jumbotron">
       <h3>Featured Videos: </h3>
@@ -83,25 +83,76 @@ include(ROOT . 'includes/topnav.php');
   </div>
 
   <!-- Scrolling Image -->
- 
+  <div class="page-wrapper">
+    <!-- Post Slide -->
+    <div class="post-slider">
+      <h1 class="slider-title"><img class="logo-float " src="<?= SITE_URL('assets/img/logo.png'); ?>" alt="cswdlogo" width="100" height="100" style="margin-right: 5px;  border-radius: 50%;">CSWD LATEST POST</h1>
 
-<div class="wrapper" >
-   <hr/>
-  <center>
-<h1><img class="logo-float" src="<?= SITE_URL('assets/img/logo.png'); ?>" alt="cswdlogo" width="10%" height="auto" style="margin-right: 5px;  border-radius: 50%;">Gallery and Events</h1> 
-</center>
-  <hr/>  
-<div class="container " >
-<marquee behavior="scroll" direction="left" style="box-shadow: 3px 3px 5px 3px;">
-<img src="<?= SITE_URL('assets/img/slider/1.jpg'); ?>" width="50%" height="auto" >
-<img src="<?= SITE_URL('assets/img/slider/2.jpg'); ?>" width="50%" height="auto" >
-<img src="<?= SITE_URL('assets/img/slider/3.jpg'); ?>" width="50%" height="auto" >
-<img src="<?= SITE_URL('assets/img/slider/4.jpg'); ?>" width="50%" height="auto" >
-<img src="<?= SITE_URL('assets/img/slider/5.jpg'); ?>" width="50%" height="auto" >
-</marquee>   
-  </div>
-  </div>
-  <br>
+      <i class="fas fa-chevron-left prev"></i>
+      <i class="fas fa-chevron-right next"></i>
+
+      <div class="post-wrapper">
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/1.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/2.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/3.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/4.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>  
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/5.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>
+        <div class="post">
+          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/1.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <div class="post-info">
+            <h4><a href="">Sana All ALL</a></h4>
+            <i class="fas fa-user">CSWD Office</i>
+            &nbsp;
+            <i class="fas fa-calendar">July 02, 2021</i>
+          </div>
+        </div>                  
+      </div>
+    </div>
+    <!-- //Post -->
+  </div>  
+
+</div>
+<br>
 
 
 
