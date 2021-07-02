@@ -113,7 +113,7 @@ $('#pwd_typedis').change(function() {
       toast: false,
       position: 'center',
       showConfirmButton: false,
-      timer: 1000
+      timer: 3000
     });
     var Toasted = Swal.mixin({
       toast: false,

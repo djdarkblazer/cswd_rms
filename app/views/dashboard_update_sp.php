@@ -45,10 +45,7 @@
 										<div class="col-2">
 											<label for="sp_age">Age</label>
 											<div class="input-group">
-												<input type="text" class="form-control" value="<?=$data['sp_age']; ?>" name="sp_age" id="age">
-												<div class="input-group-prepend">
-													<span class="input-group-text">yrs. old</span>
-												</div>	
+												<input type="text" class="form-control" value="<?=$data['sp_age']; ?>" name="sp_age" id="age" readonly>	
 											</div>										
 										</div>
 										<div class="col-2">
@@ -78,10 +75,7 @@
 										</div>
 										<div class="col-4">
 											<label for="sp_mobilenum">Mobile Number</label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text">+639</span>
-												</div>											
+											<div class="input-group">											
 												<input type="text" class="form-control" value="<?=$data['sp_mobilenum']; ?>" name="sp_mobilenum">
 
 											</div>										
@@ -98,6 +92,10 @@
 											<label for="sp_monthlyincome">Estimated Monthly Income</label>
 											<input type="text" class="form-control" value="<?=$data['sp_monthlyincome']; ?>" name="sp_monthlyincome">
 										</div>
+										<div class="col-4" >
+											<label for="sp_signature">Uploaded ID Picture</label>
+											<p><img src="<?php echo BASE_URL .'uploads/image/sp_idpic/'. $data['image']; ?>" width="100" height="100" style="border: 1px solid black;padding: 3px"></p>
+										</div>										
 
 										<!-- /.row -->
 									</div>                                

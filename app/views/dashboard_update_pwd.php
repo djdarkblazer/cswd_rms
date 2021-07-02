@@ -1,5 +1,5 @@
 	<?php
-	$pageTitle = "CSWD | PWD Records";
+	$pageTitle = "CSWD | Update PWD Records";
 	define("ROOT", __DIR__ ."/");
 	include(ROOT . 'templates/header.php');
 	?>
@@ -30,7 +30,7 @@
 						<div class="col-12">
 							<div class="card card-primary">
 								<div class="card-header ">
-									<h3 class="card-title">Identifying Information</h3>
+									<h3 class="card-title">Updating Information</h3>
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">

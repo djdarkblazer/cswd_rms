@@ -161,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url(); ?>admin/sp_viewrecords" class="nav-link">
+                <a href="<?= site_url(); ?>admin/pwd_viewrecords" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View PWD Records</p>
                 </a>

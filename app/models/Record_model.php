@@ -68,8 +68,8 @@ class Record_model extends Model {
 		);
 
 		$result = $this->db->table('form_soloparent')
-						   ->insert($bind)
-						   ->exec();
+		->insert($bind)
+		->exec();
 
 		if($result)
 			return true;	   
@@ -77,44 +77,53 @@ class Record_model extends Model {
 
 	public function retri_records(){
 		return $this->db->table('form_soloparent')
-						->order_by('sp_fullname', 'ASC')
-						->get_all();
+		->order_by('sp_fullname', 'ASC')
+		->get_all();
 	}
 
 	public function retri_coa(){
 		return $this->db->table('coa_activities')
-						->order_by('coa_date', 'ASC')
-						->get_all();
+		->order_by('coa_date', 'ASC')
+		->get_all();
 	}
 
 	public function delete_coa($id){
 		$result = $this->db->table('coa_activities')
-						    ->delete()
-						    ->where('coa_id', $id)
-						    ->exec();
+		->delete()
+		->where('coa_id', $id)
+		->exec();
 		if($result)
 			return true;						   					
 	}		
 
 	public function user_accounts(){
 		return $this->db->table('user')
-						->order_by('username', 'ASC')
-						->get_all();
+		->order_by('username', 'ASC')
+		->get_all();
 	}	
 
 	public function delete_data($id){
 		$result = $this->db->table('form_soloparent')
-						    ->delete()
-						    ->where('sp_id', $id)
-						    ->exec();
+		->delete()
+		->where('sp_id', $id)
+		->exec();
 		if($result)
 			return true;						   					
 	}
 
+
+	public function get_single_image($id){
+		return $this->db->table('form_soloparent')
+						->select('image')
+						->where('sp_id', $id)
+						->get();		
+	}
+
+
 	public function get_single_data($id){
 		return $this->db->table('form_soloparent')
-					->where('sp_id', $id)
-					->get();
+		->where('sp_id', $id)
+		->get();
 	}	
 
 	//Updating Query
@@ -182,40 +191,165 @@ class Record_model extends Model {
 		);
 
 		$result = $this->db->table('form_soloparent')
-						   ->where('sp_id', $sp_id)
-						   ->update($data)
-						   ->exec();
+		->where('sp_id', $sp_id)
+		->update($data)
+		->exec();
 
 		if($result)
 			return true;	   
 	}
 
 	   //Check if Email Exist	
-    public function email_exists($email){
-        return $this->db->table('clients')->where('email', $email)->get();
-    }
-    
-    public function find_pdf($sp_id)
-    {
-    	return $this->db->table('form_soloparent')
-    					->where('sp_id', $sp_id)
-    					->get_all();
-    }
+	public function email_exists($email){
+		return $this->db->table('clients')->where('email', $email)->get();
+	}
 
-    public function insert_coarecords($coa_date,$coa_name)
-    {
-        $data = array(
-        	'coa_date' => $coa_date,
-        	'coa_name' => $coa_name
-        );
+	public function find_pdf($sp_id)
+	{
+		return $this->db->table('form_soloparent')
+		->where('sp_id', $sp_id)
+		->get_all();
+	}
 
-        $result = $this->db->table('coa_activities')
-        				   ->insert($data)
-        				   ->exec();
+	public function insert_coarecords($coa_date,$coa_name)
+	{
+		$data = array(
+			'coa_date' => $coa_date,
+			'coa_name' => $coa_name
+		);
 
-        if($result)
-        	return true;
-    }
+		$result = $this->db->table('coa_activities')
+		->insert($data)
+		->exec();
+
+		if($result)
+			return true;
+	}
+
+
+    ####### PWD PANEL ##########
+
+	public function retri_pwd_records(){
+		return $this->db->table('form_pwd')
+		->order_by('pwd_lname', 'ASC')
+		->get_all();
+	}
+
+	public function get_single_pwd($id){
+		return $this->db->table('form_pwd')
+		->where('pwd_id', $id)
+		->get();
+	}	
+
+	public function insert_pwdrecords($pwd_lname,$pwd_fname,$pwd_mname,$pwd_sex,$pwd_typedis,$pwd_typespecify,$pwd_causedis,$pwd_address,$pwd_region,$pwd_province,$pwd_city,$pwd_brgy,$pwd_landline,$pwd_mobilenum,$pwd_email,$pwd_dob,$pwd_civilstatus,$pwd_educational,$pwd_empstatus,$pwd_empnature,$pwd_emptype,$pwd_occupation,$pwd_cperson,$pwd_cnumber,$pwd_idnum,$pwdf_lname,$pwdf_fname,$pwdf_mname,$pwdm_lname,$pwdm_fname,$pwdm_mname,$pwdg_lname,$pwdg_fname,$pwdg_mname,$pwdab_lname,$pwdab_fname,$pwdab_mname,$pwdru_lname,$pwdru_fname,$pwdru_mname,$pwd_signature,$image)
+	{
+		$bind = array(
+			'pwd_lname' => $pwd_lname,
+			'pwd_fname' => $pwd_fname,
+			'pwd_mname' => $pwd_mname,
+			'pwd_sex' => $pwd_sex,
+			'pwd_typedis' => $pwd_typedis,
+			'pwd_typespecify' => $pwd_typespecify,
+			'pwd_causedis' => $pwd_causedis,
+			'pwd_address' => $pwd_address,
+			'pwd_region' => $pwd_region,
+			'pwd_province' => $pwd_province,
+			'pwd_city' => $pwd_city,
+			'pwd_brgy' => $pwd_brgy,
+			'pwd_landline' => $pwd_landline,
+			'pwd_mobilenum' => $pwd_mobilenum,
+			'pwd_email' => $pwd_email,
+			'pwd_dob' => $pwd_dob,
+			'pwd_civilstatus' => $pwd_civilstatus,
+			'pwd_educational' => $pwd_educational,
+			'pwd_empstatus' => $pwd_empstatus,
+			'pwd_empnature' => $pwd_empnature,
+			'pwd_emptype' => $pwd_emptype,
+			'pwd_occupation' => $pwd_occupation,
+			'pwd_cperson' => $pwd_cperson,
+			'pwd_cnumber' => $pwd_cnumber,
+			'pwd_idnum' => $pwd_idnum,
+			'pwdf_lname' => $pwdf_lname,
+			'pwdf_fname' => $pwdf_fname,
+			'pwdf_mname' => $pwdf_mname,
+			'pwdm_lname' => $pwdm_lname,
+			'pwdm_fname' => $pwdm_fname,
+			'pwdm_mname' => $pwdm_mname,
+			'pwdg_lname' => $pwdg_lname,
+			'pwdg_fname' => $pwdg_fname,
+			'pwdg_mname' => $pwdg_mname,	    		    		    		    
+			'pwdab_lname' => $pwdab_lname,
+			'pwdab_fname' => $pwdab_fname,
+			'pwdab_mname' => $pwdab_mname,	
+			'pwdru_lname' => $pwdru_lname,
+			'pwdru_fname' => $pwdru_fname,
+			'pwdru_mname' => $pwdru_mname,
+			'pwd_signature' => $pwd_signature,
+			'request_status' => "Pending",
+			'image' => $image	    	    			    	
+		);
+		$result = $this->db->table('form_pwd')
+		->insert($bind)
+		->exec();
+
+		if($result)
+			return true;	    
+	}
+
+	public function update_pwdrecords($pwd_id,$pwd_lname,$pwd_fname,$pwd_mname,$pwd_sex,$pwd_typedis,$pwd_typespecify,$pwd_causedis,$pwd_address,$pwd_region,$pwd_province,$pwd_city,$pwd_brgy,$pwd_landline,$pwd_mobilenum,$pwd_email,$pwd_dob,$pwd_civilstatus,$pwd_educational,$pwd_empstatus,$pwd_empnature,$pwd_emptype,$pwd_occupation,$pwd_cperson,$pwd_cnumber,$pwd_idnum,$pwdf_lname,$pwdf_fname,$pwdf_mname,$pwdm_lname,$pwdm_fname,$pwdm_mname,$pwdg_lname,$pwdg_fname,$pwdg_mname,$pwdab_lname,$pwdab_fname,$pwdab_mname,$pwdru_lname,$pwdru_fname,$pwdru_mname,$pwd_signature,$request_status)
+	{
+		$bind = array(
+			'pwd_lname' => $pwd_lname,
+			'pwd_fname' => $pwd_fname,
+			'pwd_mname' => $pwd_mname,
+			'pwd_sex' => $pwd_sex,
+			'pwd_typedis' => $pwd_typedis,
+			'pwd_typespecify' => $pwd_typespecify,
+			'pwd_causedis' => $pwd_causedis,
+			'pwd_address' => $pwd_address,
+			'pwd_region' => $pwd_region,
+			'pwd_province' => $pwd_province,
+			'pwd_city' => $pwd_city,
+			'pwd_brgy' => $pwd_brgy,
+			'pwd_landline' => $pwd_landline,
+			'pwd_mobilenum' => $pwd_mobilenum,
+			'pwd_email' => $pwd_email,
+			'pwd_dob' => $pwd_dob,
+			'pwd_civilstatus' => $pwd_civilstatus,
+			'pwd_educational' => $pwd_educational,
+			'pwd_empstatus' => $pwd_empstatus,
+			'pwd_empnature' => $pwd_empnature,
+			'pwd_emptype' => $pwd_emptype,
+			'pwd_occupation' => $pwd_occupation,
+			'pwd_cperson' => $pwd_cperson,
+			'pwd_cnumber' => $pwd_cnumber,
+			'pwd_idnum' => $pwd_idnum,
+			'pwdf_lname' => $pwdf_lname,
+			'pwdf_fname' => $pwdf_fname,
+			'pwdf_mname' => $pwdf_mname,
+			'pwdm_lname' => $pwdm_lname,
+			'pwdm_fname' => $pwdm_fname,
+			'pwdm_mname' => $pwdm_mname,
+			'pwdg_lname' => $pwdg_lname,
+			'pwdg_fname' => $pwdg_fname,
+			'pwdg_mname' => $pwdg_mname,	    		    		    		    
+			'pwdab_lname' => $pwdab_lname,
+			'pwdab_fname' => $pwdab_fname,
+			'pwdab_mname' => $pwdab_mname,	
+			'pwdru_lname' => $pwdru_lname,
+			'pwdru_fname' => $pwdru_fname,
+			'pwdru_mname' => $pwdru_mname,
+			'pwd_signature' => $pwd_signature,
+			'request_status' => $request_status	    	    			    	
+		);
+		$result = $this->db->table('form_pwd')
+		->where('pwd_id', $pwd_id)
+		->update($bind)
+		->exec();
+
+		if($result)
+			return true;	    
+	}	
 
 //End
 }
