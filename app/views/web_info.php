@@ -15,21 +15,28 @@ include(ROOT . 'includes/topnav.php');
 					<div class="col-md-12">
 						<div class="card">
 							<div style="border: solid #007bff 1px; padding: 10px;" class="card-body">
-								<h3 style="margin-bottom: 50px;" class="text-center">
-									<strong>CSWD : INFORMATIONS</strong>
-								</h3>
 								<div class="row">
-									<div class="col-md-12">										
+									<div class="col-md-12 text-center mt-2">
+										<img src="<?php echo BASE_URL .'uploads/post/'. $data['image']; ?>" style="width: 60%;height: 70%; box-shadow: 5px 10px 10px -6px black;">
+										<h3 class="text-center mt-4">
+											<strong><?=$data['info_title']?></strong>
+										</h3>
+										<h5>CSWD</h5>
+										<h6><?= date('F d, Y',strtotime($data['info_date'])); ?></h6>
+											
 									</div>
-									</div>								
-								</div>
+									<div class="col-md-12 text-center">
+										<p><?=$data['info_information']?></p>
+									</div>
+								</div>								
 							</div>
 						</div>
 					</div>
-				</section>
-			</div>
+				</div>
+			</section>
 		</div>
 	</div>
+</div>
 
 <!-- Include Footer -->
 <?php

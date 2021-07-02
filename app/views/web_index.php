@@ -92,60 +92,17 @@ include(ROOT . 'includes/topnav.php');
       <i class="fas fa-chevron-right next"></i>
 
       <div class="post-wrapper">
+        <?php foreach($data as $row):?>
         <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/1.jpg')?>" alt="cswdlogo" width="100" height="100">
+          <img class="slider-image" src="<?php echo BASE_URL .'uploads/post/'. $row['image']; ?>" alt="cswdlogo" width="100" height="100">
           <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
+            <h4><a href="<?=site_url('website/get_viewpost/'.$row['info_id'].'')?>"><?=$row['info_title']?></a></h4>
+            <i class="fas fa-user"> CSWD</i>
             &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
+            <i class="fas fa-calendar"> <?= date('F d, Y',strtotime($row['info_date'])); ?></i>
           </div>
         </div>
-        <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/2.jpg')?>" alt="cswdlogo" width="100" height="100">
-          <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
-            &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
-          </div>
-        </div>
-        <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/3.jpg')?>" alt="cswdlogo" width="100" height="100">
-          <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
-            &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
-          </div>
-        </div>
-        <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/4.jpg')?>" alt="cswdlogo" width="100" height="100">
-          <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
-            &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
-          </div>
-        </div>  
-        <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/5.jpg')?>" alt="cswdlogo" width="100" height="100">
-          <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
-            &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
-          </div>
-        </div>
-        <div class="post">
-          <img class="slider-image" src="<?= SITE_URL('assets/img/slider/1.jpg')?>" alt="cswdlogo" width="100" height="100">
-          <div class="post-info">
-            <h4><a href="">Sana All ALL</a></h4>
-            <i class="fas fa-user">CSWD Office</i>
-            &nbsp;
-            <i class="fas fa-calendar">July 02, 2021</i>
-          </div>
-        </div>                  
+        <?php endforeach;?>                     
       </div>
     </div>
     <!-- //Post -->

@@ -1233,6 +1233,96 @@ public function pwddata_update()
 	$this->call->view('dashboard_update_pwd');
 }
 
+public function postinfo()
+{
+	
+	if($this->auth->is_logged_in()){
+		$this->call->view('dashboard_postinfo');
+	} else {
+		$this->call->view('dashboard_login'); 
+	}	
+}
+
+public function viewinfo()
+{
+	
+	if($this->auth->is_logged_in()){
+		$data = $this->record->viewall_post();
+		$this->call->view('dashboard_view_infopost',$data);
+	} else {
+		$this->call->view('dashboard_login'); 
+	}	
+}
+
+public function insert_info_post()
+{
+	if($this->form_validation->submitted())
+	{
+		$this->form_validation
+		->name('info_date')->required('Set Date is Required')
+		->name('info_title')->required('Title is Required')
+		->name('info_information');
+
+		$target_dir = "uploads/post/";
+		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+			// Check if file already exists
+		if (file_exists($target_file))
+		{
+
+			$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
+			$uploadOk = 0;
+		}
+
+			// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+
+			$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
+		$uploadOk = 0;
+	}
+			// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 500000) {
+
+		$this->session->set_flashdata(array('error' => 'Sorry, your file is too large.'));			
+		$uploadOk = 0;
+	}
+
+	if ($uploadOk == 0) 
+	{
+			// if everything is ok, try to upload file
+		$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
+	}
+	else
+	{
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+		{
+			$this->record->insert_infopost(
+				$this->io->post('info_date'),
+				$this->io->post('info_title'),
+				basename($_FILES["fileToUpload"]["name"]),
+				$this->io->post('info_information'));
+
+			$this->session->set_flashdata(array('success' => 'Data Posted Successfully.'));
+			redirect('admin/viewinfo');	
+			exit();			
+		}
+		else
+		{
+			$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+			redirect('admin/postinfo');
+			exit();				
+		}
+	}
+}
+
+$this->call->view('dashboard_postinfo'); 
+}
+
+
+
 
 	//End	
 }

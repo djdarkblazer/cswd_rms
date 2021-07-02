@@ -68,8 +68,15 @@
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="<?= site_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
 
 <?php echo load_js(array('js/opt_address')); ?>
+
+<script>
+    window.onload = function() {
+        CKEDITOR.replace( 'editor1' );
+    };
+</script>
 
 <script type="text/javascript">
   $(document).ready( function () {

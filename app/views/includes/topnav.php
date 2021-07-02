@@ -16,7 +16,6 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" href="<?= SITE_URL('website'); ?>">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= SITE_URL('website/services'); ?>">Services</a></li>            
-            <li class="nav-item"><a class="nav-link" href="<?= SITE_URL('website/information'); ?>">Information</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= SITE_URL('website/events'); ?>">Events</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= SITE_URL('website/assistance'); ?>">Assistance</a></li>
           </ul>

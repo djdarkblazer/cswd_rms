@@ -186,13 +186,28 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="$" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
                 Post / Articles
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url('admin/postinfo')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Post</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('admin/viewinfo'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Post</p>
+                </a>
+              </li>                            
+            </ul>
+          </li>          
           <li class="nav-header"><strong>MISCELLANEOUS</strong></li>
           <li class="nav-item">
             <a href="https://adminlte.io/docs/3.1/" class="nav-link">
