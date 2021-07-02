@@ -10,12 +10,21 @@ class Admin extends Controller {
 		$config = Array(
 			'protocol' => 'smtp',
 			'smtp_host' => 'smtp.mailtrap.io',
-			'smtp_port' => 2525,
+			'smtp_port' => 587,
 			'smtp_user' => 'a5b27f29d6c901',
 			'smtp_pass' => '54e8232d49b7b4',
 			'crlf' => "\r\n",
 			'newline' => "\r\n"
 		);
+		// $config = array(
+		// 	'protocol' => 'smtp',
+		// 	'smtp_host' => 'ssl://smtp.gmail.com',
+		// 	'smtp_port' => 587,
+		// 	'smtp_user' => 'deejaydarkblazer@gmail.com',
+		// 	'smtp_pass' => '09161886402_macarangelobutones',
+		// 	'mailtype' => 'html',
+		// 	'charset' => 'iso-8859-1'
+		// );		
 		$this->call->library('email', $config);
 
 	}
@@ -1117,7 +1126,7 @@ public function pwddata_update()
 					//./SMS End	
 
 						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-						redirect('admin/sp_viewrecords');	
+						redirect('admin/pwd_viewrecords');	
 						exit();
 					}
 					else if ($this->io->post('request_status') == "Approved") 
@@ -1147,7 +1156,7 @@ public function pwddata_update()
 					//./SMS End	
 
 						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-						redirect('admin/sp_viewrecords');	
+						redirect('admin/pwd_viewrecords');	
 						exit();					
 					}
 					else if ($this->io->post('request_status') == "Disapproved")
@@ -1177,7 +1186,7 @@ public function pwddata_update()
 					//./SMS End	
 
 						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-						redirect('admin/sp_viewrecords');	
+						redirect('admin/pwd_viewrecords');	
 						exit();							
 					}
 					else if ($this->io->post('request_status') == "Incomplete")
