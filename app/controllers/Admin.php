@@ -11,8 +11,8 @@ class Admin extends Controller {
 			'protocol' => 'smtp',
 			'smtp_host' => 'smtp.mailtrap.io',
 			'smtp_port' => 2525,
-			'smtp_user' => 'b5c9f8d9708796',
-			'smtp_pass' => 'ae54c4aef19a31',
+			'smtp_user' => 'a5b27f29d6c901',
+			'smtp_pass' => '54e8232d49b7b4',
 			'crlf' => "\r\n",
 			'newline' => "\r\n"
 		);
@@ -23,7 +23,22 @@ class Admin extends Controller {
 	public function index()
 	{
 		if($this->auth->is_logged_in()){
-			$this->call->view('dashboard_main');
+			$sp_row=$this->record->count_sp();
+			$sp_pending=$this->record->count_sp_pending();
+			$sp_approved=$this->record->count_sp_approved();
+			$sp_napproved=$this->record->count_sp_napproved();
+			$sp_incomplete=$this->record->count_sp_incomplete();
+
+			$pwd_row=$this->record->count_pwd();
+			$pwd_pending=$this->record->count_pwd_pending();
+			$pwd_approved=$this->record->count_pwd_approved();
+			$pwd_napproved=$this->record->count_pwd_napproved();
+			$pwd_incomplete=$this->record->count_pwd_incomplete();			
+
+
+			$data = array('total' => $sp_row+$pwd_row, 'pending' => $sp_pending+$pwd_pending, 'approved' => $sp_approved+$pwd_approved, 'napproved' => $sp_napproved+$pwd_napproved, 'incomplete' => $sp_incomplete+$pwd_incomplete);
+
+			$this->call->view('dashboard_main',$data);
 		} else {
 			$this->call->view('dashboard_login'); 
 		}
@@ -466,7 +481,7 @@ public function spdata_update()
 
 
 					//Email and SMS Notification
-				if($this->io->post('request_status') == "pending")
+				if($this->io->post('request_status') == "Pending")
 				{
 					//Email Notification
 					$this->send_ureview($email,$fullname);
@@ -496,7 +511,7 @@ public function spdata_update()
 					redirect('admin/sp_viewrecords');	
 					exit();
 				}
-				else if ($this->io->post('request_status') == "approved") 
+				else if ($this->io->post('request_status') == "Approved") 
 				{
 					//Email Notification
 					$this->send_approved($email,$fullname);
@@ -526,7 +541,7 @@ public function spdata_update()
 					redirect('admin/sp_viewrecords');	
 					exit();					
 				}		
-				else if ($this->io->post('request_status') == "disapproved")
+				else if ($this->io->post('request_status') == "Disapproved")
 				{
 					//Email Notification
 					$this->send_napproved($email,$fullname);
@@ -556,7 +571,7 @@ public function spdata_update()
 					redirect('admin/sp_viewrecords');	
 					exit();							
 				} 
-				else if ($this->io->post('request_status') == "incomplete")
+				else if ($this->io->post('request_status') == "Incomplete")
 				{
 					//Email Notification
 					$this->send_napproved($email,$fullname);
@@ -803,6 +818,15 @@ public function pwd_addrecords()
 	}
 }
 
+public function pwd_updaterecords()
+{
+	if($this->auth->is_logged_in()){
+		$this->call->view('dashboard_update_pwd');
+	} else {
+		$this->call->view('dashboard_login'); 
+	}
+}
+
 public function edit_pwd_records($id) {
 
 	if($this->auth->is_logged_in()){
@@ -812,6 +836,26 @@ public function edit_pwd_records($id) {
 		$this->call->view('dashboard_login'); 
 	}		
 }
+
+public function pwd_delrecords($id)
+{
+	$img = $this->record->get_single_pwd_image($id);
+	$pathFile ="/uploads/image/pwd_idpic/";
+	$dirto = getcwd();
+	$data = $dirto.$pathFile.$img['image'];
+
+	if(!empty($data))
+	{
+		unlink($data);
+	}
+	if($this->record->pwd_delete_data($id))
+	{
+		$this->session->set_flashdata(array('delete' => 'Client Data Deleted Successfully.'));
+		redirect('admin/pwd_viewrecords');
+		exit();
+	}
+}
+
 
 
 public function pwd_insert()
@@ -950,8 +994,6 @@ public function pwd_insert()
 			$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
 			redirect('admin/pwd_addrecords');	
 			exit();												
-
-
 		}
 		else
 		{
@@ -962,6 +1004,224 @@ public function pwd_insert()
 	}		
 }
 $this->call->view('dashboard_add_pwd');
+}
+
+public function pwddata_update()
+{
+	if($this->form_validation->submitted())
+	{
+		$this->form_validation
+		->name('pwd_lname')->required('Last Name is Required.')
+		->name('pwd_fname')->required('First Name is Required.')
+		->name('pwd_mname')->required('Middle Name is Required.')
+		->name('pwd_sex')->required('Sex is Required.')
+		->name('pwd_typedis')->required('Type of Disability is Required.')
+		->name('pwd_typespecify')->required('Specific Disability is Required.')
+		->name('pwd_causedis')->required('Cause of Disability is Required.')
+		->name('pwd_address')->required('Address/Number & Street is Required.')
+		->name('pwd_brgy')->required('Barangay is Required.')
+		->name('pwd_dob')->required('Birthday is Required.')
+		->name('pwd_mobilenum')->required('Mobile Number is Required.')
+		->name('pwd_email')->required('Valid Email is Required.')
+		->valid_email()
+		->name('pwd_civilstatus')->required('Civil Status is Required.')
+		->name('pwd_educational')->required('Educational Attainment is Required.')
+		->name('pwd_empstatus')->required('Employment Status is Required.')
+		->name('pwd_empnature')->required('Nature of Employer is Required.')
+		->name('pwd_emptype')->required('Type of Employment is Required.')
+		->name('pwd_occupation')->required('Occupation is Required.')
+		->name('pwd_cperson')->required('Contact Person is Required.')
+		->name('pwd_cnumber')->required('Contact Number is Required.')
+		->name('pwd_idnum')->required('PWD ID Number is Required.')
+		->name('pwd_signature')->required('Signature Over Printed Name is Required.');
+
+		if($this->form_validation->run())
+		{
+			if($this->form_validation->run())
+			{
+				if($this->record->update_pwdrecords(
+					$this->io->post('pwd_id'),
+					$this->io->post('pwd_lname'),
+					$this->io->post('pwd_fname'),
+					$this->io->post('pwd_mname'),
+					$this->io->post('pwd_sex'),
+					$this->io->post('pwd_typedis'),
+					$this->io->post('pwd_typespecify'),
+					$this->io->post('pwd_causedis'),
+					$this->io->post('pwd_address'),
+					$this->io->post('pwd_region'),
+					$this->io->post('pwd_province'),
+					$this->io->post('pwd_city'),
+					$this->io->post('pwd_brgy'),
+					$this->io->post('pwd_landline'),
+					$this->io->post('pwd_mobilenum'),
+					$this->io->post('pwd_email'),
+					$this->io->post('pwd_dob'),
+					$this->io->post('pwd_civilstatus'),
+					$this->io->post('pwd_educational'),
+					$this->io->post('pwd_empstatus'),
+					$this->io->post('pwd_empnature'),
+					$this->io->post('pwd_emptype'),
+					$this->io->post('pwd_occupation'),
+					$this->io->post('pwd_cperson'),
+					$this->io->post('pwd_cnumber'),
+					$this->io->post('pwd_idnum'),
+					$this->io->post('pwdf_lname'),
+					$this->io->post('pwdf_fname'),
+					$this->io->post('pwdf_mname'),
+					$this->io->post('pwdm_lname'),
+					$this->io->post('pwdm_fname'),
+					$this->io->post('pwdm_mname'),
+					$this->io->post('pwdg_lname'),
+					$this->io->post('pwdg_fname'),
+					$this->io->post('pwdg_mname'),
+					$this->io->post('pwdab_lname'),
+					$this->io->post('pwdab_fname'),
+					$this->io->post('pwdab_mname'),
+					$this->io->post('pwdru_lname'),
+					$this->io->post('pwdru_fname'),
+					$this->io->post('pwdru_mname'),
+					$this->io->post('pwd_signature'),
+					$this->io->post('request_status')					
+				))
+				{
+					$email= $this->io->post('pwd_email');
+					$fullname = $this->io->post('pwd_lname');
+					$mynumber = $this->io->post('pwd_mobilenum');
+
+					//Email and SMS Notification
+					if($this->io->post('request_status') == "Pending")
+					{
+					//Email Notification
+						$this->send_ureview($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+						$message = "Your Request Assistance from CSWD is Pending from Approval.";
+						$api_user = "TR-CALAP695595_5M21Q";
+						$api_pass = "s#k1gseyd8";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if ($result == ""){
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if ($result == 0){
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}
+						else{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+
+					//./SMS End	
+
+						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+						redirect('admin/sp_viewrecords');	
+						exit();
+					}
+					else if ($this->io->post('request_status') == "Approved") 
+					{
+					//Email Notification
+						$this->send_approved($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+						$message = "Your Request Assistance from CSWD is Approved.";
+						$api_user = "TR-CALAP695595_5M21Q";
+						$api_pass = "s#k1gseyd8";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if ($result == ""){
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if ($result == 0){
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}
+						else{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+
+					//./SMS End	
+
+						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+						redirect('admin/sp_viewrecords');	
+						exit();					
+					}
+					else if ($this->io->post('request_status') == "Disapproved")
+					{
+					//Email Notification
+						$this->send_napproved($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+						$message = "Your Request Assistance from CSWD is Disapproved";
+						$api_user = "TR-CALAP695595_5M21Q";
+						$api_pass = "s#k1gseyd8";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if ($result == ""){
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if ($result == 0){
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}
+						else{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+
+					//./SMS End	
+
+						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+						redirect('admin/sp_viewrecords');	
+						exit();							
+					}
+					else if ($this->io->post('request_status') == "Incomplete")
+					{
+					//Email Notification
+						$this->send_napproved($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+						$message = "Your Request Assistance from CSWD is Incomplete";
+						$api_user = "TR-CALAP695595_5M21Q";
+						$api_pass = "s#k1gseyd8";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if ($result == ""){
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if ($result == 0){
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}
+						else{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+
+					//./SMS End	
+
+						$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+						redirect('admin/pwd_viewrecords');	
+						exit();	
+					}												
+				//end					
+				}
+				else
+				{
+					$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+					redirect('admin/pwd_viewrecords');
+					exit();					
+				}
+			}
+		}		
+	}
+	$this->call->view('dashboard_update_pwd');
 }
 
 

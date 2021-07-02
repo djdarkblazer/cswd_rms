@@ -241,6 +241,23 @@ class Record_model extends Model {
 		->get();
 	}	
 
+	public function pwd_delete_data($id){
+		$result = $this->db->table('form_pwd')
+		->delete()
+		->where('pwd_id', $id)
+		->exec();
+		if($result)
+			return true;						   					
+	}
+
+
+	public function get_single_pwd_image($id){
+		return $this->db->table('form_pwd')
+						->select('image')
+						->where('pwd_id', $id)
+						->get();		
+	}	
+
 	public function insert_pwdrecords($pwd_lname,$pwd_fname,$pwd_mname,$pwd_sex,$pwd_typedis,$pwd_typespecify,$pwd_causedis,$pwd_address,$pwd_region,$pwd_province,$pwd_city,$pwd_brgy,$pwd_landline,$pwd_mobilenum,$pwd_email,$pwd_dob,$pwd_civilstatus,$pwd_educational,$pwd_empstatus,$pwd_empnature,$pwd_emptype,$pwd_occupation,$pwd_cperson,$pwd_cnumber,$pwd_idnum,$pwdf_lname,$pwdf_fname,$pwdf_mname,$pwdm_lname,$pwdm_fname,$pwdm_mname,$pwdg_lname,$pwdg_fname,$pwdg_mname,$pwdab_lname,$pwdab_fname,$pwdab_mname,$pwdru_lname,$pwdru_fname,$pwdru_mname,$pwd_signature,$image)
 	{
 		$bind = array(
@@ -350,6 +367,133 @@ class Record_model extends Model {
 		if($result)
 			return true;	    
 	}	
+
+    public function count_sp()
+    {
+        $row = $this->db->table('form_soloparent')->select_count('sp_id', 'total_row')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+
+    public function count_sp_pending()
+    {
+        $row = $this->db->table('form_soloparent')->select_count('sp_id', 'total_row')->where('request_status','Pending')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_sp_approved()
+    {
+        $row = $this->db->table('form_soloparent')->select_count('sp_id', 'total_row')->where('request_status','Approved')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_sp_napproved()
+    {
+        $row = $this->db->table('form_soloparent')->select_count('sp_id', 'total_row')->where('request_status','Disapproved')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_sp_incomplete()
+    {
+        $row = $this->db->table('form_soloparent')->select_count('sp_id', 'total_row')->where('request_status','Incomplete')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+
+
+
+    public function count_pwd()
+    {
+        $row = $this->db->table('form_pwd')->select_count('pwd_id', 'total_row')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_pwd_pending()
+    {
+        $row = $this->db->table('form_pwd')->select_count('pwd_id', 'total_row')->where('request_status','Pending')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_pwd_approved()
+    {
+        $row = $this->db->table('form_pwd')->select_count('pwd_id', 'total_row')->where('request_status','Approved')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_pwd_napproved()
+    {
+        $row = $this->db->table('form_pwd')->select_count('pwd_id', 'total_row')->where('request_status','Disapproved')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+    public function count_pwd_incomplete()
+    {
+        $row = $this->db->table('form_pwd')->select_count('pwd_id', 'total_row')->where('request_status','Incomplete')->get();
+        if($row)
+        {
+           return $row['total_row'];
+             
+        }
+        else {
+                return false;
+            }    
+    }
+
+
 
 //End
 }

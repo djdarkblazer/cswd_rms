@@ -62,7 +62,7 @@ include(ROOT . 'templates/header.php');
                     <td><?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?></td>
                     <td>
                       <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                        <a href="<?=site_url('admin/pwd_delrecords/'.$row['pwd_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         <a href="<?=site_url('admin/edit_pwd_records/'.$row['pwd_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
                         <a href="" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-file"></i> PDF</a>                     
                       </div>                      

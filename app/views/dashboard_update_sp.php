@@ -365,10 +365,10 @@
 										<div class="col-4">
 											<label>Status</label>
 											<select name="request_status" class="form-control">
-												<option value="pending">Pending for Approval</option>
-												<option value="approved">Assistance Approved</option>
-												<option value="disapproved">Assistance Disapproved</option>
-												<option value="incomplete">Incomplete Requirements</option>					
+												<option value="Pending">Pending for Approval</option>
+												<option value="Approved">Assistance Approved</option>
+												<option value="Disapproved">Assistance Disapproved</option>
+												<option value="Incomplete">Incomplete Requirements</option>					
 											</select>
 										</div>									
 									</div>
