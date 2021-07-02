@@ -6,7 +6,7 @@ let options = [
 },
 {
 	text: 'Balingayan',
-	value: 'Balingayan',
+	value: 'Balingayan'
 },
 {
 	text: 'Balite',

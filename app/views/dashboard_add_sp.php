@@ -26,7 +26,7 @@
 		<section class="content">
 			<div class="container-fluid"> 
 				<div class="row">
-					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" enctype="multipart/form-data">>					
+					<form action="<?= site_url('admin/sp_insert'); ?>" method="POST" enctype="multipart/form-data">					
 						<!-- left column -->
 						<div class="col-md-12">
 
@@ -46,15 +46,16 @@
 											<label for="sp_age">Age</label>
 											<div class="input-group">
 												<input type="text" class="form-control" placeholder="Auto Calculate" name="sp_age" id="age" readonly="">
-											</div>										
+											</div>	
 										</div>
 										<div class="col-2">
 											<label for="sp_sex">Sex</label>
 											<select name="sp_sex" class="form-control">
+												<option value="none" selected >---SELECT---</option>
 												<option value="Male">Male</option>
 												<option value="Female">Female</option>
 											</select>
-										</div>
+										</div>										
 										<div class="col-4">
 											<label for="sp_dob">Date of Birth</label>
 											<input type="date" class="form-control pull-right" name="sp_dob" id="bday">
@@ -368,7 +369,9 @@
 					</div>
 					<!-- /.row -->
 					<div class="card-footer">
+						<center>
 						<button type="submit" class="btn btn-primary">Submit Application Form</button>
+						</center>
 					</div>				
 				</form>
 			</div><!-- /.container-fluid -->

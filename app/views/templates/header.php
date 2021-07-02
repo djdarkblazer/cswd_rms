@@ -33,7 +33,7 @@
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
-  <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/toastr/toastr.min.css">  
+  <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
   <div class="wrapper">
@@ -138,7 +138,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url(); ?>admin/sp_addrecords" class="nav-link">
+                <a href="<?= site_url(); ?>admin/pwd_addrecords" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add PWD</p>
                 </a>
@@ -161,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url(); ?>admin/sp_viewrecords" class="nav-link">
+                <a href="<?= site_url(); ?>admin/pwd_viewrecords" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View PWD Records</p>
                 </a>

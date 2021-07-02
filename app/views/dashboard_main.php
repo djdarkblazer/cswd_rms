@@ -35,7 +35,7 @@ include(ROOT . '/templates/header.php');
             <div class="info-box-content">
               <span class="info-box-text">Total Client</span>
               <span class="info-box-number">
-                10
+                <?= $data['total'];?>
               </span>
             </div>
             <!-- /.info-box-content -->
@@ -49,7 +49,7 @@ include(ROOT . '/templates/header.php');
 
             <div class="info-box-content">
               <span class="info-box-text">Approved Assistance Request</span>
-              <span class="info-box-number">41,410</span>
+              <span class="info-box-number"><?= $data['approved'];?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -66,7 +66,7 @@ include(ROOT . '/templates/header.php');
 
             <div class="info-box-content">
               <span class="info-box-text">Disapproved Assistance Request</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-number"><?= $data['napproved'];?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -79,7 +79,7 @@ include(ROOT . '/templates/header.php');
 
             <div class="info-box-content">
               <span class="info-box-text">Pending Assistance Request</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-number"><?= $data['pending'];?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -93,7 +93,7 @@ include(ROOT . '/templates/header.php');
             <div class="info-box-content">
               <span class="info-box-text">Incomplete Requirements</span>
               <span class="info-box-number">
-                10
+                <?= $data['incomplete'];?>
               </span>
             </div>
             <!-- /.info-box-content -->

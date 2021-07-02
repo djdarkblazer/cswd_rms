@@ -69,6 +69,8 @@
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<?php echo load_js(array('js/opt_address')); ?>
+
 <script type="text/javascript">
   $(document).ready( function () {
       $('#myTable').dataTable( {
@@ -77,6 +79,15 @@
           scrollCollapse: true,
       } );
   } );  
+</script>
+
+<script type="text/javascript">
+$('#pwd_typedis').change(function() {
+  $('#pwd_typespecify').prop('readonly', true);
+  if ($(this).val() == 'Other') {
+    $('#pwd_typespecify').prop('readonly', false);
+  }
+});  
 </script>
 
 
@@ -102,7 +113,7 @@
       toast: false,
       position: 'center',
       showConfirmButton: false,
-      timer: 1000
+      timer: 3000
     });
     var Toasted = Swal.mixin({
       toast: false,
