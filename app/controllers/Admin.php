@@ -7,24 +7,24 @@ class Admin extends Controller {
 	{
 		parent:: __construct();
 
-		$config = Array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.mailtrap.io',
-			'smtp_port' => 587,
-			'smtp_user' => 'a5b27f29d6c901',
-			'smtp_pass' => '54e8232d49b7b4',
-			'crlf' => "\r\n",
-			'newline' => "\r\n"
-		);
-		// $config = array(
+		// $config = Array(
 		// 	'protocol' => 'smtp',
-		// 	'smtp_host' => 'ssl://smtp.gmail.com',
+		// 	'smtp_host' => 'smtp.mailtrap.io',
 		// 	'smtp_port' => 587,
-		// 	'smtp_user' => 'deejaydarkblazer@gmail.com',
-		// 	'smtp_pass' => '09161886402_macarangelobutones',
-		// 	'mailtype' => 'html',
-		// 	'charset' => 'iso-8859-1'
-		// );		
+		// 	'smtp_user' => 'a5b27f29d6c901',
+		// 	'smtp_pass' => '54e8232d49b7b4',
+		// 	'crlf' => "\r\n",
+		// 	'newline' => "\r\n"
+		// );
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 587,
+			'smtp_user' => 'deejaydarkblazer@gmail.com',
+			'smtp_pass' => '09161886402_macarangelobutones',
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1'
+		);		
 		$this->call->library('email', $config);
 
 	}
