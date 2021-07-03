@@ -521,7 +521,25 @@ class Record_model extends Model {
 		return $this->db->table('form_info')
 		->where('info_id', $id)
 		->get();
-	}	
+	}
+
+	public function get_single_postimage($id){
+		return $this->db->table('form_info')
+		->select('image')
+		->where('info_id', $id)
+		->get();		
+	}
+
+
+	public function delete_post($id){
+		$result = $this->db->table('form_info')
+		->delete()
+		->where('info_id', $id)
+		->exec();
+
+		if($result)
+			return true;						   					
+	}		
 
 //End
 }

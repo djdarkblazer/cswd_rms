@@ -51,8 +51,9 @@
 <body onload="window.print()">
 	<div class="h-style">
 		<img src="<?= site_url()?>assets/img/logo.png" height="70px" width="70px">
-		<h5>CALAPAN CITY SOCIAL WELFARE AND DEVELOPMENT</h5>	
+		<h6>CALAPAN CITY SOCIAL WELFARE AND DEVELOPMENT</h6>	
 		<p>Republic of the Philippines<br>Province of Oriental Mindoro<br>Calapan City</p>
+		<h5>SOLO PARENT APPLICATION FORM</h5>
 	</div>
 	<hr>
 	<?php foreach($data as $rows) :?>
@@ -73,14 +74,13 @@
 		<h6><strong>Highest Educational Attainment:</strong> <?= $rows['sp_educational']?></h6>
 				<br>
 		<div class="form-group" style="display: flex;">
-		<h6 style="margin-right: 180px;"><strong>Occupation:</strong> <?= $rows['sp_occupation']?></h6>
+		<h6 style="margin-right: 150px;"><strong>Occupation:</strong> <?= $rows['sp_occupation']?></h6>
 
 		<h6><strong>Monthly Income: </strong>₱<?= $rows['sp_monthlyincome']?></h6>
 		</div>
 
 	</div>
 	<hr>
-	<br>
 	<h5 style="margin-left: 10px;">I. Family Composition</h5>
 		<table class="table table-bordered" width="100%">
 			<thead>
@@ -150,18 +150,17 @@
 		</table>
 		<p style="margin-left: 10px;"><strong>*Include family members and other members of the household</strong></p>
 		<hr>
-		<br>
 
 	<h5 style="margin-left: 10px;">II. Classification/Circumstances of Being a Solo Parent</h5>
 	<h6 style="margin-left: 10px;"><strong>Current Status:</strong> <?= $rows['sp_curr_status']?></h6>
 	<br>
 	<p style="margin-left: 50px;"><?= $rows['sp_circumstances']?></p>
 	<hr>
-	<br>
+
 	<h5 style="margin-left: 10px;">III. Needs/Problems of the Solo Parent</h5>
 	<p style="margin-left: 50px;" ><?= $rows['sp_problems']?></p>
 	<hr>
-	<br>
+
 	<h5 style="margin-left: 10px;">IV. Family Resources</h5>
 	<p style="margin-left: 50px;" ><?= $rows['sp_family_resources']?></p>
 	<hr>

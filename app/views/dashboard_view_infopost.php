@@ -54,7 +54,7 @@ include(ROOT . 'templates/header.php');
                       <td><?=$row['info_information']?></td>
                       <td>
                         <div class="btn-group btn-group-sm">
-                          <a href="" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                          <a href="<?=site_url('admin/del_viewpost/'.$row['info_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         </div>
                       </td>
                     </tr>

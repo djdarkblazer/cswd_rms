@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class Website extends Controller
@@ -31,6 +31,16 @@ class Website extends Controller
 		$data = $this->record->get_single_post($id);
 		$this->call->view('web_info',$data); 
 	}
+
+	public function view_req_sp()
+	{
+	    $this->call->view('web_req_sp');
+	}
+
+	public function view_req_pwd()
+	{
+	    $this->call->view('web_req_pwd');
+	}	
 
 
 

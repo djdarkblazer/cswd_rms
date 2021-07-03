@@ -1,6 +1,6 @@
 <!-- Include Header -->
 <?php
-$pageTitle = "CSWD | Information";
+$pageTitle = "CSWD | ".$data['info_title'];
 define("ROOT", __DIR__ ."/");
 include(ROOT . 'includes/header.php');
 include(ROOT . 'includes/topnav.php');

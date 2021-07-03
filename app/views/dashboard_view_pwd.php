@@ -64,7 +64,7 @@ include(ROOT . 'templates/header.php');
                       <div class="btn-group btn-group-sm">
                         <a href="<?=site_url('admin/pwd_delrecords/'.$row['pwd_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         <a href="<?=site_url('admin/edit_pwd_records/'.$row['pwd_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                        <a href="" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-file"></i> PDF</a>                     
+                        <a href="<?=site_url('admin/pdf_view_pwd/'.$row['pwd_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-file"></i> PDF</a>                     
                       </div>                      
                     </td>
                    </td>
