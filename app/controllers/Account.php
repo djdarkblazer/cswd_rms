@@ -22,7 +22,7 @@ class Account extends Controller {
 
     public function Login()
     {
-        $this->call->view('dashboard_login');    
+        $this->call->view('dashboard_login_v2');    
     }    
 
     public function Register()
@@ -80,20 +80,20 @@ class Account extends Controller {
                         redirect('account/admin_page');
                     } else {
                         $this->session->set_flashdata(array('error' => 'Invalid Email or Password'));
-                        $this->call->view('dashboard_login');
+                        $this->call->view('dashboard_login_v2');
 
                     }
                 } else {
                     $this->session->set_flashdata(array('error' => 'Verify your account First!'));
-                    $this->call->view('dashboard_login');
+                    $this->call->view('dashboard_login_v2');
                 }
             } else {
                 $this->session->set_flashdata(array('error' => 'No Account found in the Database'));
-                $this->call->view('dashboard_login');
+                $this->call->view('dashboard_login_v2');
             }
         }
     }
-    $this->call->view('dashboard_login');
+    $this->call->view('dashboard_login_v2');
 }
 
 	//Creating New Account
@@ -187,7 +187,7 @@ public function verification()
             { 
                 $this->account->is_validated($this->session->userdata('email'));
                 $this->session->set_flashdata(array('success' => 'Your Account is Verified.\nPlease Login now!'));
-                $this->call->view('dashboard_login');
+                $this->call->view('dashboard_login_v2');
                 exit();
             }
             else
@@ -276,7 +276,7 @@ public function change_password()
             if($this->account->change_password($this->io->post('password'), $this->session->userdata('user_email')))
             {
                 $this->session->set_flashdata(array('success' => 'Password Changed. You can Login now'));                        
-                $this->call->view('dashboard_login');
+               $this->call->view('dashboard_login_v2');
                 exit();
             }
         }

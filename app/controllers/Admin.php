@@ -1862,5 +1862,10 @@ public function download_backup($id)
 	force_download($data,$img['backup_file'],NULL);
 }	
 
+public function backup_database()
+{
+	
+}
+
 	//End	
 }

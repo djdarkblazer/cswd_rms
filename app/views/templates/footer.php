@@ -18,6 +18,13 @@
 
 <!-- jQuery -->
 <script src="<?= site_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+<!-- Morris.js charts -->
+<script src="<?= site_url(); ?>assets/plugins/raphael/raphael.min.js"></script>
+<script src="<?= site_url(); ?>assets/plugins/morris.js/morris.min.js"></script>
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= site_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -26,6 +33,9 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?= site_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- FastClick -->
+<script src="<?= site_url(); ?>assets/plugins/fastclick/lib/fastclick.js"></script>
 <!-- ChartJS -->
 <script src="<?= site_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -160,5 +170,36 @@
   });
 </script>
 
+<script type="text/javascript">
+    //DONUT CHART
+    new Morris.Donut({
+      element: 'sales-chart',
+      resize: true,
+      colors: ["cyan", "#f56954", "yellow","#007bff","red"],
+      data: [
+      {label: "Approved", value: <?= $data['approved'];?>},
+      {label: "Disapproved", value: <?= $data['napproved'];?>},
+      {label: "Pending", value: <?= $data['pending'];?>},
+      {label: "Total Client", value: <?= $data['total'];?>},
+      {label: "Incomplete", value: <?= $data['incomplete'];?>},
+      ],
+      hideHover: 'auto'
+    });
+
+    //BAR CHART
+    new Morris.Bar({
+      element: 'bar-chart',
+      resize: true,
+      data: [
+        {y: <?= date('Y'); ?>, a: <?= $data['total'];?>, b: <?= $data['approved'];?>,c: <?= $data['napproved'];?>,d: <?= $data['pending'];?>, e: <?= $data['incomplete'];?>},
+
+      ],
+      barColors: ['#007bff', '#f56954','lime', '#00a65a','violet'],
+      xkey: 'y',
+      ykeys: ['a', 'b','c','d','e'],
+      labels: ['Total Client','Approved', 'Disapproved','Pending','Incomplete'],
+      hideHover: 'auto'
+    });    
+  </script>
 </body>
 </html>

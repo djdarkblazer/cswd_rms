@@ -582,7 +582,9 @@ class Record_model extends Model {
 		if($result)
 			return true;						   					
 	}
-		
 
+	public function backup_databasefile(){
+
+	}
 //End
 }

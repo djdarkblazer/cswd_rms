@@ -105,28 +105,58 @@ include(ROOT . '/templates/header.php');
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-6 connectedSortable">
-          <!-- Custom tabs (Charts with tabs)-->
+          <div class="col-md-6">
+            <!-- AREA CHART -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Donut Chart for Solo Parent and PWD</h3>
 
-          <!-- /.card-body -->
-        </div>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="sales-chart" style="height: 250px; width: auto;"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- LINE CHART -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Line Chart for Solo Parent & PWD (2021)</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="bar-chart" style="height: 250px; width: auto;"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col (RIGHT) -->          
       </div>
-
-
-    </section>
-    <!-- /.Left col -->
-    <!-- right col (We are only adding the ID to make the widgets sortable)-->
-    <section class="col-lg-6 connectedSortable">
-
-
-    </section>
-    <!-- right col -->
-  </div>
-  <!-- /.row (main row) -->
-</div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->  
 <?php

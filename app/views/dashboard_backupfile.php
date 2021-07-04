@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 $pageTitle = "CSWD | Backup Data File";
 define("ROOT", __DIR__ ."/");
 include(ROOT . 'templates/header.php');
@@ -32,7 +32,9 @@ include(ROOT . 'templates/header.php');
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Backup Data File</h3>
+            
             </div>
+
             <!-- /.card-header -->
             <form action="<?= site_url('admin/backupfile_now'); ?>" method="POST" enctype="multipart/form-data">
               <div class="card-body">
@@ -111,4 +113,4 @@ include(ROOT . 'templates/header.php');
 
 <?php
 include(ROOT . 'templates/footer.php');
-?> -->
+?>
