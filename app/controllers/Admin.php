@@ -1746,5 +1746,121 @@ public function pwd_insert_request()
 }
 $this->call->view('web_req_pwd');
 }
+
+
+public function backupfile()
+{
+	if($this->auth->is_logged_in()){
+		$data = $this->record->viewall_backup();
+		$this->call->view('dashboard_backupfile',$data);
+	} else {
+		$this->call->view('dashboard_login'); 
+	}    
+}
+
+public function backupfile_now()
+{
+	if($this->form_validation->submitted())
+	{
+		$this->form_validation
+		->name('backup_name')->required();
+
+		$target_dir = "uploads/backupfile/";
+		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$uploadOk = 1;
+		$FileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));	
+
+			// Check if file already exists
+		if (file_exists($target_file))
+		{
+
+			$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
+			$uploadOk = 0;
+			redirect('admin/backupfile');
+			exit();				
+		}
+
+			// Allow certain file formats
+		if($FileType != "docx" && $FileType != "xlsx" && $FileType != "pptx")
+		{
+
+			$this->session->set_flashdata(array('error' => 'Sorry, only docx, xlsx, pptx files are allowed.'));				
+			$uploadOk = 0;
+			redirect('admin/backupfile');
+			exit();			
+		}		
+
+			// Check file size
+		if ($_FILES["fileToUpload"]["size"] > 500000) {
+
+			$this->session->set_flashdata(array('error' => 'Sorry, your file is too large.'));			
+			$uploadOk = 0;
+			redirect('admin/backupfile');
+			exit();			
+		}	
+		
+		if ($uploadOk == 0) 
+		{
+			// if everything is ok, try to upload file
+			$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
+			redirect('admin/backupfile');
+			exit();			
+		}
+		else
+		{
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+			{
+				$this->record->insert_backup(
+					$this->io->post('backup_name'),
+					basename( $_FILES["fileToUpload"]["name"]));
+
+				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+				redirect('admin/backupfile');	
+				exit();
+
+
+			}
+			else
+			{
+				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+				redirect('admin/backupfile');
+				exit();				
+			}			
+		}				
+
+
+	}
+	$this->call->view('dashboard_backupfile');  
+}
+
+public function delete_backup($id)
+{
+	$img = $this->record->get_single_backup($id);
+	$pathFile ="/uploads/backupfile/";
+	$dirto = getcwd();
+	$data = $dirto.$pathFile.$img['backup_file'];
+
+	if(!empty($data))
+	{
+		unlink($data);
+	}
+	if($this->record->delete_backupdata($id))
+	{
+		$this->session->set_flashdata(array('delete' => 'Backup Data Deleted Successfully.'));
+		redirect('admin/backupfile');
+		exit();
+	}
+}
+
+public function download_backup($id)
+{
+	$img = $this->record->get_single_backup($id);
+	$pathFile ="/uploads/backupfile/";
+	$dirto = getcwd();
+	$data = $dirto.$pathFile.$img['backup_file'];
+
+	force_download($data,$img['backup_file'],NULL);
+}	
+
 	//End	
 }

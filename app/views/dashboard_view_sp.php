@@ -67,10 +67,6 @@ include(ROOT . 'templates/header.php');
                         <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-file"></i> PDF</a>                     
                       </div>                      
                     </td>
-<!--                     <td style="text-align: center;">
-                     <a href="<?=site_url('admin/sp_delrecords/'.$row['sp_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
-                     <a href="<?=site_url('admin/edit_records/'.$row['sp_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                     <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm"><i class="fa fa-fw fa-file"></i>Form</a></td> -->
                    </td>
                  </tr>
                <?php endforeach;?> 
@@ -101,6 +97,7 @@ include(ROOT . 'templates/header.php');
 <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
 </div>
 <!-- /.content-wrapper -->
 

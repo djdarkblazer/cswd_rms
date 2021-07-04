@@ -539,7 +539,50 @@ class Record_model extends Model {
 
 		if($result)
 			return true;						   					
-	}		
+	}
+
+//Backup Data File
+
+	public function insert_backup($backup_name,$backup_file)
+	{
+		$bind = array(
+			'backup_name' => $backup_name,
+			'backup_file' => $backup_file
+		);
+
+		$result = $this->db->table('form_backup')
+		->insert($bind)
+		->exec();
+
+		if($result)
+			return true;
+
+	}
+
+	public function viewall_backup()
+	{
+		return $this->db->table('form_backup')
+		->order_by('backup_date', 'ASC')
+		->get_all();	    
+	}	
+
+	public function get_single_backup($id){
+		return $this->db->table('form_backup')
+		->select('backup_file')
+		->where('backup_id', $id)
+		->get();		
+	}
+
+	public function delete_backupdata($id){
+		$result = $this->db->table('form_backup')
+		->delete()
+		->where('backup_id', $id)
+		->exec();
+
+		if($result)
+			return true;						   					
+	}
+		
 
 //End
 }

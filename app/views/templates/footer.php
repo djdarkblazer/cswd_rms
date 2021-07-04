@@ -73,28 +73,31 @@
 <?php echo load_js(array('js/opt_address')); ?>
 
 <script>
-    window.onload = function() {
-        CKEDITOR.replace( 'editor1' );
-    };
+  CKEDITOR.replace( 'editor1',{
+    extraPlugins : 'colorbutton',
+  });
+  CKEDITOR.replace( 'editor1',{
+    extraPlugins : 'easyimage',
+  }); 
 </script>
 
 <script type="text/javascript">
   $(document).ready( function () {
-      $('#myTable').dataTable( {
-          deferRender:    true,
-          scroller:       true,
-          scrollCollapse: true,
-      } );
+    $('#myTable').dataTable( {
+      deferRender:    true,
+      scroller:       true,
+      scrollCollapse: true,
+    } );
   } );  
 </script>
 
 <script type="text/javascript">
-$('#pwd_typedis').change(function() {
-  $('#pwd_typespecify').prop('readonly', true);
-  if ($(this).val() == 'Other') {
-    $('#pwd_typespecify').prop('readonly', false);
-  }
-});  
+  $('#pwd_typedis').change(function() {
+    $('#pwd_typespecify').prop('readonly', true);
+    if ($(this).val() == 'Other') {
+      $('#pwd_typespecify').prop('readonly', false);
+    }
+  });  
 </script>
 
 
@@ -156,7 +159,6 @@ $('#pwd_typedis').change(function() {
     <?php endif; ?>            
   });
 </script>
-
 
 </body>
 </html>

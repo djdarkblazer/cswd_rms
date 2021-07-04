@@ -213,14 +213,15 @@
               </li>                            
             </ul>
           </li>          
-          <li class="nav-header"><strong>MISCELLANEOUS</strong></li>
-          <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Documentation</p>
-            </a>
-          </li>
           <li class="nav-header"><strong>SETTINGS</strong></li>
+          <li class="nav-item">
+            <a href="<?= site_url('admin/backupfile'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p>
+                Backup Data File
+              </p>
+            </a>
+          </li>          
           <li class="nav-item">
             <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -236,7 +237,14 @@
                 Logout
               </p>
             </a>
-          </li>          
+          </li>
+  <!--         <li class="nav-header"><strong>MISCELLANEOUS</strong></li>
+          <li class="nav-item">
+            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p>Documentation</p>
+            </a>
+          </li>  -->                   
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
