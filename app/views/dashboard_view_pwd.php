@@ -30,20 +30,17 @@ include(ROOT . 'templates/header.php');
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Person with Disability Records</h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="myTable" class="table table-bordered table-striped dataTable dtr-inline"  width="100%">
                 <thead >
-                  <tr style="text-align: center;">
+                  <tr style="text-align: center;" class="bg-primary">
                     <th>ID Picture</th>
                     <th>Full Name</th>
                     <th>Sex</th>
                     <th>DOB</th>
                     <th>Type of Disability</th>
-                    <th>Specific Disability (If None on the Type)</th>
+                    <th>Specific Disability</th>
                     <th>Address</th>
                     <th>Request Status</th>
                     <th style="text-align: center;">Action</th>
@@ -64,26 +61,13 @@ include(ROOT . 'templates/header.php');
                       <div class="btn-group btn-group-sm">
                         <a href="<?=site_url('admin/pwd_delrecords/'.$row['pwd_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         <a href="<?=site_url('admin/edit_pwd_records/'.$row['pwd_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                        <a href="<?=site_url('admin/pdf_view_pwd/'.$row['pwd_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-file"></i> PDF</a>                     
+                        <a href="<?=site_url('admin/pdf_view_pwd/'.$row['pwd_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-print"></i></a>                     
                       </div>                      
                     </td>
                    </td>
                  </tr>
                <?php endforeach;?> 
              </tbody>
-             <tfoot>
-              <tr style="text-align: center;">
-                    <th>ID Picture</th>
-                    <th>Full Name</th>
-                    <th>Sex</th>
-                    <th>DOB</th>
-                    <th>Type of Disability</th>
-                    <th>Specific Disability (If None on the Type)</th>
-                    <th>Address</th>
-                    <th>Request Status</th>
-                    <th style="text-align: center;">Action</th>
-              </tr>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->

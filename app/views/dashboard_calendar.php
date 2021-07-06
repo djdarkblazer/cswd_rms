@@ -29,9 +29,6 @@ include(ROOT . 'templates/header.php');
       <div class="row">
         <div class="col-12">
           <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Add Activitis to Calendar</h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <form action="<?= site_url('admin/insert_coa');?>" method="post">
@@ -58,17 +55,13 @@ include(ROOT . 'templates/header.php');
           </div>
           <!-- /.card -->
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Calendar of Activities</h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
                 <thead>
-                  <tr style="text-align: center;">
+                  <tr style="text-align: center;" class="bg-primary">
                     <th>Set Date</th>
                     <th>Activity Name</th>
-
                     <th style="text-align: center;">Action</th>
                   </tr>
                 </thead>

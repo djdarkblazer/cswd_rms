@@ -42,7 +42,7 @@
   <!-- Morris charts -->
   <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/morris.js/morris.css">  
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -64,21 +64,43 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
+        <li class="nav-item dropdown user-menu">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <img src="<?= site_url();?>assets/img/logo.png" class="user-image img-circle elevation-2" alt="User Image">
+            <span class="d-none d-md-inline"><?php echo $this->session->userdata('username'); ?></span>
           </a>
+          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <!-- User image -->
+            <li class="user-header bg-primary">
+              <img src="<?= site_url();?>assets/img/logo.png" class="img-circle elevation-2" alt="User Image">
+
+              <p>
+                <?php echo $this->session->userdata('username'); ?>
+                <small>Member since Nov. 2012</small>
+              </p>
+            </li>
+            <!-- Menu Body -->
+            <li class="user-body">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <a href="#">Followers</a>
+                </div>
+                <div class="col-4 text-center">
+                  <a href="#">Sales</a>
+                </div>
+                <div class="col-4 text-center">
+                  <a href="#">Friends</a>
+                </div>
+              </div>
+              <!-- /.row -->
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <a href="#" class="btn btn-default btn-flat">Profile</a>
+              <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+            </li>
+          </ul>
         </li>
-
-        <!-- Messages Dropdown Menu -->
-
-        <!-- Notifications Dropdown Menu -->
-<!--         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="<?= site_url(); ?>/assets/#" role="button">
-            <i class="fas fa-th-large"></i>
-          </a>
-        </li> -->
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -92,17 +114,7 @@
       </a>
 
       <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="<?= site_url(); ?>assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a>
-          </div>
-        </div>
-
+      <div class="sidebar mt-2">
         <!-- SidebarSearch Form -->
         <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
@@ -117,7 +129,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column nav-compact" data-widget="treeview" role="menu" data-accordion="false">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-header accent-blue"><strong>ADMIN PANEL</strong></li>     
@@ -131,9 +143,9 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-plus-square"></i>
               <p>
-                Records
+                Add Records
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -156,7 +168,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Manage Records
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -174,6 +186,14 @@
                 </a>
               </li>              
             </ul>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-server"></i>
+              <p>
+                Reports
+              </p>
+            </a>
+          </li>             
           </li>
           <li class="nav-header"><strong>WEBSITE PANEL</strong></li>
           <li class="nav-item">
@@ -218,20 +238,36 @@
           <li class="nav-header"><strong>SETTINGS</strong></li>
           <li class="nav-item">
             <a href="<?= site_url('admin/backupfile'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
+              <i class="nav-icon fas fa-upload"></i>
               <p>
-                Backup Data File
+                Backup Data
               </p>
             </a>
           </li>          
           <li class="nav-item">
-            <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
-                User Account
+                User Management
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url('user/add_user'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mange User</p>
+                </a>
+              </li>                            
+            </ul>
+          </li> 
+
           <li class="nav-item">
             <a href="<?= site_url('account/is_logout'); ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

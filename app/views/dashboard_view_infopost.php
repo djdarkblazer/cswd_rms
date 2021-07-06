@@ -30,14 +30,11 @@ include(ROOT . 'templates/header.php');
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">View Post</h3>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="myTable" class="table table-bordered table-striped dataTable dtr-inline"  width="100%">
                 <thead >
-                  <tr style="text-align: center;">
+                  <tr style="text-align: center;" class="bg-primary">
                     <th>Display Picture</th>
                     <th>Set Date</th>
                     <th>Title</th>

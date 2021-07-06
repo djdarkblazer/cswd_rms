@@ -39,8 +39,8 @@
 									<div class="row">
 
 										<div class="col-4">
-											<label for="sp_fullname">Full Name</label>
-											<input type="text" class="form-control" placeholder="Full Name*" name="sp_fullname">
+											<label for="sp_fullname">Full Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_fullname">
 										</div>
 										<div class="col-2">
 											<label for="sp_age">Age</label>
@@ -49,7 +49,7 @@
 											</div>	
 										</div>
 										<div class="col-2">
-											<label for="sp_sex">Sex</label>
+											<label for="sp_sex">Sex <span style="color: red">*</span></label>
 											<select name="sp_sex" class="form-control">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Male">Male</option>
@@ -57,38 +57,50 @@
 											</select>
 										</div>										
 										<div class="col-4">
-											<label for="sp_dob">Date of Birth</label>
+											<label for="sp_dob">Date of Birth <span style="color: red">*</span></label>
 											<input type="date" class="form-control pull-right" name="sp_dob" id="bday">
 										</div>
 										<div class="col-4">
-											<label for="sp_pob">Place of Birth</label>
-											<input type="text" class="form-control" placeholder="Place of Birth*" name="sp_pob">
+											<label for="sp_pob">Place of Birth <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_pob">
 										</div>  									    
 										<div class="col-4">
-											<label for="sp_address">Address</label>
-											<input type="text" class="form-control" placeholder="Address*" name="sp_address">
-										</div> 
-										<div class="col-4">
-											<label for="sp_email">Email Address</label>
-											<input type="text" class="form-control" placeholder="Email Address*" name="sp_email">
+											<label for="sp_address">Address Stree/Number <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_address">
 										</div>
 										<div class="col-4">
-											<label for="sp_mobilenum">Mobile Number</label>
-											<div class="input-group">											
-												<input type="text" class="form-control" placeholder="Mobile Number*" name="sp_mobilenum">
-
+											<label for="pwd_brgy">Barangay <span style="color: red">*</span></label>
+											<select id="rec_mode" class="form-control" name="pwd_brgy">
+											</select>
+										</div>									
+										<div class="col-2">
+											<label for="pwd_city">City/Municipality <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Calapan City" name="pwd_city" readonly>
+										</div>
+										<div class="col-2">
+											<label for="pwd_province">Province <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Oriental Mindoro" name="pwd_province" readonly>
+										</div>	 
+										<div class="col-4">
+											<label for="sp_email">Email Address <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_email">
+										</div>
+										<div class="col-4">
+											<label for="sp_mobilenum">Mobile Number <span style="color: red">*</span></label>
+											<div class="input-group">	
+												<input type="text" class="form-control" placeholder="Start with 09..." name="sp_mobilenum">
 											</div>										
 										</div>																		
 										<div class="col-4">
-											<label for="sp_educational">Highest Educational Attainment</label>
-											<input type="text" class="form-control" placeholder="Highest Educational Attainment*" name="sp_educational">
+											<label for="sp_educational">Highest Educational Attainment <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_educational">
 										</div>
 										<div class="col-4">
-											<label for="sp_occupation">Occupation</label>
-											<input type="text" class="form-control" placeholder="Occupation*" name="sp_occupation">
+											<label for="sp_occupation">Occupation <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_occupation">
 										</div> 
 										<div class="col-4">
-											<label for="sp_monthlyincome">Estimated Monthly Income</label>
+											<label for="sp_monthlyincome">Estimated Monthly Income <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="(Ex. 20,000 - 50,000)*" name="sp_monthlyincome">
 										</div>
 
@@ -370,7 +382,7 @@
 					<!-- /.row -->
 					<div class="card-footer">
 						<center>
-						<button type="submit" class="btn btn-primary">Submit Application Form</button>
+							<button type="submit" class="btn btn-primary">Submit Application Form</button>
 						</center>
 					</div>				
 				</form>
