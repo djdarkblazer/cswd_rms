@@ -38,17 +38,17 @@
 								<div class="card-body">
 									<div class="row">
 
-										<div class="col-4">
+										<div class="col-4 form-group">
 											<label for="sp_fullname">Full Name <span style="color: red">*</span></label>
 											<input type="text" class="form-control" name="sp_fullname">
 										</div>
-										<div class="col-2">
+										<div class="col-2 form-group">
 											<label for="sp_age">Age</label>
 											<div class="input-group">
 												<input type="text" class="form-control" placeholder="Auto Calculate" name="sp_age" id="age" readonly="">
 											</div>	
 										</div>
-										<div class="col-2">
+										<div class="col-2 form-group">
 											<label for="sp_sex">Sex <span style="color: red">*</span></label>
 											<select name="sp_sex" class="form-control">
 												<option value="none" selected >---SELECT---</option>
@@ -65,21 +65,21 @@
 											<input type="text" class="form-control" name="sp_pob">
 										</div>  									    
 										<div class="col-4">
-											<label for="sp_address">Address Stree/Number <span style="color: red">*</span></label>
+											<label for="sp_address">Address Street/Number <span style="color: red">*</span></label>
 											<input type="text" class="form-control" name="sp_address">
 										</div>
 										<div class="col-4">
-											<label for="pwd_brgy">Barangay <span style="color: red">*</span></label>
-											<select id="rec_mode" class="form-control" name="pwd_brgy">
+											<label for="sp_brgy">Barangay <span style="color: red">*</span></label>
+											<select id="rec_mode" class="form-control" name="sp_brgy">
 											</select>
 										</div>									
 										<div class="col-2">
-											<label for="pwd_city">City/Municipality <span style="color: red">*</span></label>
-											<input type="text" class="form-control" value="Calapan City" name="pwd_city" readonly>
+											<label for="sp_city">City/Municipality <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Calapan City" name="sp_city" readonly>
 										</div>
 										<div class="col-2">
-											<label for="pwd_province">Province <span style="color: red">*</span></label>
-											<input type="text" class="form-control" value="Oriental Mindoro" name="pwd_province" readonly>
+											<label for="sp_province">Province <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Oriental Mindoro" name="sp_province" readonly>
 										</div>	 
 										<div class="col-4">
 											<label for="sp_email">Email Address <span style="color: red">*</span></label>
@@ -276,7 +276,7 @@
 										</table>
 										<div class="col-md-12">
 
-											<h5 class="callout callout-warning">*Include family members and other members of the household.</h5>
+											<h5 class="callout callout-warning"><span style="color: red">*</span>Include family members and other members of the household.</h5>
 											<!-- /.card-tools -->
 										</div>
 										<!-- /.row -->		
@@ -298,7 +298,7 @@
 								<div class="card-body" style="align-items: center;">	
 									<div class="row">
 										<div class="col-2 mb-4">
-											<label for="sp_curr_status">Current Status</label>
+											<label for="sp_curr_status">Current Status <span style="color: red">*</span></label>
 											<select name="sp_curr_status" class="form-control">
 												<option >----------------------------</option>
 												<option value="Widow">Widow</option>
@@ -362,14 +362,14 @@
 									<div class="row">
 										<div class="col-4">
 											<label for="curr_date">Date Today</label>
-											<input type="date" class="form-control pull-right" name="curr_date" value="<?php echo date("Y-m-d"); ?>">
+											<input type="date" class="form-control pull-right" name="curr_date" value="<?php echo date("Y-m-d"); ?>" readonly>
 										</div>
 										<div class="col-4" >
-											<label for="sp_signature">PRINTED NAME</label>
-											<input type="text" class="form-control" placeholder="PRINTED NAME*" name="sp_signature">
+											<label for="sp_signature">Printed Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_signature">
 										</div>										
 										<div class="col-4" >
-											<label for="fileToUpload">Upload Any Size ID Picture</label>
+											<label for="fileToUpload">Upload Any Size ID Picture <span style="color: red">*</span></label>
 											<input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px">
 										</div>												
 									</div>

@@ -1350,7 +1350,7 @@ public function insert_info_post()
 				$this->io->post('info_information'));
 
 			$this->session->set_flashdata(array('success' => 'Data Posted Successfully.'));
-			redirect('admin/viewinfo');	
+			redirect('admin/viewinfo','refresh',2);	
 			exit();			
 		}
 		else

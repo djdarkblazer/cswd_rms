@@ -26,10 +26,9 @@ include(ROOT . 'templates/header.php');
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <form action="<?= site_url('admin/insert_info_post'); ?>" method="POST" enctype="multipart/form-data">
+      <form action="#" method="POST" enctype="multipart/form-data" id="usr_validation" >
         <div class="row">
           <div class="col-12">
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Add User Account</h3>
@@ -37,19 +36,53 @@ include(ROOT . 'templates/header.php');
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
-                    <label for="fullname">Full Name <span style="color: red">*</span></label>
-                    <input type="text" class="form-control" placeholder="Full Name" name="fullname">
+                  <div class="col-2 form-group">
+                    <label for="lastname">Last Name <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="lastname">
+                  </div>
+                  <div class="col-2 form-group">
+                    <label for="firstname">First Name <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="firstname">
+                  </div>
+                  <div class="col-2 form-group">
+                    <label for="middlename">Middle Name <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="middlename">
+                  </div>
+                  <div class="col-3 form-group">
+                    <label for="email">Email Address <span style="color: red">*</span></label>
+                    <input type="email" class="form-control" name="email">
                   </div>                  
-
+                  <div class="col-3 form-group">
+                    <label for="username">Username <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="username">
+                  </div>                                    
+                  <div class="col-2 form-group">
+                    <label for="password">Password <span style="color: red">*</span></label>
+                    <input type="password" class="form-control" name="password">
+                  </div>
+                  <div class="col-2 form-group">
+                    <label for="role">Role <span style="color: red">*</span></label>
+                    <select name="role" class="form-control">
+                      <option value="Administrator">Administrator</option>
+                      <option value="Employee">Employee</option>
+                    </select>
+                  </div>
+                  <div class="col-3 form-group" >
+                    <label for="fileToUpload">Upload Photo <span style="color: red">*</span></label>
+                    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                  </div>
+                  <div class="col-3 form-group">
+                    <label>Photo Preview</label>
+                    <img id="output" width="150" height="150" style="border: 2px solid black; padding:5px" />
+                  </div>                                    
                 </div>
-                <div class="card-footer">
+                <div class="col-3 form-group">
                   <button type="submit" class="btn btn-primary">Add User</button>
-                </div>  
+                </div>                   
               </div>
-              <!-- /.card-body -->
+              <!-- /.card-body -->              
             </div>
-            <!-- /.card -->
+            <!-- /.card -->            
           </div>
           <!-- /.col -->
         </div>

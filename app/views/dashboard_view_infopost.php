@@ -24,7 +24,7 @@ include(ROOT . 'templates/header.php');
   </section>
 
   <!-- Main content -->
-  <section class="content">
+  <section class="content" >
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -51,7 +51,7 @@ include(ROOT . 'templates/header.php');
                       <td><?=$row['info_information']?></td>
                       <td>
                         <div class="btn-group btn-group-sm">
-                          <a href="<?=site_url('admin/del_viewpost/'.$row['info_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                          <a href="<?=site_url('admin/del_viewpost/'.$row['info_id'].'')?>" class="btn btn-danger btn-sm" onclick="reload();"><i class="fa fa-fw fa-trash"></i></a>
                         </div>
                       </td>
                     </tr>

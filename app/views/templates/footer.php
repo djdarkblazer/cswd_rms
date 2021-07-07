@@ -79,8 +79,14 @@
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="<?= site_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
+<!-- jquery-validation -->
+<script src="<?= site_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= site_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 
+<!-- Custom Script -->
 <?php echo load_js(array('js/opt_address')); ?>
+<?php echo load_js(array('js/user_validation')); ?>
+<!-- //Custom Script -->
 
 <script>
   CKEDITOR.replace( 'editor1',{
@@ -130,10 +136,10 @@
 <script type="text/javascript" language="javascript">
   $(document).ready(function () {
     var Toast = Swal.mixin({
-      toast: false,
-      position: 'center',
+      toast: true,
+      position: 'top-right',
       showConfirmButton: false,
-      timer: 3000
+      timer: 5000
     });
     var Toasted = Swal.mixin({
       toast: false,
@@ -191,7 +197,7 @@
       element: 'bar-chart',
       resize: true,
       data: [
-        {y: <?= date('Y'); ?>, a: <?= $data['total'];?>, b: <?= $data['approved'];?>,c: <?= $data['napproved'];?>,d: <?= $data['pending'];?>, e: <?= $data['incomplete'];?>},
+      {y: <?= date('Y'); ?>, a: <?= $data['total'];?>, b: <?= $data['approved'];?>,c: <?= $data['napproved'];?>,d: <?= $data['pending'];?>, e: <?= $data['incomplete'];?>},
 
       ],
       barColors: ['#007bff', '#f56954','lime', '#00a65a','violet'],
@@ -200,6 +206,6 @@
       labels: ['Total Client','Approved', 'Disapproved','Pending','Incomplete'],
       hideHover: 'auto'
     });    
-  </script>
+  </script> 
 </body>
 </html>

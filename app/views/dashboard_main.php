@@ -26,82 +26,73 @@ include(ROOT . '/templates/header.php');
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Total Client</span>
-              <span class="info-box-number">
-                <?= $data['total'];?>
-              </span>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?= $data['total']?></h3>
+                <p>Total<br>Client Request</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Approved Assistance Request</span>
-              <span class="info-box-number"><?= $data['approved'];?></span>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?= $data['approved']?></h3>
+                <p>Approved<br>Request</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-check"></i>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix hidden-md-up"></div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Disapproved Assistance Request</span>
-              <span class="info-box-number"><?= $data['napproved'];?></span>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?= $data['napproved']?></h3>
+                <p>Disapproved<br>Request</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-times"></i>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-spinner"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Pending Assistance Request</span>
-              <span class="info-box-number"><?= $data['pending'];?></span>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3><?= $data['pending']?></h3>
+                <p>Pending<br>Request</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-spinner"></i>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Incomplete Requirements</span>
-              <span class="info-box-number">
-                <?= $data['incomplete'];?>
-              </span>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?= $data['incomplete']?></h3>
+                <p>Incomplete<br>Requirements</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-times-circle"></i>
+              </div>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
+          <!-- ./col -->          
         </div>
-
-      </div>
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">

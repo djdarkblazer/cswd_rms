@@ -79,25 +79,9 @@
                 <small>Member since Nov. 2012</small>
               </p>
             </li>
-            <!-- Menu Body -->
-            <li class="user-body">
-              <div class="row">
-                <div class="col-4 text-center">
-                  <a href="#">Followers</a>
-                </div>
-                <div class="col-4 text-center">
-                  <a href="#">Sales</a>
-                </div>
-                <div class="col-4 text-center">
-                  <a href="#">Friends</a>
-                </div>
-              </div>
-              <!-- /.row -->
-            </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-              <a href="#" class="btn btn-default btn-flat">Profile</a>
-              <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+              <a href="<?= site_url('account/is_logout'); ?>" class="btn btn-default btn-flat float-right">Sign out</a>
             </li>
           </ul>
         </li>
@@ -129,7 +113,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
+          <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-header accent-blue"><strong>ADMIN PANEL</strong></li>     
@@ -266,23 +250,7 @@
                 </a>
               </li>                            
             </ul>
-          </li> 
-
-          <li class="nav-item">
-            <a href="<?= site_url('account/is_logout'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Logout
-              </p>
-            </a>
-          </li>
-  <!--         <li class="nav-header"><strong>MISCELLANEOUS</strong></li>
-          <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Documentation</p>
-            </a>
-          </li>  -->                   
+          </li>                   
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
