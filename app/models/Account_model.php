@@ -28,7 +28,7 @@ class Account_model extends Model {
     {
       $data = array(
         'email' => $email,
-        'status' => 'Verified'
+        'status' => 'Activated'
     );
 
       return $this->db->table('user')->where($data)->get();

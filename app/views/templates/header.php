@@ -246,7 +246,7 @@
               <li class="nav-item">
                 <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mange User</p>
+                  <p>Manage User</p>
                 </a>
               </li>                            
             </ul>
