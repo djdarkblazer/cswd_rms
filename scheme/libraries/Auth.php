@@ -71,14 +71,18 @@ class Auth {
 	 * @param  string $usertype   Usertype
 	 * @return $this
 	 */
-	public function register($username, $password, $email)
+	public function register($lastname,$firstname,$middlename,$username, $password, $email,$role,$image)
 	{
 		$bind = array(
-			'username' => $username,
-			'password' => $this->passwordhash($password),
-			'email' => $email,
-			'status' => 'Unverified',
-			'role' => 'Administrator'
+            'lastname' => $lastname,
+            'firstname' => $firstname,
+            'middlename' => $middlename,
+            'username' => $username,
+            'email' => $email,
+            'password' =>password_hash($password, PASSWORD_BCRYPT),
+            'role' => $role,
+            'status' => 'Deactivated',
+            'image' => $image
 			);
 		return $this->LAVA->db->table('user')
 						->insert($bind)
@@ -106,6 +110,47 @@ class Auth {
 			}
 		}
 	}
+
+
+	/**
+	 * Login
+	 * @param  string $username Username
+	 * @param  string $password Password
+	 * @return string Validated User Role
+	 */
+	public function login_role($email, $password)
+	{
+    	$row = $this->LAVA->db->table('user') 					
+    					->where('email', $email)
+    					->get();
+		if($row)
+		{
+			if(password_verify($password, $row['password']))
+			{
+				return $row['role'];
+			} else {
+				return false;
+			}
+		}
+	}
+
+	/**
+	 * Set up session for Role
+	 * @param $this
+	 */
+	public function set_loggedin_role($role) {
+		return $this->LAVA->session->set_userdata(array('role' => $role, 'loggedin' => 1));
+	}
+
+	/**
+	 * Get User ID Role
+	 * @return string User ID from Session
+	 */
+	public function get_role()
+	{
+		$role = $this->LAVA->session->userdata('role');
+		return !empty($role) ? $role : false;
+	}			
 
 	/**
 	 * Set up session for login

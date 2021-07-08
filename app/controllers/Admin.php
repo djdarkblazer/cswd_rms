@@ -49,7 +49,7 @@ class Admin extends Controller {
 
 			$this->call->view('dashboard_main',$data);
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}
 	}
 
@@ -58,7 +58,7 @@ class Admin extends Controller {
 		if($this->auth->is_logged_in()){
 			$this->call->view('dashboard_add_sp');
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}
 	}
 
@@ -67,7 +67,7 @@ class Admin extends Controller {
 		if($this->auth->is_logged_in()){
 			$this->call->view('dashboard_update_sp');
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}
 	}	
 
@@ -77,17 +77,17 @@ class Admin extends Controller {
 			$data = $this->record->retri_records();
 			$this->call->view('dashboard_view_sp',$data);
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}
 	}
 
-	public function sp_viewaccounts()
+	public function manage_useraccount()
 	{
 		if($this->auth->is_logged_in()){
 			$data = $this->record->user_accounts();
-			$this->call->view('dashboard_view_useraccount',$data);
+			$this->call->view('dashboard_manage_user',$data);
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}
 	}	
 
@@ -116,7 +116,7 @@ class Admin extends Controller {
 			$data = $this->record->get_single_data($id);
 			$this->call->view('dashboard_update_sp',$data);
 		} else {
-			$this->call->view('dashboard_login'); 
+			$this->call->view('dashboard_login_v2'); 
 		}		
 	}				
 
@@ -782,7 +782,7 @@ public function calendarofact()
 		$data = $this->record->retri_coa();
 		$this->call->view('dashboard_calendar',$data);
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}		
 }
 
@@ -829,7 +829,7 @@ public function pwd_viewrecords()
 		$data = $this->record->retri_pwd_records();
 		$this->call->view('dashboard_view_pwd',$data);
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}
 }
 
@@ -839,7 +839,7 @@ public function pwd_addrecords()
 	if($this->auth->is_logged_in()){
 		$this->call->view('dashboard_add_pwd');
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}
 }
 
@@ -848,7 +848,7 @@ public function pwd_updaterecords()
 	if($this->auth->is_logged_in()){
 		$this->call->view('dashboard_update_pwd');
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}
 }
 
@@ -858,7 +858,7 @@ public function edit_pwd_records($id) {
 		$data = $this->record->get_single_pwd($id);
 		$this->call->view('dashboard_update_pwd',$data);
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}		
 }
 
@@ -1263,7 +1263,7 @@ public function postinfo()
 	if($this->auth->is_logged_in()){
 		$this->call->view('dashboard_postinfo');
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}	
 }
 
@@ -1274,7 +1274,7 @@ public function viewinfo()
 		$data = $this->record->viewall_post();
 		$this->call->view('dashboard_view_infopost',$data);
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
 	}	
 }
 
@@ -1754,7 +1754,18 @@ public function backupfile()
 		$data = $this->record->viewall_backup();
 		$this->call->view('dashboard_backupfile',$data);
 	} else {
-		$this->call->view('dashboard_login'); 
+		$this->call->view('dashboard_login_v2'); 
+	}    
+}
+
+
+public function request_adminfile()
+{
+	if($this->auth->is_logged_in()){
+		$data = $this->record->viewall_request();
+		$this->call->view('dashboard_upload_admin_request',$data);
+	} else {
+		$this->call->view('dashboard_login_v2'); 
 	}    
 }
 
@@ -1852,6 +1863,8 @@ public function delete_backup($id)
 	}
 }
 
+
+
 public function download_backup($id)
 {
 	$img = $this->record->get_single_backup($id);
@@ -1862,9 +1875,27 @@ public function download_backup($id)
 	force_download($data,$img['backup_file'],NULL);
 }	
 
-public function backup_database()
+public function del_multiuser($id)
 {
-	
+	if($this->auth->is_logged_in()){
+		$img = $this->record->get_single_userdata($id);
+		$pathFile ="/uploads/image/user_pic/";
+		$dirto = getcwd();
+		$data = $dirto.$pathFile.$img['image'];
+
+		if(!empty($data))
+		{
+			unlink($data);
+		}
+		if($this->record->delete_userdata($id))
+		{
+			$this->session->set_flashdata(array('delete' => 'User Data Deleted Successfully.'));
+			redirect('admin/manage_useraccount');
+			exit();
+		}
+	} else {
+		$this->call->view('dashboard_login_v2'); 
+	}     
 }
 
 	//End	

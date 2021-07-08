@@ -46,7 +46,10 @@ class Account extends Controller {
     {
         if($this->auth->is_logged_in())
         {
-            $data['username']= $this->auth->get_username();
+            $getusr = $this->auth->get_username();
+            $getrole = $this->auth->get_role(); 
+
+            $data = array('username' => $getusr, 'role' => $getrole);
             redirect('admin/index', $data);
         }
     }
@@ -77,6 +80,9 @@ class Account extends Controller {
                     {
                         $data=$this->auth->login($this->io->post('email'), $this->io->post('password'));
                         $this->auth->set_logged_in($data);
+                        $data_role = $this->auth->login_role($this->io->post('email'), $this->io->post('password'));
+                        $this->auth->set_loggedin_role($data_role);
+
                         redirect('account/admin_page');
                     } else {
                         $this->session->set_flashdata(array('error' => 'Invalid Email or Password'));

@@ -40,7 +40,17 @@
   <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
 
   <!-- Morris charts -->
-  <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/morris.js/morris.css">  
+  <link rel="stylesheet" href="<?= site_url(); ?>assets/plugins/morris.js/morris.css">
+
+<?php echo load_css(array('css/preloader')); ?>
+
+<style type="text/css">
+  .removeRow
+  {
+    background: #FF0000;
+    color: #FFFFFF;
+  }
+</style>  
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -58,7 +68,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?= site_url(); ?>admin" class="nav-link">Home</a>
+          <a href="" class="nav-link">Home</a>
         </li>
       </ul>
 
@@ -76,7 +86,9 @@
 
               <p>
                 <?php echo $this->session->userdata('username'); ?>
+                <small><?php echo $this->session->userdata('role'); ?></small>
                 <small>Member since Nov. 2012</small>
+
               </p>
             </li>
             <!-- Menu Footer-->
@@ -92,10 +104,18 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="<?= site_url(); ?>admin" class="brand-link">
-        <img src="<?= site_url();?>assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">ADMIN PANEL</span>
-      </a>
+      <?php if($this->session->userdata('role') == "Administrator") :?>
+        <a href="<?= site_url(); ?>admin" class="brand-link">
+          <img src="<?= site_url();?>assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">Administrator Panel</span>
+        </a>
+      <?php elseif($this->session->userdata('role') == "Employee") :?>
+        <a href="<?= site_url(); ?>admin" class="brand-link">
+          <img src="<?= site_url();?>assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">Employee Panel</span>
+        </a>
+      <?php endif; ?>
+
 
       <!-- Sidebar -->
       <div class="sidebar mt-2">
@@ -112,11 +132,14 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
+
+        <?php if($this->session->userdata('role') == "Administrator") :?>
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
-           <li class="nav-header accent-blue"><strong>ADMIN PANEL</strong></li>     
+           <li class="nav-header accent-blue"><strong>RECORDS PANEL</strong></li>     
            <li class="nav-item menu-open">
             <a href="<?= site_url(); ?>admin" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -170,14 +193,14 @@
                 </a>
               </li>              
             </ul>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-server"></i>
-              <p>
-                Reports
-              </p>
-            </a>
-          </li>             
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-server"></i>
+                <p>
+                  Reports
+                </p>
+              </a>
+            </li>             
           </li>
           <li class="nav-header"><strong>WEBSITE PANEL</strong></li>
           <li class="nav-item">
@@ -188,14 +211,6 @@
               </p>
             </a>
           </li>
-<!--           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
-            </a>
-          </li> -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -244,7 +259,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
+                <a href="<?= site_url('admin/manage_useraccount'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage User</p>
                 </a>
@@ -254,7 +269,152 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+    <?php elseif ($this->session->userdata('role') == "Employee") :?> 
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+           with font-awesome or any other icon font library -->
+           <li class="nav-header accent-blue"><strong>RECORDS PANEL</strong></li>     
+           <li class="nav-item menu-open">
+            <a href="<?= site_url(); ?>admin" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-plus-square"></i>
+              <p>
+                Add Records
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>admin/sp_addrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Solo Parent</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>admin/pwd_addrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add PWD</p>
+                </a>
+              </li>                            
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Manage Records
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>admin/sp_viewrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Solo Parent Records</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>admin/pwd_viewrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View PWD Records</p>
+                </a>
+              </li>              
+            </ul>
+            <li class="nav-item">
+              <a href="<?= site_url('admin/request_adminfile'); ?>" class="nav-link">
+                <i class="nav-icon fas fa-upload"></i>
+                <p>
+                  Upload File Request
+                </p>
+              </a>
+            </li>            
+<!--           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-server"></i>
+              <p>
+                Reports
+              </p>
+            </a>
+          </li> -->             
+        </li>
+<!--           <li class="nav-header"><strong>WEBSITE PANEL</strong></li>
+          <li class="nav-item">
+            <a href="<?= site_url(); ?>admin/calendarofact" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Calendar of Activities
+              </p>
+            </a>
+          </li> -->
+<!--           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Post / Articles
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url('admin/postinfo')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Post</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('admin/viewinfo'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Post</p>
+                </a>
+              </li>                            
+            </ul>
+          </li>  -->         
+<!--           <li class="nav-header"><strong>SETTINGS</strong></li>
+          <li class="nav-item">
+            <a href="<?= site_url('admin/backupfile'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-upload"></i>
+              <p>
+                Backup Data
+              </p>
+            </a>
+          </li>          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                User Management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url('user/add_user'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('admin/sp_viewaccounts'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage User</p>
+                </a>
+              </li>                            
+            </ul>
+          </li>  -->                  
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->    
+    <?php endif; ?>
+  </div>
+  <!-- /.sidebar -->
+</aside>
 

@@ -98,9 +98,26 @@ class Record_model extends Model {
 
 	public function user_accounts(){
 		return $this->db->table('user')
-		->order_by('username', 'ASC')
+		->order_by('id', 'ASC')
 		->get_all();
+	}
+
+	public function get_single_userdata($id){
+		return $this->db->table('user')
+		->select('image')
+		->where('id', $id)
+		->get();		
 	}	
+
+	public function delete_userdata($id){
+		$result = $this->db->table('user')
+		->delete()
+		->where('id', $id)
+		->exec();
+		if($result)
+			return true;						   					
+	}
+
 
 	public function delete_data($id){
 		$result = $this->db->table('form_soloparent')
@@ -564,7 +581,14 @@ class Record_model extends Model {
 		return $this->db->table('form_backup')
 		->order_by('backup_date', 'ASC')
 		->get_all();	    
-	}	
+	}
+
+	public function viewall_request()
+	{
+		return $this->db->table('form_backup')
+		->order_by('backup_date', 'ASC')
+		->get_all();	    
+	}		
 
 	public function get_single_backup($id){
 		return $this->db->table('form_backup')

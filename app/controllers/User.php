@@ -80,7 +80,7 @@ class User extends Controller
 
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
 			{
-				$this->user->create_user(
+				$this->auth->register(
 					$this->io->post('lastname'),
 					$this->io->post('firstname'),
 					$this->io->post('middle'),

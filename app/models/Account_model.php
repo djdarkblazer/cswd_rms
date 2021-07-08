@@ -16,9 +16,9 @@ class Account_model extends Model {
         );
 
         $result = $this->db->table('user')
-                       ->where('email', $email)
-                       ->update($data)
-                       ->exec();
+        ->where('email', $email)
+        ->update($data)
+        ->exec();
         if($result)
             return true;
     }
@@ -41,11 +41,16 @@ class Account_model extends Model {
         'password'=>password_hash($password, PASSWORD_BCRYPT),
     );
     $result=$this->db->table('user')
-                 ->where('email', $email)
-                 ->update($data)
-                 ->exec();
+    ->where('email', $email)
+    ->update($data)
+    ->exec();
     if($result)
         return true;
+}
+
+public function ClassName($PARAMETERS)
+{
+    
 }
 
 //End    
