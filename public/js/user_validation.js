@@ -1,5 +1,5 @@
 $(function(){	
-	$('#usr_validation').validate({
+	$('#user_validation').validate({
 		rules: {
 			lastname: {
 				required: true

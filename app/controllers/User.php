@@ -27,7 +27,6 @@ class User extends Controller
 			'newline' => "\r\n"
 		);		
 		$this->call->library('email', $config);
-
 		$this->call->model('user');
 	}
 
@@ -53,7 +52,7 @@ class User extends Controller
 
 			$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
 			$uploadOk = 0;
-			redirect('admin/add_user');
+			redirect('user/add_user');
 			exit();				
 		}
 
@@ -64,7 +63,7 @@ class User extends Controller
 
 			$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
 			$uploadOk = 0;
-			redirect('admin/add_user');
+			redirect('user/add_user');
 			exit();			
 		}
 
@@ -72,7 +71,7 @@ class User extends Controller
 		{
 			// if everything is ok, try to upload file
 			$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
-			redirect('admin/add_user');
+			redirect('user/add_user');
 			exit();			
 		}
 		else 
@@ -83,20 +82,21 @@ class User extends Controller
 				$this->auth->register(
 					$this->io->post('lastname'),
 					$this->io->post('firstname'),
-					$this->io->post('middle'),
+					$this->io->post('middlename'),
+					$this->io->post('email'),
 					$this->io->post('username'),
 					$this->io->post('password'),
 					$this->io->post('role'),
 					basename( $_FILES["fileToUpload"]["name"]));
 
 				$this->session->set_flashdata(array('success' => 'UserData Added Successfully.'));
-				redirect('admin/add_user');	
+				redirect('user/add_user');	
 				exit();																											
 			}
 			else
 			{
 				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-				redirect('admin/add_user');
+				redirect('user/add_user');
 				exit();
 			}			
 		}

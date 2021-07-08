@@ -86,7 +86,6 @@
 <!-- Custom Script -->
 <?php echo load_js(array('js/opt_address')); ?>
 <?php echo load_js(array('js/user_validation')); ?>
-<?php echo load_js(array('js/multi_delete')); ?>
 <!-- //Custom Script -->
 
 <script>
@@ -140,7 +139,7 @@
       toast: true,
       position: 'top-right',
       showConfirmButton: false,
-      timer: 5000
+      timer: 3000
     });
     var Toasted = Swal.mixin({
       toast: false,
