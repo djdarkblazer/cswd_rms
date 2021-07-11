@@ -21,6 +21,9 @@ include(ROOT . 'templates/header.php');
         </div>
       </div>
     </div><!-- /.container-fluid -->
+    <div class="col-4">
+      <a href="<?= site_url('admin/sp_addrecords')?>" class="btn btn-primary"><i class="nav-icon fas fa-plus-square"></i> Add</a>
+    </div>
   </section>
 
   <!-- Main content -->
@@ -39,9 +42,10 @@ include(ROOT . 'templates/header.php');
                     <th>Full Name</th>
                     <th>Age</th>
                     <th>Sex</th>
-                    <th>DOB</th>
                     <th>Address</th>
                     <th>Occupation</th>
+                    <th>Current Status</th>
+                    <th>Valid Until</th>
                     <th>Request Status</th>
                     <th style="text-align: center;">Action</th>
                   </tr>
@@ -50,12 +54,13 @@ include(ROOT . 'templates/header.php');
                  <?php foreach($data as $row):?>
                    <tr style="text-align: center;">
                     <td><img src="<?php echo BASE_URL .'uploads/image/sp_idpic/'. $row['image']; ?>" width="100" height="100"></td>
-                    <td><?=$row['sp_fullname']?></td>
+                    <td><?=$row['sp_firstname'].' '.$row['sp_middlename'].' '.$row['sp_lastname']?></td>
                     <td><?=$row['sp_age']?></td>
                     <td><?=$row['sp_sex']?></td>
-                    <td><?= date('M d, Y',strtotime($row['sp_dob'])); ?></td>
-                    <td><?=$row['sp_address']?></td>
+                    <td><?=$row['sp_address'].', '.$row['sp_brgy'].', '.$row['sp_city'].', '.$row['sp_province']?></td>
                     <td><?=$row['sp_occupation']?></td>
+                    <td><?=$row['sp_curr_status']?></td>
+                    <td><?= date('M d, Y',strtotime($row['expiration_date'])); ?></td>
                     <td><?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?></td>
                     <td>
                       <div class="btn-group btn-group-sm">
@@ -64,10 +69,10 @@ include(ROOT . 'templates/header.php');
                         <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-print"></i></a>                     
                       </div>                      
                     </td>
-                   </td>
-                 </tr>
-               <?php endforeach;?> 
-             </tbody>
+                  </td>
+                </tr>
+              <?php endforeach;?> 
+            </tbody>
           </table>
         </div>
         <!-- /.card-body -->

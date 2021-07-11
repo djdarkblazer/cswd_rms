@@ -126,82 +126,6 @@ class Admin extends Controller {
 	{
 		if($this->form_validation->submitted())
 		{
-			//Form Validation after Submit
-			$this->form_validation
-			->name('sp_fullname')->required("Please Enter your Full Name")
-			->alpha_space($this->io->post('sp_fullname'))
-			->name('sp_age')->required("Please your Age")
-			->numeric("Only the Age accepts numbers")
-			->name('sp_sex')->required("Enter your Gender/Sex")
-			->name('sp_dob')->required("Enter your Birthday")
-			->name('sp_pob')->required("Enter your Place of Birth")
-			->name('sp_address')->required("Specify your Address")
-			->name('sp_email')->required("Please enter a email address")
-			->valid_email("Enter a Valid Email.")
-			->name('sp_mobilenum')->required("Enter your Mobile Number")
-			->numeric("Only the Mobile Number accepts numbers")
-			->min_length(2)
-			->max_length(11)
-			->name('sp_educational')->required("Enter your Highest Educational Attainment")
-			->name('sp_occupation')->required("Enter your Occupation")
-			->name('sp_monthlyincome')->required("Enter your Estimated Monthly Income")
-			->name('spfc_fullname')
-			->alpha_space($this->io->post('spfc_fullname'))
-			->name('spfc_relationship')
-			->name('spfc_age')
-			->numeric("Only the Age accepts numbers")
-			->name('spfc_status')
-			->name('spfc_dob')
-			->name('spfc_educational')
-			->name('spfc_occupation')
-			->name('spfc_monthlyincome')
-			->name('spfc_fullname_two')
-			->alpha_space($this->io->post('spfc_fullname_two'))
-			->name('spfc_relationship_two')
-			->name('spfc_age_two')
-			->numeric("Only the Age accepts numbers")
-			->name('spfc_status_two')
-			->name('spfc_dob_two')
-			->name('spfc_educational_two')
-			->name('spfc_occupation_two')
-			->name('spfc_monthlyincome_two')
-			->name('spfc_fullname_three')
-			->alpha_space($this->io->post('spfc_fullname_three'))
-			->name('spfc_relationship_three')
-			->name('spfc_age_three')
-			->numeric("Only the Age accepts numbers")
-			->name('spfc_status_three')
-			->name('spfc_dob_three')
-			->name('spfc_educational_three')
-			->name('spfc_occupation_three')
-			->name('spfc_monthlyincome_three')
-			->name('spfc_fullname_four')
-			->alpha_space($this->io->post('spfc_fullname_four'))
-			->name('spfc_relationship_four')
-			->name('spfc_age_four')
-			->numeric("Only the Age accepts numbers")
-			->name('spfc_status_four')
-			->name('spfc_dob_four')
-			->name('spfc_educational_four')
-			->name('spfc_occupation_four')
-			->name('spfc_monthlyincome_four')
-			->name('spfc_fullname_five')
-			->alpha_space($this->io->post('spfc_fullname_five'))
-			->name('spfc_relationship_five')
-			->name('spfc_age_five')
-			->numeric("Only the Age accepts numbers")
-			->name('spfc_status_five')
-			->name('spfc_dob_five')
-			->name('spfc_educational_five')
-			->name('spfc_occupation_five')
-			->name('spfc_monthlyincome_five')
-			->name('sp_curr_status')->required("Enter your Current Status")
-			->name('sp_circumstances')
-			->name('sp_problems')	
-			->name('sp_family_resources')
-			->name('curr_date')->required("Enter Date Today")
-			->name('sp_signature')->required("Enter your Printed Name");
-
 			$target_dir = "uploads/image/sp_idpic/";
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 			$uploadOk = 1;
@@ -226,14 +150,6 @@ class Admin extends Controller {
 			redirect('admin/sp_addrecords');
 			exit();			
 		}
-			// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 500000) {
-
-			$this->session->set_flashdata(array('error' => 'Sorry, your file is too large.'));			
-			$uploadOk = 0;
-			redirect('admin/sp_addrecords');
-			exit();			
-		}
 
 		if ($uploadOk == 0) 
 		{
@@ -247,12 +163,17 @@ class Admin extends Controller {
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
 			{
 				$this->record->insert_sprecord(
-					$this->io->post('sp_fullname'),
+					$this->io->post('sp_lastname'),
+					$this->io->post('sp_firstname'),
+					$this->io->post('sp_middlename'),
 					$this->io->post('sp_age'),
 					$this->io->post('sp_sex'),
 					$this->io->post('sp_dob'),
 					$this->io->post('sp_pob'),
 					$this->io->post('sp_address'),
+					$this->io->post('sp_brgy'),
+					$this->io->post('sp_city'),
+					$this->io->post('sp_province'),
 					$this->io->post('sp_email'),
 					$this->io->post('sp_mobilenum'),
 					$this->io->post('sp_educational'),
@@ -307,15 +228,15 @@ class Admin extends Controller {
 					basename( $_FILES["fileToUpload"]["name"]));
 
 				$email= $this->io->post('sp_email');
-				$fullname = $this->io->post('sp_fullname');
+				$fullname = $this->io->post('sp_lastname');
 				$this->send_ureview($email,$fullname);
 
 					//SMS API WorkLoad
 					//iTextMo
 				$mynumber = $this->io->post('sp_mobilenum');
-				$message = "Mr/Mrs. $fullname,\n\nYour Request from CSWD is Pending from Approval.\n\nFrom CSWD Office";
-				$api_user = "TR-CALAP695595_5M21Q";
-				$api_pass = "s#k1gseyd8";
+				$message = "Mr/Mrs. $fullname,\nYour Request from CSWD is Pending from Approval.\n\n-CSWD Office\n\n";
+				$api_user = "TR-CSWDS591291_L6Q7P";
+				$api_pass = "9kr{cj(5&m";
 
 				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 				if($result == ""){
@@ -349,283 +270,219 @@ class Admin extends Controller {
 	//Updating Records
 public function spdata_update()
 {
-	if($this->form_validation->submitted())
+	if($this->form_validation->run())
 	{
-			//Form Validation after Submit
-		$this->form_validation
-		->name('sp_fullname')->required("Please Enter your Full Name")
-		->alpha_space($this->io->post('sp_fullname'))
-		->name('sp_age')->required("Please your Age")
-		->numeric("Only the Age accepts numbers")
-		->name('sp_sex')->required("Enter your Gender/Sex")
-		->name('sp_dob')->required("Enter your Birthday")
-		->name('sp_pob')->required("Enter your Place of Birth")
-		->name('sp_address')->required("Specify your Address")
-		->name('sp_email')->required("Please enter a email address")
-		->valid_email("Enter a Valid Email.")
-		->name('sp_mobilenum')->required("Enter your Mobile Number")
-		->numeric("Only the Mobile Number accepts numbers")
-		->min_length(2)
-		->max_length(15)
-		->name('sp_educational')->required("Enter your Highest Educational Attainment")
-		->name('sp_occupation')->required("Enter your Occupation")
-		->name('sp_monthlyincome')->required("Enter your Estimated Monthly Income")
-		->name('spfc_fullname')
-		->alpha_space($this->io->post('spfc_fullname'))
-		->name('spfc_relationship')
-		->name('spfc_age')
-		->numeric("Only the Age accepts numbers")
-		->name('spfc_status')
-		->name('spfc_dob')
-		->name('spfc_educational')
-		->name('spfc_occupation')
-		->name('spfc_monthlyincome')
-		->name('spfc_fullname_two')
-		->alpha_space($this->io->post('spfc_fullname_two'))
-		->name('spfc_relationship_two')
-		->name('spfc_age_two')
-		->numeric("Only the Age accepts numbers")
-		->name('spfc_status_two')
-		->name('spfc_dob_two')
-		->name('spfc_educational_two')
-		->name('spfc_occupation_two')
-		->name('spfc_monthlyincome_two')
-		->name('spfc_fullname_three')
-		->alpha_space($this->io->post('spfc_fullname_three'))
-		->name('spfc_relationship_three')
-		->name('spfc_age_three')
-		->numeric("Only the Age accepts numbers")
-		->name('spfc_status_three')
-		->name('spfc_dob_three')
-		->name('spfc_educational_three')
-		->name('spfc_occupation_three')
-		->name('spfc_monthlyincome_three')
-		->name('spfc_fullname_four')
-		->alpha_space($this->io->post('spfc_fullname_four'))
-		->name('spfc_relationship_four')
-		->name('spfc_age_four')
-		->numeric("Only the Age accepts numbers")
-		->name('spfc_status_four')
-		->name('spfc_dob_four')
-		->name('spfc_educational_four')
-		->name('spfc_occupation_four')
-		->name('spfc_monthlyincome_four')
-		->name('spfc_fullname_five')
-		->alpha_space($this->io->post('spfc_fullname_five'))
-		->name('spfc_relationship_five')
-		->name('spfc_age_five')
-		->numeric("Only the Age accepts numbers")
-		->name('spfc_status_five')
-		->name('spfc_dob_five')
-		->name('spfc_educational_five')
-		->name('spfc_occupation_five')
-		->name('spfc_monthlyincome_five')
-		->name('sp_curr_status')->required("Enter your Current Status")
-		->name('sp_circumstances')
-		->name('sp_problems')	
-		->name('sp_family_resources')
-		->name('curr_date')->required("Enter Date Today")
-		->name('sp_signature')->required("Enter your Printed Name")
-		->name('request_status')->required();
-
-		if($this->form_validation->run())
+		if($this->record->update_sprecord(
+			$this->io->post('sp_id'),
+			$this->io->post('sp_lastname'),
+			$this->io->post('sp_firstname'),
+			$this->io->post('sp_middlename'),
+			$this->io->post('sp_age'),
+			$this->io->post('sp_sex'),
+			$this->io->post('sp_dob'),
+			$this->io->post('sp_pob'),
+			$this->io->post('sp_address'),
+			$this->io->post('sp_brgy'),
+			$this->io->post('sp_city'),
+			$this->io->post('sp_province'),
+			$this->io->post('sp_email'),
+			$this->io->post('sp_mobilenum'),
+			$this->io->post('sp_educational'),
+			$this->io->post('sp_occupation'),
+			$this->io->post('sp_monthlyincome'),
+			$this->io->post('spfc_fullname'),
+			$this->io->post('spfc_relationship'),
+			$this->io->post('spfc_age'),
+			$this->io->post('spfc_status'),
+			$this->io->post('spfc_dob'),
+			$this->io->post('spfc_educational'),
+			$this->io->post('spfc_occupation'),
+			$this->io->post('spfc_monthlyincome'),
+			$this->io->post('spfc_fullname_two'),
+			$this->io->post('spfc_relationship_two'),
+			$this->io->post('spfc_age_two'),
+			$this->io->post('spfc_status_two'),
+			$this->io->post('spfc_dob_two'),
+			$this->io->post('spfc_educational_two'),
+			$this->io->post('spfc_occupation_two'),
+			$this->io->post('spfc_monthlyincome_two'),
+			$this->io->post('spfc_fullname_three'),
+			$this->io->post('spfc_relationship_three'),
+			$this->io->post('spfc_age_three'),
+			$this->io->post('spfc_status_three'),
+			$this->io->post('spfc_dob_three'),
+			$this->io->post('spfc_educational_three'),
+			$this->io->post('spfc_occupation_three'),
+			$this->io->post('spfc_monthlyincome_three'),
+			$this->io->post('spfc_fullname_four'),
+			$this->io->post('spfc_relationship_four'),
+			$this->io->post('spfc_age_four'),
+			$this->io->post('spfc_status_four'),
+			$this->io->post('spfc_dob_four'),
+			$this->io->post('spfc_educational_four'),
+			$this->io->post('spfc_occupation_four'),
+			$this->io->post('spfc_monthlyincome_four'),	
+			$this->io->post('spfc_fullname_five'),
+			$this->io->post('spfc_relationship_five'),
+			$this->io->post('spfc_age_five'),
+			$this->io->post('spfc_status_five'),
+			$this->io->post('spfc_dob_five'),
+			$this->io->post('spfc_educational_five'),
+			$this->io->post('spfc_occupation_five'),
+			$this->io->post('spfc_monthlyincome_five'),
+			$this->io->post('sp_curr_status'),
+			$this->io->post('sp_circumstances'),
+			$this->io->post('sp_problems'),
+			$this->io->post('sp_family_resources'),
+			$this->io->post('curr_date'),
+			$this->io->post('sp_signature'),
+			$this->io->post('request_status'),
+			$this->io->post('expiration_date')
+		))
 		{
-			if($this->record->update_sprecord(
-				$this->io->post('sp_id'),
-				$this->io->post('sp_fullname'),
-				$this->io->post('sp_age'),
-				$this->io->post('sp_sex'),
-				$this->io->post('sp_dob'),
-				$this->io->post('sp_pob'),
-				$this->io->post('sp_address'),
-				$this->io->post('sp_email'),
-				$this->io->post('sp_mobilenum'),
-				$this->io->post('sp_educational'),
-				$this->io->post('sp_occupation'),
-				$this->io->post('sp_monthlyincome'),
-				$this->io->post('spfc_fullname'),
-				$this->io->post('spfc_relationship'),
-				$this->io->post('spfc_age'),
-				$this->io->post('spfc_status'),
-				$this->io->post('spfc_dob'),
-				$this->io->post('spfc_educational'),
-				$this->io->post('spfc_occupation'),
-				$this->io->post('spfc_monthlyincome'),
-				$this->io->post('spfc_fullname_two'),
-				$this->io->post('spfc_relationship_two'),
-				$this->io->post('spfc_age_two'),
-				$this->io->post('spfc_status_two'),
-				$this->io->post('spfc_dob_two'),
-				$this->io->post('spfc_educational_two'),
-				$this->io->post('spfc_occupation_two'),
-				$this->io->post('spfc_monthlyincome_two'),
-				$this->io->post('spfc_fullname_three'),
-				$this->io->post('spfc_relationship_three'),
-				$this->io->post('spfc_age_three'),
-				$this->io->post('spfc_status_three'),
-				$this->io->post('spfc_dob_three'),
-				$this->io->post('spfc_educational_three'),
-				$this->io->post('spfc_occupation_three'),
-				$this->io->post('spfc_monthlyincome_three'),
-				$this->io->post('spfc_fullname_four'),
-				$this->io->post('spfc_relationship_four'),
-				$this->io->post('spfc_age_four'),
-				$this->io->post('spfc_status_four'),
-				$this->io->post('spfc_dob_four'),
-				$this->io->post('spfc_educational_four'),
-				$this->io->post('spfc_occupation_four'),
-				$this->io->post('spfc_monthlyincome_four'),	
-				$this->io->post('spfc_fullname_five'),
-				$this->io->post('spfc_relationship_five'),
-				$this->io->post('spfc_age_five'),
-				$this->io->post('spfc_status_five'),
-				$this->io->post('spfc_dob_five'),
-				$this->io->post('spfc_educational_five'),
-				$this->io->post('spfc_occupation_five'),
-				$this->io->post('spfc_monthlyincome_five'),
-				$this->io->post('sp_curr_status'),
-				$this->io->post('sp_circumstances'),
-				$this->io->post('sp_problems'),
-				$this->io->post('sp_family_resources'),
-				$this->io->post('curr_date'),
-				$this->io->post('sp_signature'),
-				$this->io->post('request_status')
-			))
-			{
-				$email= $this->io->post('sp_email');
-				$fullname = $this->io->post('sp_fullname');
-				$mynumber = $this->io->post('sp_mobilenum');
+			$email= $this->io->post('sp_email');
+			$varf = $this->io->post('sp_firstname');
+			$varm = $this->io->post('sp_middlename');
+			$varl = $this->io->post('sp_lastname');
+			$fullname = "$varf $varm $varl";
+			$mynumber = $this->io->post('sp_mobilenum');
 
 
 					//Email and SMS Notification
-				if($this->io->post('request_status') == "Pending")
-				{
-					//Email Notification
-					$this->send_ureview($email,$fullname);
-
-					//SMS Notification
-					//iTextMo
-					$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office";
-					$api_user = "TR-CALAP695595_5M21Q";
-					$api_pass = "s#k1gseyd8";
-
-					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-					if ($result == ""){
-						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-							Please CONTACT US for help. '));							
-					}else if ($result == 0){
-						echo "Message Sent!";
-						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-					}
-					else{	
-						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-					}
-
-					//./SMS End	
-
-					$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-					redirect('admin/sp_viewrecords');	
-					exit();
-				}
-				else if ($this->io->post('request_status') == "Approved") 
-				{
-					//Email Notification
-					$this->send_approved($email,$fullname);
-
-					//SMS Notification
-					//iTextMo
-					$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Approved.\n\n-CSWD Office";
-					$api_user = "TR-CALAP695595_5M21Q";
-					$api_pass = "s#k1gseyd8";
-
-					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-					if ($result == ""){
-						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-							Please CONTACT US for help. '));							
-					}else if ($result == 0){
-						echo "Message Sent!";
-						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-					}
-					else{	
-						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-					}
-
-					//./SMS End	
-
-					$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-					redirect('admin/sp_viewrecords');	
-					exit();					
-				}		
-				else if ($this->io->post('request_status') == "Disapproved")
-				{
-					//Email Notification
-					$this->send_napproved($email,$fullname);
-
-					//SMS Notification
-					//iTextMo
-					$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Disapproved.\n\n-CSWD Office";
-					$api_user = "TR-CALAP695595_5M21Q";
-					$api_pass = "s#k1gseyd8";
-
-					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-					if ($result == ""){
-						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-							Please CONTACT US for help. '));							
-					}else if ($result == 0){
-						echo "Message Sent!";
-						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-					}
-					else{	
-						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-					}
-
-					//./SMS End	
-
-					$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-					redirect('admin/sp_viewrecords');	
-					exit();							
-				} 
-				else if ($this->io->post('request_status') == "Incomplete")
-				{
-					//Email Notification
-					$this->send_napproved($email,$fullname);
-
-					//SMS Notification
-					//iTextMo
-					$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Incomplete.\n\n-CSWD Office";
-					$api_user = "TR-CALAP695595_5M21Q";
-					$api_pass = "s#k1gseyd8";
-
-					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-					if ($result == ""){
-						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-							Please CONTACT US for help. '));							
-					}else if ($result == 0){
-						echo "Message Sent!";
-						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-					}
-					else{	
-						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-					}
-
-					//./SMS End	
-
-					$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
-					redirect('admin/sp_viewrecords');	
-					exit();	
-				}							
-			}
-			else
+			if($this->io->post('request_status') == "Pending")
 			{
-				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-				redirect('admin/sp_updaterecords');
+					//Email Notification
+				$this->send_ureview($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Pending from Approval.\n-CSWD Office\n";
+				$api_user = "TR-CSWDS591291_L6Q7P";
+				$api_pass = "9kr{cj(5&m";				
+
+
+				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+				if ($result == ""){
+					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+						Please CONTACT US for help. '));							
+				}else if ($result == 0){
+					echo "Message Sent!";
+					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+				}
+				else{	
+					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+				}
+
+					//./SMS End	
+
+				$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+				redirect('admin/sp_viewrecords');	
 				exit();
 			}
-		}			
+			else if ($this->io->post('request_status') == "Approved") 
+			{
+					//Email Notification
+				$expdate = $this->io->post('expiration_date');
+				$this->send_approved($email,$fullname,date('F d, Y',strtotime($expdate)));
+
+
+					//SMS Notification
+					//iTextMo
+				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Approved.\nYour Assistance is Valid until $expdate.\n-CSWD Office\n\n";
+				$api_user = "TR-CSWDS591291_L6Q7P";
+				$api_pass = "9kr{cj(5&m";				
+
+
+				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+				if ($result == ""){
+					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+						Please CONTACT US for help. '));							
+				}else if ($result == 0){
+					echo "Message Sent!";
+					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+				}
+				else{	
+					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+				}
+
+					//./SMS End	
+
+				$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+				redirect('admin/sp_viewrecords');	
+				exit();					
+			}		
+			else if ($this->io->post('request_status') == "Disapproved")
+			{
+					//Email Notification
+
+				$dis_msg = $this->io->post('sp_dis_msg');
+				$this->send_napproved($email,$fullname,$dis_msg); 
+
+					//SMS Notification
+					//iTextMo
+				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Disapproved.\nReason: $dis_msg.-CSWD Office\n\n";
+				$api_user = "TR-CSWDS591291_L6Q7P";
+				$api_pass = "9kr{cj(5&m";
+
+
+				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+				if ($result == ""){
+					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+						Please CONTACT US for help. '));							
+				}else if ($result == 0){
+					echo "Message Sent!";
+					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+				}
+				else{	
+					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+				}
+
+					//./SMS End	
+
+				$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+				redirect('admin/sp_viewrecords');	
+				exit();							
+			} 
+			else if ($this->io->post('request_status') == "Incomplete")
+			{
+					//Email Notification
+				$this->send_incomplete($email,$fullname);
+
+					//SMS Notification
+					//iTextMo
+				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Incomplete.\n-CSWD Office\n\n";
+				$api_user = "TR-CSWDS591291_L6Q7P";
+				$api_pass = "9kr{cj(5&m";
+
+				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+				if ($result == ""){
+					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+						Please CONTACT US for help. '));							
+				}else if ($result == 0){
+					echo "Message Sent!";
+					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+				}
+				else{	
+					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+				}
+
+					//./SMS End	
+
+				$this->session->set_flashdata(array('success' => 'Data Updated Successfully.'));
+				redirect('admin/sp_viewrecords');	
+				exit();	
+			}							
+		}
+		else
+		{
+			$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+			redirect('admin/sp_updaterecords');
+			exit();
+		}
 	}
 	$this->call->view('dashboard_update_sp');
 }
@@ -689,7 +546,7 @@ public function send_incomplete($recipient,$fullname)
 	} 
 }		
 
-public function send_napproved($recipient,$fullname)
+public function send_napproved($recipient,$fullname,$msg)
 {
 	$this->email->subject('Calapan City Social Welfare and Development');
 	$this->email->sender('deejaydarkblazer@gmail.com');
@@ -702,7 +559,7 @@ public function send_napproved($recipient,$fullname)
 	<h2>REQUEST INFORMATION</h2>
 	<h3>Hi Mr/Mrs. $fullname ,</h3>
 	<br>			
-	<p><b>Your Request Assistance from CSWD is Disapproved.</b></p></br>
+	<p><b>Your Request Assistance from CSWD is Disapproved because of $msg.</b></p></br>
 	<p>Please go to the Main Office for futher information regarding on your request.</p>
 	<br>
 	<br>
@@ -717,7 +574,7 @@ public function send_napproved($recipient,$fullname)
 		return true;
 	} 
 }
-public function send_approved($recipient,$fullname)
+public function send_approved($recipient,$fullname,$expiry)
 {
 	$this->email->subject('Calapan City Social Welfare and Development');
 	$this->email->sender('deejaydarkblazer@gmail.com');
@@ -730,7 +587,7 @@ public function send_approved($recipient,$fullname)
 	<h2>REQUEST INFORMATION</h2>
 	<h3>Hi Mr/Mrs. $fullname ,</h3>
 	<br>			
-	<p><b>Your Request Assistance from CSWD has been Approved.</b></p></br>
+	<p><b>Your Request Assistance from CSWD has been Approved valid until $expiry.</b></p></br>
 	<p>Please go to the Main Office for futher information regarding on your request.</p>
 	<br>
 	<br>
@@ -747,17 +604,15 @@ public function send_approved($recipient,$fullname)
 }
 
 public function itexmo($number,$message,$apicode,$passwd){
-	$url = 'https://www.itexmo.com/php_api/api.php';
-	$itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
-	$param = array(
-		'http' => array(
-			'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-			'method'  => 'POST',
-			'content' => http_build_query($itexmo),
-		),
-	);
-	$context  = stream_context_create($param);
-	return file_get_contents($url, false, $context);
+			$ch = curl_init();
+			$itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+			curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			 curl_setopt($ch, CURLOPT_POSTFIELDS, 
+			          http_build_query($itexmo));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			return curl_exec ($ch);
+			curl_close ($ch);
 }
 
 public function pdf_view($id)
@@ -937,14 +792,7 @@ public function pwd_insert()
 		redirect('admin/pwd_addrecords');
 		exit();			
 	}
-			// Check file size
-	if ($_FILES["fileToUpload"]["size"] > 500000) {
 
-		$this->session->set_flashdata(array('error' => 'Sorry, your file is too large.'));			
-		$uploadOk = 0;
-		redirect('admin/pwd_addrecords');
-		exit();			
-	}
 
 	if ($uploadOk == 0) 
 	{
@@ -1009,8 +857,8 @@ public function pwd_insert()
 					//iTextMo
 			$mynumber = $this->io->post('pwd_mobilenum');
 			$message = "Mr/Mrs. $fullname,\n\nYour Request from CSWD is Pending from Approval.\n\nFrom CSWD Office";
-			$api_user = "TR-CALAP695595_5M21Q";
-			$api_pass = "s#k1gseyd8";
+			$api_user = "TR-CSWDS591291_L6Q7P";
+			$api_pass = "9kr{cj(5&m";
 
 			$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 			if($result == ""){
@@ -1121,6 +969,8 @@ public function pwddata_update()
 					$email= $this->io->post('pwd_email');
 					$fullname = $this->io->post('pwd_lname');
 					$mynumber = $this->io->post('pwd_mobilenum');
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";					
 
 					//Email and SMS Notification
 					if($this->io->post('request_status') == "Pending")
@@ -1131,8 +981,7 @@ public function pwddata_update()
 					//SMS Notification
 					//iTextMo
 						$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office";
-						$api_user = "TR-CALAP695595_5M21Q";
-						$api_pass = "s#k1gseyd8";
+
 
 						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 						if ($result == ""){
@@ -1161,8 +1010,7 @@ public function pwddata_update()
 					//SMS Notification
 					//iTextMo
 						$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Approved.\n\n-CSWD Office";
-						$api_user = "TR-CALAP695595_5M21Q";
-						$api_pass = "s#k1gseyd8";
+
 
 						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 						if ($result == ""){
@@ -1191,8 +1039,7 @@ public function pwddata_update()
 					//SMS Notification
 					//iTextMo
 						$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Disapproved.\n\n-CSWD Office";
-						$api_user = "TR-CALAP695595_5M21Q";
-						$api_pass = "s#k1gseyd8";
+
 
 						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 						if ($result == ""){
@@ -1221,8 +1068,7 @@ public function pwddata_update()
 					//SMS Notification
 					//iTextMo
 						$message = "Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Incomplete.\n\n-CSWD Office";
-						$api_user = "TR-CALAP695595_5M21Q";
-						$api_pass = "s#k1gseyd8";
+
 
 						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 						if ($result == ""){
@@ -1558,8 +1404,8 @@ public function sp_insert_request()
 					//iTextMo
 			$mynumber = $this->io->post('sp_mobilenum');
 			$message = "Mr/Mrs. $fullname,\n\nYour Request from CSWD is Pending from Approval.\n\nFrom CSWD Office";
-			$api_user = "TR-CALAP695595_5M21Q";
-			$api_pass = "s#k1gseyd8";
+			$api_user = "TR-CSWDS591291_L6Q7P";
+			$api_pass = "9kr{cj(5&m";
 
 			$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 			if($result == ""){
@@ -1717,8 +1563,8 @@ public function pwd_insert_request()
 					//iTextMo
 			$mynumber = $this->io->post('pwd_mobilenum');
 			$message = "Mr/Mrs. $fullname,\n\nYour Request from CSWD is Pending from Approval.\n\nFrom CSWD Office";
-			$api_user = "TR-CALAP695595_5M21Q";
-			$api_pass = "s#k1gseyd8";
+			$api_user = "TR-CSWDS591291_L6Q7P";
+			$api_pass = "9kr{cj(5&m";
 
 			$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
 			if($result == ""){

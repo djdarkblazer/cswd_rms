@@ -1,5 +1,5 @@
 $(function(){	
-	$('#user_validation').validate({
+	$('#validating_inputs').validate({
 		rules: {
 			lastname: {
 				required: true
@@ -20,7 +20,6 @@ $(function(){
 			password: {
 				required: true,
 				minlength: 6,
-				maxlength: 20
 			}
 		},
 		messages: {
@@ -43,7 +42,6 @@ $(function(){
 			password: {
 				required: "Please provide a password",
 				minlength: "Your password must be at least 5 characters long",
-				maxlength: "Your password must be at max of 20 characters only."
 			},
 		},
 		errorElement: 'span',

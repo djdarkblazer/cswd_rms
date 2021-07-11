@@ -26,7 +26,7 @@ include(ROOT . 'templates/header.php');
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <form action="<?= site_url('user/insert_user');?>" method="POST" enctype="multipart/form-data" id="user_validation" >
+      <form action="<?= site_url('user/insert_user');?>" method="POST" enctype="multipart/form-data" id="validating_inputs" >
         <div class="row">
           <div class="col-12">
             <div class="card">

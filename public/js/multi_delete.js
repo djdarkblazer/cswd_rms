@@ -1,34 +1,30 @@
-$(document).ready(function(){
-
-	$('.delete_checkbox').click(function(){
-		if ($(this).is(':checked')) {
-			$(this).closest('tr').addClass('removeRow');
-		} else {
-			$(this).closest('tr').removeClass('removeRow');
-		}
-	});
-
-	$('#delete_all').click(function(){
-
-		var checkbox = $('.delete_checkbox:checked');
-
-		if (checkbox.length > 0) {
-			var checkbox_value = [];
-
-			$(checkbox).each(function(){
-				checkbox_value.push($(this).val());
+$(document).ready(function(){	
+	$('#del_data').click(function(){
+		if(confirm("Are you sure you want to Delete This?")){
+			var id = [];
+			$(':checkbox:checked').each(function(i){
+				id[i] = $(this).val();
 			});
-			$.ajax({
-				url: "<?= site_url();?>admin/del_multiuser",
-				method: "POST",
-				data: {checkbox_value:checkbox_value},
-				success:function()
-				{
-					$('removeRow').fadeOut(1500);
-				}
-			}) 
+
+			if(id.length === 0){
+				alert("Please Select Atleast One Checkbox");
+			} else {
+				$.ajax({
+					url: "<?=site_url('admin/sp_delrecords')?>",
+					method: "POST",
+					data: {sp_id:id},
+					success:function(){
+						for(var i=0; i<id,length; i++){
+							$('td#' +id[i]+'').css('background-color','#ccc');
+							$('tr#' _id[i]+'').fadeOut('slow');
+
+						}
+					}
+				});
+			}
+
 		} else {
-			alert('Select atleast one Record');
+			return false;
 		}
 	});
 });

@@ -86,7 +86,10 @@
 <!-- Custom Script -->
 <?php echo load_js(array('js/opt_address')); ?>
 <?php echo load_js(array('js/user_validation')); ?>
+<?php echo load_js(array('js/sp_validation')); ?>
+<?php echo load_js(array('js/multi_delete')); ?>
 <!-- //Custom Script -->
+
 
 <script>
   CKEDITOR.replace( 'editor1',{
@@ -108,10 +111,19 @@
 </script>
 
 <script type="text/javascript">
+  $('#status_req').change(function() {
+    $('#status_disapproved').prop('hidden', true);
+    if ($(this).val() == 'Disapproved') {
+      $('#status_disapproved').prop('hidden', false);
+    }
+  });  
+</script>
+
+<script type="text/javascript">
   $('#pwd_typedis').change(function() {
-    $('#pwd_typespecify').prop('readonly', true);
+    $('#pwd_typespecify').prop('hidden', true);
     if ($(this).val() == 'Other') {
-      $('#pwd_typespecify').prop('readonly', false);
+      $('#pwd_typespecify').prop('hidden', false);
     }
   });  
 </script>
@@ -145,7 +157,8 @@
       toast: false,
       position: 'center',
       showConfirmButton: true,
-    });    
+    });  
+
 
     <?php if($this->session->flashdata('success')) : ?>
       Toast.fire({
