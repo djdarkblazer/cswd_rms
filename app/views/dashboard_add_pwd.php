@@ -35,28 +35,28 @@
 								<!-- /.card-header -->
 								<div class="card-body">
 									<div class="row">
-										<div class="col-2">
-											<label for="pwd_lname">Last Name</label>
+										<div class="col-2 form-group">
+											<label for="pwd_lname">Last Name <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Last Name" name="pwd_lname" autofocus>
 										</div>
-										<div class="col-2">
-											<label for="pwd_fname">First Name</label>
+										<div class="col-2 form-group">
+											<label for="pwd_fname">First Name <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="First Name" name="pwd_fname">
 										</div>											
-										<div class="col-2">
-											<label for="pwd_mname">Middle Name</label>
+										<div class="col-2 form-group">
+											<label for="pwd_mname">Middle Name <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Middle Name" name="pwd_mname">
 										</div>											
-										<div class="col-2">
-											<label for="pwd_sex">Sex</label>
+										<div class="col-2 form-group">
+											<label for="pwd_sex">Sex <span style="color: red">*</span></label>
 											<select name="pwd_sex" class="form-control">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Male">Male</option>
 												<option value="Female">Female</option>
 											</select>
 										</div>
-										<div class="col-4">
-											<label for="pwd_typedis">Type of Disability</label>
+										<div class="col-4 form-group">
+											<label for="pwd_typedis">Type of Disability <span style="color: red">*</span></label>
 											<select name="pwd_typedis" class="form-control" id="pwd_typedis">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Communication Disability">Communication Disability</option>
@@ -68,12 +68,12 @@
 												<option value="Other">Other Type of Disability</option>
 											</select>
 										</div>											
-										<div class="col-3">
-											<label for="pwd_typespecify">Other Type of Disability</label>
-											<input type="text" class="form-control" value="none" name="pwd_typespecify" id="pwd_typespecify" readonly="">
+										<div class="col-3 form-group" id="pwd_typespecify" hidden="">
+											<label for="pwd_typespecify">Other Type of Disability <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="none" name="pwd_typespecify">
 										</div>											
-										<div class="col-2">
-											<label for="pwd_causedis">Cause of Disability</label>
+										<div class="col-2 form-group">
+											<label for="pwd_causedis">Cause of Disability <span style="color: red">*</span></label>
 											<select name="pwd_causedis" class="form-control" >
 												<option value="none" selected >---SELECT---</option>
 												<option value="Inborn">Inborn</option>
@@ -81,29 +81,29 @@
 												<option value="Due to Chronic Illness">Due to Chronic Illness</option>
 											</select>
 										</div>	
-										<div class="col-4">
-											<label for="pwd_address">Address/Number & Street</label>
+										<div class="col-4 form-group">
+											<label for="pwd_address">Address/Number & Street <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="E.g. Quezon Drive Street" name="pwd_address">	
 										</div>
-										<div class="col-2">
-											<label for="pwd_region">Region</label>
+										<div class="col-2 form-group">
+											<label for="pwd_region">Region <span style="color: red">*</span></label>
 											<input type="text" class="form-control" value="MIMAROPA" name="pwd_region" readonly>
 										</div>											
-										<div class="col-2">
-											<label for="pwd_province">Province</label>
+										<div class="col-2 form-group">
+											<label for="pwd_province">Province <span style="color: red">*</span></label>
 											<input type="text" class="form-control" value="Oriental Mindoro" name="pwd_province" readonly>
 										</div>											
-										<div class="col-3">
-											<label for="pwd_city">City/Municipality</label>
+										<div class="col-3 form-group">
+											<label for="pwd_city">City/Municipality <span style="color: red">*</span></label>
 											<input type="text" class="form-control" value="Calapan City" name="pwd_city" readonly>
 										</div>											
-										<div class="col-3">
-											<label for="pwd_brgy">Barangay</label>
+										<div class="col-3 form-group">
+											<label for="pwd_brgy">Barangay <span style="color: red">*</span></label>
 											<select id="rec_mode" class="form-control" name="pwd_brgy">
 											</select>
 										</div>
-										<div class="col-2">
-											<label for="pwd_dob">Date of Birth</label>
+										<div class="col-2 form-group">
+											<label for="pwd_dob">Date of Birth <span style="color: red">*</span></label>
 											<input type="date" class="form-control pull-right" name="pwd_dob">
 										</div>																			
 									</div>
@@ -120,20 +120,20 @@
 								<!-- /.card-header -->
 								<div class="card-body">
 									<div class="row">
-										<div class="col-2">
-											<label for="pwd_landline">Landline Number</label>
+										<div class="col-2 form-group">
+											<label for="pwd_landline">Landline Number <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Ex. (043) 286-7440" name="pwd_landline">
 										</div>
-										<div class="col-2">
-											<label for="pwd_mobilenum">Mobile Number</label>
+										<div class="col-2 form-group">
+											<label for="pwd_mobilenum">Mobile Number <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Ex. 09123456789" name="pwd_mobilenum">
 										</div>
-										<div class="col-3">
-											<label for="pwd_email">Email Address</label>
+										<div class="col-3 form-group">
+											<label for="pwd_email">Email Address <span style="color: red">*</span></label>
 											<input type="email" class="form-control" placeholder="example@example.com" name="pwd_email">
 										</div>
-										<div class="col-3">
-											<label for="pwd_civilstatus">Civil Status</label>
+										<div class="col-3 form-group">
+											<label for="pwd_civilstatus">Civil Status <span style="color: red">*</span></label>
 											<select name="pwd_civilstatus" class="form-control">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Single">Single</option>
@@ -155,8 +155,8 @@
 								<!-- /.card-header -->
 								<div class="card-body">
 									<div class="row">
-										<div class="col-4">
-											<label for="pwd_educational">Educational Attainment</label>
+										<div class="col-4 form-group">
+											<label for="pwd_educational">Educational Attainment <span style="color: red">*</span></label>
 											<select class="form-control" name="pwd_educational">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Elementary Level">Elementary Level</option>
@@ -170,8 +170,8 @@
 												<option value="none">NONE</option>
 											</select>
 										</div>											
-										<div class="col-4">
-											<label for="pwd_empstatus">Employment Status</label>
+										<div class="col-4 form-group">
+											<label for="pwd_empstatus">Employment Status <span style="color: red">*</span></label>
 											<select class="form-control" name="pwd_empstatus">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Employed">Employed</option>
@@ -182,16 +182,16 @@
 												<option value="Returning Overseas Filipino Worker">Returning Overseas Filipino Worker</option>
 											</select>
 										</div>											
-										<div class="col-4">
-											<label for="pwd_empnature">Nature of Employer</label>
+										<div class="col-4 form-group">
+											<label for="pwd_empnature">Nature of Employer <span style="color: red">*</span></label>
 											<select class="form-control" name="pwd_empnature">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Private">Private</option>
 												<option value="Government">Government</option>
 											</select>
 										</div>											
-										<div class="col-4">
-											<label for="pwd_emptype">Type of Employment</label>
+										<div class="col-4 form-group">
+											<label for="pwd_emptype">Type of Employment <span style="color: red">*</span> </label>
 											<select class="form-control" name="pwd_emptype">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Contractual">Contractual</option>
@@ -200,24 +200,24 @@
 												<option value="Seasonal">Seasonal</option>
 											</select>
 										</div>											
-										<div class="col-4">
-											<label for="pwd_occupation">Occupation</label>
+										<div class="col-4 form-group">
+											<label for="pwd_occupation">Occupation <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Occupation*" name="pwd_occupation">					
 										</div>
-										<div class="col-4">
-											<label for="pwd_cperson">Contact Person</label>
+										<div class="col-4 form-group">
+											<label for="pwd_cperson">Contact Person <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="Full Name of Contact Person*" name="pwd_cperson">					
 										</div>
-										<div class="col-4">
-											<label for="pwd_cnumber">Contact Number</label>
+										<div class="col-4 form-group">
+											<label for="pwd_cnumber">Contact Number <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="An Active Contact Number*" name="pwd_cnumber">					
 										</div>
-										<div class="col-2">
-											<label for="pwd_idnum">PWD ID Number</label>
+										<div class="col-2 form-group">
+											<label for="pwd_idnum">PWD ID Number <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="PWD ID Number*" name="pwd_idnum">
 										</div>
-										<div class="col-3" >
-											<label for="fileToUpload">Attach 1x1 ID Picture</label>
+										<div class="col-3 form-group" >
+											<label for="fileToUpload">Attach 1x1 ID Picture <span style="color: red">*</span></label>
 											<input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px">
 										</div>						
 									</div>
@@ -276,9 +276,9 @@
 										</table>									
 									</div>
 									<center>
-										<div class="col-4 mt-4">
+										<div class="col-4 mt-4 form-group">
 											<input type="text" class="form-control form-control-border border-width-2 text-center" placeholder="Printed Name of Applicant" name="pwd_signature">
-											<label for="pwd_signature">Signature Over Printed Name of Applicant</label>				
+											<label for="pwd_signature">Signature Over Printed Name of Applicant <span style="color: red">*</span></label>				
 										</div> 										
 									</center>									
 								</div>
@@ -289,11 +289,11 @@
 
 						<!-- /.row -->
 					</div>
-						<div class="card-footer">
-							<center>
-								<button type="submit" class="btn btn-primary">Submit Application Form</button>
-							</center>
-						</div>					
+					<div class="card-footer">
+						<center>
+							<button type="submit" class="btn btn-primary">Submit Application Form</button>
+						</center>
+					</div>					
 				</form>					
 			</div>
 			<!-- /.container-fluid -->
@@ -304,4 +304,4 @@
 	<!-- /.content-wrapper -->
 	<?php
 	include(ROOT . 'templates/footer.php');
-	?>
+?>

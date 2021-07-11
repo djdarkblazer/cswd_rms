@@ -87,7 +87,7 @@ date_default_timezone_set('Asia/Manila');
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= 'http://cswd/';
+$config['base_url'] 				= 'http://localhost/cswd_rms/';
 
 /*
 |--------------------------------------------------------------------------

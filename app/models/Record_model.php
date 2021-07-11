@@ -341,7 +341,7 @@ class Record_model extends Model {
 			return true;	    
 	}
 
-	public function update_pwdrecords($pwd_id,$pwd_lname,$pwd_fname,$pwd_mname,$pwd_sex,$pwd_typedis,$pwd_typespecify,$pwd_causedis,$pwd_address,$pwd_region,$pwd_province,$pwd_city,$pwd_brgy,$pwd_landline,$pwd_mobilenum,$pwd_email,$pwd_dob,$pwd_civilstatus,$pwd_educational,$pwd_empstatus,$pwd_empnature,$pwd_emptype,$pwd_occupation,$pwd_cperson,$pwd_cnumber,$pwd_idnum,$pwdf_lname,$pwdf_fname,$pwdf_mname,$pwdm_lname,$pwdm_fname,$pwdm_mname,$pwdg_lname,$pwdg_fname,$pwdg_mname,$pwdab_lname,$pwdab_fname,$pwdab_mname,$pwdru_lname,$pwdru_fname,$pwdru_mname,$pwd_signature,$request_status)
+	public function update_pwdrecords($pwd_id,$pwd_lname,$pwd_fname,$pwd_mname,$pwd_sex,$pwd_typedis,$pwd_typespecify,$pwd_causedis,$pwd_address,$pwd_region,$pwd_province,$pwd_city,$pwd_brgy,$pwd_landline,$pwd_mobilenum,$pwd_email,$pwd_dob,$pwd_civilstatus,$pwd_educational,$pwd_empstatus,$pwd_empnature,$pwd_emptype,$pwd_occupation,$pwd_cperson,$pwd_cnumber,$pwd_idnum,$pwdf_lname,$pwdf_fname,$pwdf_mname,$pwdm_lname,$pwdm_fname,$pwdm_mname,$pwdg_lname,$pwdg_fname,$pwdg_mname,$pwdab_lname,$pwdab_fname,$pwdab_mname,$pwdru_lname,$pwdru_fname,$pwdru_mname,$pwd_signature,$request_status,$expirydate)
 	{
 		$bind = array(
 			'pwd_lname' => $pwd_lname,
@@ -385,7 +385,8 @@ class Record_model extends Model {
 			'pwdru_fname' => $pwdru_fname,
 			'pwdru_mname' => $pwdru_mname,
 			'pwd_signature' => $pwd_signature,
-			'request_status' => $request_status	    	    			    	
+			'request_status' => $request_status,
+			'expiration_date' => $expirydate	    	    			    	
 		);
 		$result = $this->db->table('form_pwd')
 		->where('pwd_id', $pwd_id)

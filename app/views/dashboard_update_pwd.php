@@ -227,15 +227,6 @@
 											<label for="pwd_idnum">PWD ID Number</label>
 											<input type="text" class="form-control" value="<?=$data['pwd_idnum']; ?>" name="pwd_idnum">
 										</div>
-										<div class="col-2">
-											<label>Status</label>
-											<select name="request_status" class="form-control">
-												<option value="Pending">Pending for Approval</option>
-												<option value="Approved">Assistance Approved</option>
-												<option value="Disapproved">Assistance Disapproved</option>
-												<option value="Incomplete">Incomplete Requirements</option>					
-											</select>
-										</div>											
 										<div class="col-3" >
 											<label for="fileToUpload">Uploaded ID Picture</label>
 											<p><img src="<?php echo BASE_URL .'uploads/image/pwd_idpic/'. $data['image']; ?>" width="100" height="100" style="border: 1px solid black;padding: 3px"></p>											
@@ -304,6 +295,37 @@
 								</div>
 								<!-- /.card-body -->
 							</div>
+						<div class="col-md-12">
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Request Validation Status</h3>
+								</div>
+								<div class="card-body" style="align-items: center;">	
+									<div class="row">
+										<div class="col-3 form-group">
+											<label for="expiration_date">Expirate Date <span style="color: red">*</span></label>
+											<input type="date" class="form-control pull-right" name="expiration_date" value="<?php echo date('Y-m-d',strtotime("+6 months")); ?>">
+										</div>	
+										<div class="col-3">
+											<label>Request Status</label>
+											<select name="request_status" class="form-control" id="status_req">
+												<option value="Pending">Pending from Approval</option>
+												<option value="Approved">Assistance Approved</option>
+												<option value="Disapproved">Assistance Disapproved</option>
+												<option value="Incomplete">Incomplete Requirements</option>	
+											</select>
+										</div>
+										<div class="col-5" id="status_disapproved"  hidden="">
+											<label for="sp_dis_msg">Reason for Disapproved <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_dis_msg" placeholder="Enter your Message">
+										</div>											
+
+									</div>
+
+								</div>
+								<!-- /.card-body -->
+							</div>
+						</div>							
 							<!-- /.card -->
 						</div>										
 
