@@ -63,14 +63,16 @@
 	
 	<div class="basicinfo">
 		<div class="form-group" style="display: flex;">
-		<h6 style="margin-right: 100px; "><strong>Name:</strong> <?= $rows['sp_fullname']?></h6>
+		<h6 style="margin-right: 100px; "><strong>Name:</strong> <?= $rows['sp_firstname']?> <?= $rows['sp_middlename']?> <?= $rows['sp_lastname']?></h6>
 		<h6 style="margin-right: 100px;"><strong>Age:</strong> <?= $rows['sp_age']?></h6>
 		<h6 style="margin-right: 50px;"><strong>Sex:</strong> <?= $rows['sp_sex']?></h6>
 		</div>
 		<div class="form-group" style="display: flex;">
-		<h6 style="margin-right: 85px;"><strong>Address:</strong> <?= $rows['sp_address']?></h6>
-		<h6><strong>Place of Birth:</strong> <?= $rows['sp_pob']?></h6>
+		<h6 style="margin-right: 85px;"><strong>Address:</strong> <?= $rows['sp_address']?>, <?= $rows['sp_brgy']?>, <?= $rows['sp_city']?>, <?= $rows['sp_province']?></h6>
+		
 		</div>
+		<h6><strong>Place of Birth:</strong> <?= $rows['sp_pob']?></h6>
+		<br>
 		<h6><strong>Highest Educational Attainment:</strong> <?= $rows['sp_educational']?></h6>
 				<br>
 		<div class="form-group" style="display: flex;">

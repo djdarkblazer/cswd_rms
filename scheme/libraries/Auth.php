@@ -71,7 +71,7 @@ class Auth {
 	 * @param  string $usertype   Usertype
 	 * @return $this
 	 */
-	public function register($lastname,$firstname,$middlename,$username, $password, $email,$role,$image)
+	public function register($lastname,$firstname,$middlename,$email,$username, $password,$role,$image)
 	{
 		$bind = array(
             'lastname' => $lastname,

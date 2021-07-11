@@ -52,7 +52,7 @@
   }
 </style>  
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -68,7 +68,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="" class="nav-link">Home</a>
+          <!-- <a href="" class="nav-link">Home</a> -->
         </li>
       </ul>
 

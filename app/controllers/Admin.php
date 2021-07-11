@@ -26,9 +26,12 @@ class Admin extends Controller {
 			'newline' => "\r\n"
 		);		
 		$this->call->library('email', $config);
-
 	}
 
+//##########################################################################
+// ITEXMO SEND SMS API - PHP - CURL-LESS METHOD
+// Visit www.itexmo.com/developers.php for more info about this API
+//##########################################################################
 	public function itexmo($number,$message,$apicode,$passwd){
 		$url = 'https://www.itexmo.com/php_api/api.php';
 		$itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
@@ -42,22 +45,19 @@ class Admin extends Controller {
 		$context  = stream_context_create($param);
 		return file_get_contents($url, false, $context);
 	}
-
-
-
-
-
-
+//##########################################################################
 
 	public function index()
 	{
 		if($this->auth->is_logged_in()){
+			//Solo Parent Total Count Row
 			$sp_row=$this->record->count_sp();
 			$sp_pending=$this->record->count_sp_pending();
 			$sp_approved=$this->record->count_sp_approved();
 			$sp_napproved=$this->record->count_sp_napproved();
 			$sp_incomplete=$this->record->count_sp_incomplete();
 
+			//PWD Total Count Row
 			$pwd_row=$this->record->count_pwd();
 			$pwd_pending=$this->record->count_pwd_pending();
 			$pwd_approved=$this->record->count_pwd_approved();
@@ -144,122 +144,252 @@ class Admin extends Controller {
 	//Adding Records
 	public function sp_insert()
 	{
-		if($this->form_validation->run())
+		if($this->form_validation->submitted())
 		{
-			$target_dir = "uploads/image/sp_idpic/";
-			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-			$uploadOk = 1;
-			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			if($this->form_validation->run())
+			{
+				$target_dir = "uploads/image/sp_idpic/";
+				$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			// Check if file already exists
-			if (file_exists($target_file))
-			{
-				$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
-				$uploadOk = 0;
-				redirect('admin/sp_addrecords');
-				exit();				
-			}
-			// Allow certain file formats
-			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-				&& $imageFileType != "gif" ) 
-			{
-
-				$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
-				$uploadOk = 0;
-				redirect('admin/sp_addrecords');
-				exit();			
-			}
-
-			if ($uploadOk == 0) 
-			{
-			// if everything is ok, try to upload file
-				$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
-				redirect('admin/sp_addrecords');
-				exit();			
-			}
-			else
-			{
-				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+				if (file_exists($target_file))
 				{
-					$this->record->insert_sprecord(
-						$this->io->post('sp_lastname'),
-						$this->io->post('sp_firstname'),
-						$this->io->post('sp_middlename'),
-						$this->io->post('sp_age'),
-						$this->io->post('sp_sex'),
-						$this->io->post('sp_dob'),
-						$this->io->post('sp_pob'),
-						$this->io->post('sp_address'),
-						$this->io->post('sp_brgy'),
-						$this->io->post('sp_city'),
-						$this->io->post('sp_province'),
-						$this->io->post('sp_email'),
-						$this->io->post('sp_mobilenum'),
-						$this->io->post('sp_educational'),
-						$this->io->post('sp_occupation'),
-						$this->io->post('sp_monthlyincome'),
-						$this->io->post('spfc_fullname'),
-						$this->io->post('spfc_relationship'),
-						$this->io->post('spfc_age'),
-						$this->io->post('spfc_status'),
-						$this->io->post('spfc_dob'),
-						$this->io->post('spfc_educational'),
-						$this->io->post('spfc_occupation'),
-						$this->io->post('spfc_monthlyincome'),
-						$this->io->post('spfc_fullname_two'),
-						$this->io->post('spfc_relationship_two'),
-						$this->io->post('spfc_age_two'),
-						$this->io->post('spfc_status_two'),
-						$this->io->post('spfc_dob_two'),
-						$this->io->post('spfc_educational_two'),
-						$this->io->post('spfc_occupation_two'),
-						$this->io->post('spfc_monthlyincome_two'),
-						$this->io->post('spfc_fullname_three'),
-						$this->io->post('spfc_relationship_three'),
-						$this->io->post('spfc_age_three'),
-						$this->io->post('spfc_status_three'),
-						$this->io->post('spfc_dob_three'),
-						$this->io->post('spfc_educational_three'),
-						$this->io->post('spfc_occupation_three'),
-						$this->io->post('spfc_monthlyincome_three'),
-						$this->io->post('spfc_fullname_four'),
-						$this->io->post('spfc_relationship_four'),
-						$this->io->post('spfc_age_four'),
-						$this->io->post('spfc_status_four'),
-						$this->io->post('spfc_dob_four'),
-						$this->io->post('spfc_educational_four'),
-						$this->io->post('spfc_occupation_four'),
-						$this->io->post('spfc_monthlyincome_four'),	
-						$this->io->post('spfc_fullname_five'),
-						$this->io->post('spfc_relationship_five'),
-						$this->io->post('spfc_age_five'),
-						$this->io->post('spfc_status_five'),
-						$this->io->post('spfc_dob_five'),
-						$this->io->post('spfc_educational_five'),
-						$this->io->post('spfc_occupation_five'),
-						$this->io->post('spfc_monthlyincome_five'),
-						$this->io->post('sp_curr_status'),
-						$this->io->post('sp_circumstances'),
-						$this->io->post('sp_problems'),
-						$this->io->post('sp_family_resources'),
-						$this->io->post('curr_date'),
-						$this->io->post('sp_signature'),					
-						basename( $_FILES["fileToUpload"]["name"]));
+					$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
+					$uploadOk = 0;
+					redirect('admin/sp_addrecords');
+					exit();				
+				}
+			// Allow certain file formats
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+					&& $imageFileType != "gif" ) 
+				{
+
+					$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
+					$uploadOk = 0;
+					redirect('admin/sp_addrecords');
+					exit();			
+				}
+
+				if ($uploadOk == 0) 
+				{
+			// if everything is ok, try to upload file
+					$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
+					redirect('admin/sp_addrecords');
+					exit();			
+				}
+				else
+				{
+					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+					{
+						$this->record->insert_sprecord(
+							$this->io->post('sp_lastname'),
+							$this->io->post('sp_firstname'),
+							$this->io->post('sp_middlename'),
+							$this->io->post('sp_age'),
+							$this->io->post('sp_sex'),
+							$this->io->post('sp_dob'),
+							$this->io->post('sp_pob'),
+							$this->io->post('sp_address'),
+							$this->io->post('sp_brgy'),
+							$this->io->post('sp_city'),
+							$this->io->post('sp_province'),
+							$this->io->post('sp_email'),
+							$this->io->post('sp_mobilenum'),
+							$this->io->post('sp_educational'),
+							$this->io->post('sp_occupation'),
+							$this->io->post('sp_monthlyincome'),
+							$this->io->post('spfc_fullname'),
+							$this->io->post('spfc_relationship'),
+							$this->io->post('spfc_age'),
+							$this->io->post('spfc_status'),
+							$this->io->post('spfc_dob'),
+							$this->io->post('spfc_educational'),
+							$this->io->post('spfc_occupation'),
+							$this->io->post('spfc_monthlyincome'),
+							$this->io->post('spfc_fullname_two'),
+							$this->io->post('spfc_relationship_two'),
+							$this->io->post('spfc_age_two'),
+							$this->io->post('spfc_status_two'),
+							$this->io->post('spfc_dob_two'),
+							$this->io->post('spfc_educational_two'),
+							$this->io->post('spfc_occupation_two'),
+							$this->io->post('spfc_monthlyincome_two'),
+							$this->io->post('spfc_fullname_three'),
+							$this->io->post('spfc_relationship_three'),
+							$this->io->post('spfc_age_three'),
+							$this->io->post('spfc_status_three'),
+							$this->io->post('spfc_dob_three'),
+							$this->io->post('spfc_educational_three'),
+							$this->io->post('spfc_occupation_three'),
+							$this->io->post('spfc_monthlyincome_three'),
+							$this->io->post('spfc_fullname_four'),
+							$this->io->post('spfc_relationship_four'),
+							$this->io->post('spfc_age_four'),
+							$this->io->post('spfc_status_four'),
+							$this->io->post('spfc_dob_four'),
+							$this->io->post('spfc_educational_four'),
+							$this->io->post('spfc_occupation_four'),
+							$this->io->post('spfc_monthlyincome_four'),	
+							$this->io->post('spfc_fullname_five'),
+							$this->io->post('spfc_relationship_five'),
+							$this->io->post('spfc_age_five'),
+							$this->io->post('spfc_status_five'),
+							$this->io->post('spfc_dob_five'),
+							$this->io->post('spfc_educational_five'),
+							$this->io->post('spfc_occupation_five'),
+							$this->io->post('spfc_monthlyincome_five'),
+							$this->io->post('sp_curr_status'),
+							$this->io->post('sp_circumstances'),
+							$this->io->post('sp_problems'),
+							$this->io->post('sp_family_resources'),
+							$this->io->post('curr_date'),
+							$this->io->post('sp_signature'),					
+							basename( $_FILES["fileToUpload"]["name"]));
 
 					//Notifications Here
-					$email= $this->io->post('sp_email');
+						$email= $this->io->post('sp_email');
+						$varf = $this->io->post('sp_firstname');
+						$varm = $this->io->post('sp_middlename');
+						$varl = $this->io->post('sp_lastname');
+						$fullname = "$varf $varm $varl";
+
+					//Send Email Notif Here
+						$this->send_ureview($email,$fullname);
+
+					//SMS Notif Setup
+						$mynumber = $this->io->post('sp_mobilenum');
+						$message = "Mr/Mrs. $varl,\nYour Request Assistance is Pending from Approval.\n\n-CSWD Office\n";
+
+					//SMS Sending Information
+						$api_user = "TR-CSWDS591291_L6Q7P";
+						$api_pass = "9kr{cj(5&m";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if($result == "")
+						{
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if($result == 0)
+						{
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}else
+						{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+					//./SMS End
+
+						$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+						redirect('admin/sp_viewrecords');	
+						exit();						
+					}
+					else
+					{
+						$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+						redirect('admin/sp_addrecords');
+						exit();					
+					}					
+				}						
+			}
+		}
+		//End
+		$this->call->view('dashboard_add_sp');
+	}
+
+	//Updating Records
+	public function spdata_update()
+	{
+		if ($this->form_validation->submitted())
+		{
+			if($this->form_validation->run())
+			{
+				$this->record->update_sprecord(
+					$this->io->post('sp_id'),
+					$this->io->post('sp_lastname'),
+					$this->io->post('sp_firstname'),
+					$this->io->post('sp_middlename'),
+					$this->io->post('sp_age'),
+					$this->io->post('sp_sex'),
+					$this->io->post('sp_dob'),
+					$this->io->post('sp_pob'),
+					$this->io->post('sp_address'),
+					$this->io->post('sp_brgy'),
+					$this->io->post('sp_city'),
+					$this->io->post('sp_province'),
+					$this->io->post('sp_email'),
+					$this->io->post('sp_mobilenum'),
+					$this->io->post('sp_educational'),
+					$this->io->post('sp_occupation'),
+					$this->io->post('sp_monthlyincome'),
+					$this->io->post('spfc_fullname'),
+					$this->io->post('spfc_relationship'),
+					$this->io->post('spfc_age'),
+					$this->io->post('spfc_status'),
+					$this->io->post('spfc_dob'),
+					$this->io->post('spfc_educational'),
+					$this->io->post('spfc_occupation'),
+					$this->io->post('spfc_monthlyincome'),
+					$this->io->post('spfc_fullname_two'),
+					$this->io->post('spfc_relationship_two'),
+					$this->io->post('spfc_age_two'),
+					$this->io->post('spfc_status_two'),
+					$this->io->post('spfc_dob_two'),
+					$this->io->post('spfc_educational_two'),
+					$this->io->post('spfc_occupation_two'),
+					$this->io->post('spfc_monthlyincome_two'),
+					$this->io->post('spfc_fullname_three'),
+					$this->io->post('spfc_relationship_three'),
+					$this->io->post('spfc_age_three'),
+					$this->io->post('spfc_status_three'),
+					$this->io->post('spfc_dob_three'),
+					$this->io->post('spfc_educational_three'),
+					$this->io->post('spfc_occupation_three'),
+					$this->io->post('spfc_monthlyincome_three'),
+					$this->io->post('spfc_fullname_four'),
+					$this->io->post('spfc_relationship_four'),
+					$this->io->post('spfc_age_four'),
+					$this->io->post('spfc_status_four'),
+					$this->io->post('spfc_dob_four'),
+					$this->io->post('spfc_educational_four'),
+					$this->io->post('spfc_occupation_four'),
+					$this->io->post('spfc_monthlyincome_four'),	
+					$this->io->post('spfc_fullname_five'),
+					$this->io->post('spfc_relationship_five'),
+					$this->io->post('spfc_age_five'),
+					$this->io->post('spfc_status_five'),
+					$this->io->post('spfc_dob_five'),
+					$this->io->post('spfc_educational_five'),
+					$this->io->post('spfc_occupation_five'),
+					$this->io->post('spfc_monthlyincome_five'),
+					$this->io->post('sp_curr_status'),
+					$this->io->post('sp_circumstances'),
+					$this->io->post('sp_problems'),
+					$this->io->post('sp_family_resources'),
+					$this->io->post('curr_date'),
+					$this->io->post('sp_signature'),
+					$this->io->post('request_status'),
+					$this->io->post('expiration_date'));
+
+				//Email and SMS Notification
+				if($this->io->post('request_status') == "Pending")
+				{
+					$mynumber = $this->io->post('sp_mobilenum');
 					$email= $this->io->post('sp_email');
 					$varf = $this->io->post('sp_firstname');
 					$varm = $this->io->post('sp_middlename');
 					$varl = $this->io->post('sp_lastname');
 					$fullname = "$varf $varm $varl";
 
-					//Send Email Notif Here
+					//Email Notification
 					$this->send_ureview($email,$fullname);
 
+					//SMS Notification
 					//SMS Notif Setup
-					$mynumber = $this->io->post('sp_mobilenum');
-					$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office\n\n";
 
+					$message = "Mr/Mrs. $varl,\nYour Request Assistance is Pending from Approval.\n\n-CSWD Office\n";
+					//
 					//SMS Sending Information
 					$api_user = "TR-CSWDS591291_L6Q7P";
 					$api_pass = "9kr{cj(5&m";
@@ -279,257 +409,132 @@ class Admin extends Controller {
 						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
 					}
 					//./SMS End
-					
+
 					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
 					redirect('admin/sp_viewrecords');	
-					exit();						
-				}
-				else
-				{
-					$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-					redirect('admin/sp_addrecords');
 					exit();					
 				}
-			}						
-		}
-		//End
-		$this->call->view('dashboard_add_sp');
-	}
-
-	//Updating Records
-	public function spdata_update()
-	{
-		if($this->form_validation->run())
-		{
-			$this->record->update_sprecord(
-				$this->io->post('sp_id'),
-				$this->io->post('sp_lastname'),
-				$this->io->post('sp_firstname'),
-				$this->io->post('sp_middlename'),
-				$this->io->post('sp_age'),
-				$this->io->post('sp_sex'),
-				$this->io->post('sp_dob'),
-				$this->io->post('sp_pob'),
-				$this->io->post('sp_address'),
-				$this->io->post('sp_brgy'),
-				$this->io->post('sp_city'),
-				$this->io->post('sp_province'),
-				$this->io->post('sp_email'),
-				$this->io->post('sp_mobilenum'),
-				$this->io->post('sp_educational'),
-				$this->io->post('sp_occupation'),
-				$this->io->post('sp_monthlyincome'),
-				$this->io->post('spfc_fullname'),
-				$this->io->post('spfc_relationship'),
-				$this->io->post('spfc_age'),
-				$this->io->post('spfc_status'),
-				$this->io->post('spfc_dob'),
-				$this->io->post('spfc_educational'),
-				$this->io->post('spfc_occupation'),
-				$this->io->post('spfc_monthlyincome'),
-				$this->io->post('spfc_fullname_two'),
-				$this->io->post('spfc_relationship_two'),
-				$this->io->post('spfc_age_two'),
-				$this->io->post('spfc_status_two'),
-				$this->io->post('spfc_dob_two'),
-				$this->io->post('spfc_educational_two'),
-				$this->io->post('spfc_occupation_two'),
-				$this->io->post('spfc_monthlyincome_two'),
-				$this->io->post('spfc_fullname_three'),
-				$this->io->post('spfc_relationship_three'),
-				$this->io->post('spfc_age_three'),
-				$this->io->post('spfc_status_three'),
-				$this->io->post('spfc_dob_three'),
-				$this->io->post('spfc_educational_three'),
-				$this->io->post('spfc_occupation_three'),
-				$this->io->post('spfc_monthlyincome_three'),
-				$this->io->post('spfc_fullname_four'),
-				$this->io->post('spfc_relationship_four'),
-				$this->io->post('spfc_age_four'),
-				$this->io->post('spfc_status_four'),
-				$this->io->post('spfc_dob_four'),
-				$this->io->post('spfc_educational_four'),
-				$this->io->post('spfc_occupation_four'),
-				$this->io->post('spfc_monthlyincome_four'),	
-				$this->io->post('spfc_fullname_five'),
-				$this->io->post('spfc_relationship_five'),
-				$this->io->post('spfc_age_five'),
-				$this->io->post('spfc_status_five'),
-				$this->io->post('spfc_dob_five'),
-				$this->io->post('spfc_educational_five'),
-				$this->io->post('spfc_occupation_five'),
-				$this->io->post('spfc_monthlyincome_five'),
-				$this->io->post('sp_curr_status'),
-				$this->io->post('sp_circumstances'),
-				$this->io->post('sp_problems'),
-				$this->io->post('sp_family_resources'),
-				$this->io->post('curr_date'),
-				$this->io->post('sp_signature'),
-				$this->io->post('request_status'),
-				$this->io->post('expiration_date'));
-
-				//Email and SMS Notification
-			if($this->io->post('request_status') == "Pending")
-			{
-				$mynumber = $this->io->post('sp_mobilenum');
-				$email= $this->io->post('sp_email');
-				$varf = $this->io->post('sp_firstname');
-				$varm = $this->io->post('sp_middlename');
-				$varl = $this->io->post('sp_lastname');
-				$fullname = "$varf $varm $varl";
+				else if ($this->io->post('request_status') == "Approved")
+				{
+					$mynumber = $this->io->post('sp_mobilenum');
+					$email= $this->io->post('sp_email');
+					$varf = $this->io->post('sp_firstname');
+					$varm = $this->io->post('sp_middlename');
+					$varl = $this->io->post('sp_lastname');
+					$fullname = "$varf $varm $varl";
 
 					//Email Notification
-				$this->send_ureview($email,$fullname);
+					$expdate = $this->io->post('expiration_date');
+					$validity = date('M d, Y',strtotime($expdate));
+					$this->send_approved($email,$fullname,date('F d, Y',strtotime($expdate)));
 
-					//SMS Notification
-					//SMS Notif Setup
+					$message = "Mr/Mrs. $varl,\nYour Request is Approved.\nValid until $validity.\n-CSWD Office";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office\n\n";
-					//
-					//SMS Sending Information
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
-
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/sp_viewrecords');	
-				exit();					
-			}
-			else if ($this->io->post('request_status') == "Approved")
-			{
-				$mynumber = $this->io->post('sp_mobilenum');
-				$email= $this->io->post('sp_email');
-				$varf = $this->io->post('sp_firstname');
-				$varm = $this->io->post('sp_middlename');
-				$varl = $this->io->post('sp_lastname');
-				$fullname = "$varf $varm $varl";
-
-					//Email Notification
-				$expdate = $this->io->post('expiration_date');
-				$validity = date('F d, Y',strtotime($expdate));
-				$this->send_approved($email,$fullname,date('F d, Y',strtotime($expdate)));
-
-				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Approved.\n\nYour Assistance is Valid until $validity.\n-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
-
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/sp_viewrecords');	
+					exit();					
 				}
-					//./SMS End
+				else if ($this->io->post('request_status') == "Disapproved")
+				{
+					$mynumber = $this->io->post('sp_mobilenum');
+					$email= $this->io->post('sp_email');
+					$varf = $this->io->post('sp_firstname');
+					$varm = $this->io->post('sp_middlename');
+					$varl = $this->io->post('sp_lastname');
+					$fullname = "$varf $varm $varl";
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/sp_viewrecords');	
-				exit();					
-			}
-			else if ($this->io->post('request_status') == "Disapproved")
-			{
-				$mynumber = $this->io->post('sp_mobilenum');
-				$email= $this->io->post('sp_email');
-				$varf = $this->io->post('sp_firstname');
-				$varm = $this->io->post('sp_middlename');
-				$varl = $this->io->post('sp_lastname');
-				$fullname = "$varf $varm $varl";
-
-				$dis_msg = $this->io->post('sp_dis_msg');
-				$this->send_napproved($email,$fullname,$dis_msg); 
+					$dis_msg = $this->io->post('sp_dis_msg');
+					$this->send_napproved($email,$fullname,$dis_msg); 
 
 					//SMS Notification
 					//iTextMo
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Disapproved.\nReason: $dis_msg.-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$message = "Mr/Mrs. $varl,\nYour Request is Disapproved.\nReason: $dis_msg.\n-CSWD Office\n";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/sp_viewrecords');	
-				exit();															
-			}
-			else if($this->io->post('request_status') == "Incomplete")
-			{
-				$mynumber = $this->io->post('sp_mobilenum');
-				$email= $this->io->post('sp_email');
-				$varf = $this->io->post('sp_firstname');
-				$varm = $this->io->post('sp_middlename');
-				$varl = $this->io->post('sp_lastname');
-				$fullname = "$varf $varm $varl";
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/sp_viewrecords');	
+					exit();															
+				}
+				else if($this->io->post('request_status') == "Incomplete")
+				{
+					$mynumber = $this->io->post('sp_mobilenum');
+					$email= $this->io->post('sp_email');
+					$varf = $this->io->post('sp_firstname');
+					$varm = $this->io->post('sp_middlename');
+					$varl = $this->io->post('sp_lastname');
+					$fullname = "$varf $varm $varl";
 
 					//Email Notification
-				$this->send_incomplete($email,$fullname);
+					$this->send_incomplete($email,$fullname);
 
 					//SMS Notification
 					//iTextMo
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Incomplete.\n\n-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$message = "Mr/Mrs. $varl,\n\nYour Request Assistance is Incomplete.\n-CSWD Office\n";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/sp_viewrecords');	
-				exit();																				
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/sp_viewrecords');	
+					exit();																				
+				}
 			}
-		}
-		else
-		{
-			$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-			redirect('admin/sp_updaterecords');
-			exit();		
+			else
+			{
+				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+				redirect('admin/sp_updaterecords');
+				exit();		
+			}
 		}
 		//End
 		$this->call->view('dashboard_update_sp');
@@ -775,42 +780,140 @@ class Admin extends Controller {
 
 
 	public function pwd_insert()
-	{
-		$target_dir = "uploads/image/pwd_idpic/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$uploadOk = 1;
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-			// Check if file already exists
-		if (file_exists($target_file))
+	{	
+		if($this->form_validation->submitted())
 		{
-			$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
-			$uploadOk = 0;
-			redirect('admin/pwd_addrecords');
-			exit();				
-		}
+			if($this->form_validation->run())
+			{
+				$target_dir = "uploads/image/pwd_idpic/";
+				$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			// Check if file already exists
+				if (file_exists($target_file))
+				{
+					$this->session->set_flashdata(array('error' => 'Sorry, file already exists.'));					
+					$uploadOk = 0;
+					redirect('admin/pwd_addrecords');
+					exit();				
+				}
 
 			// Allow certain file formats
-		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-			&& $imageFileType != "gif" )
-		{
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+					&& $imageFileType != "gif" )
+				{
 
-			$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
-			$uploadOk = 0;
-			redirect('admin/pwd_addrecords');
-			exit();			
-		}
-		if ($uploadOk == 0) 
-		{
+					$this->session->set_flashdata(array('error' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'));				
+					$uploadOk = 0;
+					redirect('admin/pwd_addrecords');
+					exit();			
+				}
+				if ($uploadOk == 0) 
+				{
 			// if everything is ok, try to upload file
-			$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
-			redirect('admin/pwd_addrecords');
-			exit();			
+					$this->session->set_flashdata(array('error' => 'Sorry, your file was not uploaded.'));
+					redirect('admin/pwd_addrecords');
+					exit();			
+				}
+				else
+				{
+					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+					{
+						$this->record->insert_pwdrecords(
+							$this->io->post('pwd_lname'),
+							$this->io->post('pwd_fname'),
+							$this->io->post('pwd_mname'),
+							$this->io->post('pwd_sex'),
+							$this->io->post('pwd_typedis'),
+							$this->io->post('pwd_typespecify'),
+							$this->io->post('pwd_causedis'),
+							$this->io->post('pwd_address'),
+							$this->io->post('pwd_region'),
+							$this->io->post('pwd_province'),
+							$this->io->post('pwd_city'),
+							$this->io->post('pwd_brgy'),
+							$this->io->post('pwd_landline'),
+							$this->io->post('pwd_mobilenum'),
+							$this->io->post('pwd_email'),
+							$this->io->post('pwd_dob'),
+							$this->io->post('pwd_civilstatus'),
+							$this->io->post('pwd_educational'),
+							$this->io->post('pwd_empstatus'),
+							$this->io->post('pwd_empnature'),
+							$this->io->post('pwd_emptype'),
+							$this->io->post('pwd_occupation'),
+							$this->io->post('pwd_cperson'),
+							$this->io->post('pwd_cnumber'),
+							$this->io->post('pwd_idnum'),
+							$this->io->post('pwdf_lname'),
+							$this->io->post('pwdf_fname'),
+							$this->io->post('pwdf_mname'),
+							$this->io->post('pwdm_lname'),
+							$this->io->post('pwdm_fname'),
+							$this->io->post('pwdm_mname'),
+							$this->io->post('pwdg_lname'),
+							$this->io->post('pwdg_fname'),
+							$this->io->post('pwdg_mname'),
+							$this->io->post('pwdab_lname'),
+							$this->io->post('pwdab_fname'),
+							$this->io->post('pwdab_mname'),
+							$this->io->post('pwdru_lname'),
+							$this->io->post('pwdru_fname'),
+							$this->io->post('pwdru_mname'),
+							$this->io->post('pwd_signature'),
+							basename( $_FILES["fileToUpload"]["name"]));
+
+						$email= $this->io->post('pwd_email');
+						$varf = $this->io->post('pwd_fname');
+						$varm = $this->io->post('pwd_mname');
+						$varl = $this->io->post('pwd_lname');
+						$fullname = "$varf $varm $varl";
+
+						$this->send_ureview($email,$fullname);
+
+					//SMS API WorkLoad
+					//iTextMo
+						$mynumber = $this->io->post('pwd_mobilenum');
+						$message = "Mr/Mrs. $varl,\n\nYour Request is Pending from Approval.\n-CSWD Office\n";
+						$api_user = "TR-CSWDS591291_L6Q7P";
+						$api_pass = "9kr{cj(5&m";
+
+						$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+						if($result == ""){
+							$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+								Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+								Please CONTACT US for help. '));							
+						}else if($result == 0){
+							echo "Message Sent!";
+							$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+						}else{	
+							$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+						}
+
+						$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+						redirect('admin/pwd_viewrecords');	
+						exit();												
+					}
+					else
+					{
+						$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+						redirect('admin/pwd_addrecords');
+						exit();			
+					}
+				}				
+			}
 		}
-		else
+		$this->call->view('dashboard_add_pwd');
+	}
+
+	public function pwddata_update()
+	{
+		if($this->form_validation->submitted())
 		{
-			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+			if($this->form_validation->run())
 			{
-				$this->record->insert_pwdrecords(
+				$this->record->update_pwdrecords(
+					$this->io->post('pwd_id'),
 					$this->io->post('pwd_lname'),
 					$this->io->post('pwd_fname'),
 					$this->io->post('pwd_mname'),
@@ -855,260 +958,169 @@ class Admin extends Controller {
 					$this->io->post('request_status'),
 					$this->io->post('expiration_date'));
 
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$email= $this->io->post('pwd_email');
-				$varf = $this->io->post('pwd_fname');
-				$varm = $this->io->post('pwd_mname');
-				$varl = $this->io->post('pwd_lname');
-				$fullname = "$varf $varm $varl";
-
-				$this->send_ureview($email,$fullname);
-
-					//SMS API WorkLoad
-					//iTextMo
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
-
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == ""){
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0){
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
-
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/pwd_viewrecords');	
-				exit();												
-			}
-			else
-			{
-				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-				redirect('admin/pwd_addrecords');
-				exit();			
-			}
-		}		
-
-		$this->call->view('dashboard_add_pwd');
-	}
-
-	public function pwddata_update()
-	{
-		if($this->form_validation->run())
-		{
-			$this->record->update_pwdrecords(
-				$this->io->post('pwd_id'),
-				$this->io->post('pwd_lname'),
-				$this->io->post('pwd_fname'),
-				$this->io->post('pwd_mname'),
-				$this->io->post('pwd_sex'),
-				$this->io->post('pwd_typedis'),
-				$this->io->post('pwd_typespecify'),
-				$this->io->post('pwd_causedis'),
-				$this->io->post('pwd_address'),
-				$this->io->post('pwd_region'),
-				$this->io->post('pwd_province'),
-				$this->io->post('pwd_city'),
-				$this->io->post('pwd_brgy'),
-				$this->io->post('pwd_landline'),
-				$this->io->post('pwd_mobilenum'),
-				$this->io->post('pwd_email'),
-				$this->io->post('pwd_dob'),
-				$this->io->post('pwd_civilstatus'),
-				$this->io->post('pwd_educational'),
-				$this->io->post('pwd_empstatus'),
-				$this->io->post('pwd_empnature'),
-				$this->io->post('pwd_emptype'),
-				$this->io->post('pwd_occupation'),
-				$this->io->post('pwd_cperson'),
-				$this->io->post('pwd_cnumber'),
-				$this->io->post('pwd_idnum'),
-				$this->io->post('pwdf_lname'),
-				$this->io->post('pwdf_fname'),
-				$this->io->post('pwdf_mname'),
-				$this->io->post('pwdm_lname'),
-				$this->io->post('pwdm_fname'),
-				$this->io->post('pwdm_mname'),
-				$this->io->post('pwdg_lname'),
-				$this->io->post('pwdg_fname'),
-				$this->io->post('pwdg_mname'),
-				$this->io->post('pwdab_lname'),
-				$this->io->post('pwdab_fname'),
-				$this->io->post('pwdab_mname'),
-				$this->io->post('pwdru_lname'),
-				$this->io->post('pwdru_fname'),
-				$this->io->post('pwdru_mname'),
-				$this->io->post('pwd_signature'),
-				$this->io->post('request_status'));
-
 				//Email and SMS Notification
-			if($this->io->post('request_status') == "Pending")
-			{
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$email= $this->io->post('pwd_email');
-				$varf = $this->io->post('pwd_fname');
-				$varm = $this->io->post('pwd_mname');
-				$varl = $this->io->post('pwd_lname');
-				$fullname = "$varf $varm $varl";
+				if($this->io->post('request_status') == "Pending")
+				{
+					$mynumber = $this->io->post('pwd_mobilenum');
+					$email= $this->io->post('pwd_email');
+					$varf = $this->io->post('pwd_fname');
+					$varm = $this->io->post('pwd_mname');
+					$varl = $this->io->post('pwd_lname');
+					$fullname = "$varf $varm $varl";
 
 					//Email Notification
-				$this->send_ureview($email,$fullname);
+					$this->send_ureview($email,$fullname);
 
 					//SMS Notification
 					//SMS Notif Setup
 
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Pending from Approval.\n\n-CSWD Office\n\n";
+					$message = "Mr/Mrs. $varl,\n\nYour Request is Pending from Approval.\n-CSWD Office\n";
 					//
 					//SMS Sending Information
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/pwd_viewrecords');	
-				exit();					
-			}
-			else if ($this->io->post('request_status') == "Approved")
-			{
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$email= $this->io->post('pwd_email');
-				$varf = $this->io->post('pwd_fname');
-				$varm = $this->io->post('pwd_mname');
-				$varl = $this->io->post('pwd_lname');
-				$fullname = "$varf $varm $varl";
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/pwd_viewrecords');	
+					exit();					
+				}
+				else if ($this->io->post('request_status') == "Approved")
+				{
+					$mynumber = $this->io->post('pwd_mobilenum');
+					$email= $this->io->post('pwd_email');
+					$varf = $this->io->post('pwd_fname');
+					$varm = $this->io->post('pwd_mname');
+					$varl = $this->io->post('pwd_lname');
+					$fullname = "$varf $varm $varl";
 
 					//Email Notification
-				$expdate = $this->io->post('expiration_date');
-				$validity = date('F d, Y',strtotime($expdate));
-				$this->send_approved($email,$fullname,date('F d, Y',strtotime($expdate)));
+					$expdate = $this->io->post('expiration_date');
+					$validity = date('F d, Y',strtotime($expdate));
+					$this->send_approved($email,$fullname,date('F d, Y',strtotime($expdate)));
 
-				$message = "Dear Mr/Mrs. $fullname,\nYour Request Assistance from CSWD is Approved.\n\nYour Assistance is Valid until $validity.\n-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$message = "Mr/Mrs. $varl,\nYour Request is Approved.\nValid until $validity.\n-CSWD Office";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/pwd_viewrecords');	
-				exit();					
-			}
-			else if ($this->io->post('request_status') == "Disapproved")
-			{
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$email= $this->io->post('pwd_email');
-				$varf = $this->io->post('pwd_fname');
-				$varm = $this->io->post('pwd_mname');
-				$varl = $this->io->post('pwd_lname');
-				$fullname = "$varf $varm $varl";
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/pwd_viewrecords');	
+					exit();					
+				}
+				else if ($this->io->post('request_status') == "Disapproved")
+				{
+					$mynumber = $this->io->post('pwd_mobilenum');
+					$email= $this->io->post('pwd_email');
+					$varf = $this->io->post('pwd_fname');
+					$varm = $this->io->post('pwd_mname');
+					$varl = $this->io->post('pwd_lname');
+					$fullname = "$varf $varm $varl";
 
-				$dis_msg = $this->io->post('sp_dis_msg');
-				$this->send_napproved($email,$fullname,$dis_msg); 
+					$dis_msg = $this->io->post('sp_dis_msg');
+					$this->send_napproved($email,$fullname,$dis_msg); 
 
 					//SMS Notification
 					//iTextMo
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Disapproved.\nReason: $dis_msg.-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$message = "Mr/Mrs. $varl,\n\nYour Request is Disapproved.\nReason: $dis_msg.\n-CSWD Office\n";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/pwd_viewrecords');	
-				exit();															
-			}
-			else if($this->io->post('request_status') == "Incomplete")
-			{
-				$mynumber = $this->io->post('pwd_mobilenum');
-				$email= $this->io->post('pwd_email');
-				$varf = $this->io->post('pwd_fname');
-				$varm = $this->io->post('pwd_mname');
-				$varl = $this->io->post('pwd_lname');
-				$fullname = "$varf $varm $varl";
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/pwd_viewrecords');	
+					exit();															
+				}
+				else if($this->io->post('request_status') == "Incomplete")
+				{
+					$mynumber = $this->io->post('pwd_mobilenum');
+					$email= $this->io->post('pwd_email');
+					$varf = $this->io->post('pwd_fname');
+					$varm = $this->io->post('pwd_mname');
+					$varl = $this->io->post('pwd_lname');
+					$fullname = "$varf $varm $varl";
 
 					//Email Notification
-				$this->send_incomplete($email,$fullname);
+					$this->send_incomplete($email,$fullname);
 
 					//SMS Notification
 					//iTextMo
-				$message = "Dear Mr/Mrs. $fullname,\n\nYour Request Assistance from CSWD is Incomplete.\n\n-CSWD Office\n\n";
-				$api_user = "TR-CSWDS591291_L6Q7P";
-				$api_pass = "9kr{cj(5&m";
+					$message = "Mr/Mrs. $varl,\n\nYour Request is Incomplete.\n-CSWD Office\n";
+					$api_user = "TR-CSWDS591291_L6Q7P";
+					$api_pass = "9kr{cj(5&m";
 
-				$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
-				if($result == "")
-				{
-					$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
-						Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-						Please CONTACT US for help. '));							
-				}else if($result == 0)
-				{
-					echo "Message Sent!";
-					$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
-				}else
-				{	
-					$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
-				}
+					$result = $this->itexmo($mynumber,$message,$api_user,$api_pass);
+					if($result == "")
+					{
+						$this->session->set_flashdata(array('error' => 'iTexMo: No response from server!!!
+							Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+							Please CONTACT US for help. '));							
+					}else if($result == 0)
+					{
+						echo "Message Sent!";
+						$this->session->set_flashdata(array('success' => 'Message Sent! Successfully.'));						
+					}else
+					{	
+						$this->session->set_flashdata(array('success' => 'Error Num '. $result . ' was encountered!'));
+					}
 					//./SMS End
 
-				$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
-				redirect('admin/pwd_viewrecords');	
-				exit();					
+					$this->session->set_flashdata(array('success' => 'Data Added Successfully.'));
+					redirect('admin/pwd_viewrecords');	
+					exit();					
+				}
 			}
-		}
-		else
-		{
-			$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
-			redirect('admin/pwd_updaterecords');
-			exit();	
+			else
+			{
+				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+				redirect('admin/pwd_updaterecords');
+				exit();	
+			}
 		}
 		$this->call->view('dashboard_update_pwd');
 	}

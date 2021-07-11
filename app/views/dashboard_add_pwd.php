@@ -68,9 +68,9 @@
 												<option value="Other">Other Type of Disability</option>
 											</select>
 										</div>											
-										<div class="col-3 form-group" id="pwd_typespecify" hidden="">
+										<div class="col-3 form-group" >
 											<label for="pwd_typespecify">Other Type of Disability <span style="color: red">*</span></label>
-											<input type="text" class="form-control" value="none" name="pwd_typespecify">
+											<input type="text" class="form-control" value="none" name="pwd_typespecify" id="pwd_typespecify" readonly>
 										</div>											
 										<div class="col-2 form-group">
 											<label for="pwd_causedis">Cause of Disability <span style="color: red">*</span></label>

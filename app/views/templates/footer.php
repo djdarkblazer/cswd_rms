@@ -121,9 +121,9 @@
 
 <script type="text/javascript">
   $('#pwd_typedis').change(function() {
-    $('#pwd_typespecify').prop('hidden', true);
+    $('#pwd_typespecify').prop('readonly', true);
     if ($(this).val() == 'Other') {
-      $('#pwd_typespecify').prop('hidden', false);
+      $('#pwd_typespecify').prop('readonly', false);
     }
   });  
 </script>

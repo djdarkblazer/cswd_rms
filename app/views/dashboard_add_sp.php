@@ -96,7 +96,7 @@
 											<label for="sp_mobilenum">Mobile Number <span style="color: red">*</span></label>
 											<div class="input-group">	
 												<input type="text" class="form-control" placeholder="Start with 09..." name="sp_mobilenum">
-											</div>										
+											</div>
 										</div>																		
 										<div class="col-4 form-group">
 											<label for="sp_educational">Highest Educational Attainment <span style="color: red">*</span></label>
