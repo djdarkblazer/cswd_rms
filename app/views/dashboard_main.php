@@ -152,7 +152,7 @@ include(ROOT . '/templates/header.php');
       <h1><strong>EMPLOYEE DASHBOARD</strong></h1>
     </center>
     <center>
-<h1 class="slider-title"><img class="logo-float " src="<?= SITE_URL('assets/img/logo.png'); ?>" alt="cswdlogo" width="500" height="500" style="margin-right: 5px;  border-radius: 50%;">      
+<h1 class="slider-title"><img src="<?= SITE_URL('assets/img/logo.png'); ?>" alt="cswdlogo" width="500" height="500" style="margin-right: 5px;  border-radius: 50%;">      
     </center>
 </div>
 

@@ -47,9 +47,10 @@ class Account extends Controller {
         if($this->auth->is_logged_in())
         {
             $getusr = $this->auth->get_username();
-            $getrole = $this->auth->get_role(); 
+            $getrole = $this->auth->get_role();
+            $getimage = $this->auth->get_image();
 
-            $data = array('username' => $getusr, 'role' => $getrole);
+            $data = array('username' => $getusr, 'role' => $getrole, 'image' => $getimage);
             redirect('admin/index', $data);
         }
     }
@@ -82,6 +83,10 @@ class Account extends Controller {
                         $this->auth->set_logged_in($data);
                         $data_role = $this->auth->login_role($this->io->post('email'), $this->io->post('password'));
                         $this->auth->set_loggedin_role($data_role);
+                        $data_image = $this->auth->login_image($this->io->post('email'), $this->io->post('password'));
+                        $this->auth->set_loggedin_image($data_image);
+                        
+
 
                         redirect('account/admin_page');
                     } else {

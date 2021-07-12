@@ -52,7 +52,7 @@
   }
 </style>  
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini sidebar-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -76,18 +76,17 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <img src="<?= site_url();?>assets/img/logo.png" class="user-image img-circle elevation-2" alt="User Image">
-            <span class="d-none d-md-inline"><?php echo $this->session->userdata('username'); ?></span>
+            <img src="<?php echo BASE_URL .'uploads/image/user_pic/'. $this->session->userdata('image'); ?>" class="user-image img-circle elevation-2" alt="User Image">
+            <span class="d-none d-md-inline"></span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right mt-2">
             <!-- User image -->
-            <li class="user-header bg-primary">
-              <img src="<?= site_url();?>assets/img/logo.png" class="img-circle elevation-2" alt="User Image">
+            <li class="user-header" style="background-color: powderblue;">
+              <img src="<?php echo BASE_URL .'uploads/image/user_pic/'. $this->session->userdata('image'); ?>" class="img-circle elevation-2" alt="User Image">
 
               <p>
-                <?php echo $this->session->userdata('username'); ?>
+                <strong><?php echo $this->session->userdata('username'); ?></strong>
                 <small><?php echo $this->session->userdata('role'); ?></small>
-                <small>Member since Nov. 2012</small>
 
               </p>
             </li>
@@ -136,7 +135,7 @@
         <?php if($this->session->userdata('role') == "Administrator") :?>
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-flat " data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-header accent-blue"><strong>RECORDS PANEL</strong></li>     
@@ -194,7 +193,7 @@
               </li>              
             </ul>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?= site_url('admin/view_reports');?>" class="nav-link">
                 <i class="nav-icon fas fa-server"></i>
                 <p>
                   Reports

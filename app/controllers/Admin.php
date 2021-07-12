@@ -73,6 +73,16 @@ class Admin extends Controller {
 		}
 	}
 
+
+	public function view_reports()
+	{
+		if($this->auth->is_logged_in()){
+			$this->call->view('dashboard_view_reports');
+		} else {
+			$this->call->view('dashboard_login_v2'); 
+		}		
+	}
+
 	public function sp_addrecords()
 	{
 		if($this->auth->is_logged_in()){
@@ -545,7 +555,10 @@ class Admin extends Controller {
 	{
 		$this->email->subject('Calapan City Social Welfare and Development');
 		$this->email->sender('deejaydarkblazer@gmail.com');
-		$content = "<html>
+
+		//Create and Send HTML Mail
+		$message = "
+		<html>
 		<head>
 		<title>REQUEST INFORMATION</title>
 		</head>
@@ -562,7 +575,7 @@ class Admin extends Controller {
 		</center>
 		</body>
 		</html>";
-		$this->email->email_content($content, 'html');
+		$this->email->email_content($message, 'html');
 		$this->email->recipient($recipient);
 
 		if($this->email->send()){

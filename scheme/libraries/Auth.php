@@ -135,6 +135,36 @@ class Auth {
 	}
 
 	/**
+	 * Login
+	 * @param  string $username Username
+	 * @param  string $password Password
+	 * @return string Validated User Role
+	 */
+	public function login_image($email, $password)
+	{
+    	$row = $this->LAVA->db->table('user') 					
+    					->where('email', $email)
+    					->get();
+		if($row)
+		{
+			if(password_verify($password, $row['password']))
+			{
+				return $row['image'];
+			} else {
+				return false;
+			}
+		}
+	}
+
+	/**
+	 * Set up session for Role
+	 * @param $this
+	 */
+	public function set_loggedin_image($image) {
+		return $this->LAVA->session->set_userdata(array('image' => $image, 'loggedin' => 1));
+	}
+
+	/**
 	 * Set up session for Role
 	 * @param $this
 	 */
@@ -150,6 +180,16 @@ class Auth {
 	{
 		$role = $this->LAVA->session->userdata('role');
 		return !empty($role) ? $role : false;
+	}	
+
+	/**
+	 * Get User ID Role
+	 * @return string User ID from Session
+	 */
+	public function get_image()
+	{
+		$image = $this->LAVA->session->userdata('image');
+		return !empty($image) ? $image : false;
 	}			
 
 	/**
@@ -181,7 +221,7 @@ class Auth {
 	}
 
 	public function set_logged_out() {
-		$this->LAVA->session->unset_userdata(array('loggedin', 'username'));
+		$this->LAVA->session->unset_userdata(array('loggedin', 'username','role'));
 		$this->LAVA->session->sess_destroy();
 	}
 }
