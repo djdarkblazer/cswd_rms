@@ -221,7 +221,7 @@ class Auth {
 	}
 
 	public function set_logged_out() {
-		$this->LAVA->session->unset_userdata(array('loggedin', 'username','role'));
+		$this->LAVA->session->unset_userdata(array('loggedin', 'username'));
 		$this->LAVA->session->sess_destroy();
 	}
 }

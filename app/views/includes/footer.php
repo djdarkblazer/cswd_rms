@@ -44,32 +44,30 @@
 
     <p class="copyright">&copy <?= date('Y'); ?> CALAPAN CITY SOCIAL WELFARE AND DEVELOPMENT<br>MAINTAINED BY F1-TECH Inc. <i class="fa fa-heart" style="color: red"></i></p>
     <br>
-<center>
-  Total Visitors <br>
-<!-- hitwebcounter Code START -->
-<a href="https://www.hitwebcounter.com" target="_blank">
-<img src="https://hitwebcounter.com/counter/counter.php?page=7838033&style=0006&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>     
-</center>
-  </div> 
-  <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">    
-  </footer>
-  <!-- /Footer -->
+    <center>
+      Total Visitors <br>
+      <!-- hitwebcounter Code START -->
+      <a href="https://www.hitwebcounter.com" target="_blank">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=7838033&style=0006&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>     
+      </center>
+    </div> 
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">    
+    </footer>
+    <!-- /Footer --
+
+      <!-- Optional JavaScript; choose one of the two! -->
+      <script type="text/javascript" src="https://content.jwplatform.com/libraries/rN2Y8WSP.js"></script>
+      <script type="text/javascript">jwplayer.key = "moo1YXjnreqwrtTJvzDFk0rFwdQcgOQ5t9blXA==";</script>
+      <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 
-
-  <!-- Optional JavaScript; choose one of the two! -->
-  <script type="text/javascript" src="https://content.jwplatform.com/libraries/rN2Y8WSP.js"></script>
-  <script type="text/javascript">jwplayer.key = "moo1YXjnreqwrtTJvzDFk0rFwdQcgOQ5t9blXA==";</script>
-  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="<?= site_url(); ?>assets/plugins/slick-1.8.1/slick/slick.min.js"></script>
 
 
-  <script type="text/javascript" src="<?= site_url(); ?>assets/plugins/slick-1.8.1/slick/slick.min.js"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/fontawesome.min.js" integrity="sha512-KCwrxBJebca0PPOaHELfqGtqkUlFUCuqCnmtydvBSTnJrBirJ55hRG5xcP4R9Rdx9Fz9IF3Yw6Rx40uhuAHR8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/fontawesome.min.js" integrity="sha512-KCwrxBJebca0PPOaHELfqGtqkUlFUCuqCnmtydvBSTnJrBirJ55hRG5xcP4R9Rdx9Fz9IF3Yw6Rx40uhuAHR8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -79,6 +77,10 @@
 
   <?php echo load_js(array('js/preloader')); ?>
   <?php echo load_js(array('js/slickpost')); ?>
+  <?php echo load_js(array('js/sp_validation')); ?>
+  <?php echo load_js(array('js/pwd_validation')); ?>
+  <?php echo load_js(array('js/pmc_validation')); ?>
+  <?php echo load_js(array('js/sscs_validation')); ?>
   <!-- /.Custom JScript -->
 
   <!-- jQuery -->
@@ -136,12 +138,11 @@
   <script src="<?= site_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="<?= site_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
   <script src="<?= site_url(); ?>assets/dist/js/demo.js"></script>
-
+  <!-- jquery-validation -->
+  <script src="<?= site_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="<?= site_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 
   <?php echo load_js(array('js/opt_address')); ?>
-  <?php echo load_js(array('js/pie')); ?>
-
-
 
   <script type="text/javascript">
     $(document).ready( function () {

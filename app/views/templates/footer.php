@@ -85,12 +85,19 @@
 
 <!-- Custom Script -->
 <?php echo load_js(array('js/opt_address')); ?>
+<?php echo load_js(array('js/opt_address22')); ?>
 <?php echo load_js(array('js/user_validation')); ?>
 <?php echo load_js(array('js/sp_validation')); ?>
-<?php echo load_js(array('js/multi_delete')); ?>
+<?php echo load_js(array('js/pwd_validation')); ?>
+<?php echo load_js(array('js/pmc_validation')); ?>
+<?php echo load_js(array('js/sscs_validation')); ?>
 <!-- //Custom Script -->
 
 
+
+<script type="text/javascript">
+jQuery('#rec_mode').on('change',handleSelectChange); 
+</script>
 <script>
   CKEDITOR.replace( 'editor1',{
     extraPlugins : 'colorbutton',
@@ -109,6 +116,17 @@
     } );
   } );  
 </script>
+
+<script type="text/javascript">
+  $('#enable_check').change(function() {
+    $('#enable_user').prop('readonly', true);
+    if ($(this).val() == 'Enable') {
+      $('#enable_user').prop('readonly', false);
+    }
+  }); 
+</script>
+
+
 
 <script type="text/javascript">
   $('#status_req').change(function() {
@@ -148,8 +166,8 @@
 <script type="text/javascript" language="javascript">
   $(document).ready(function () {
     var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-right',
+      toast: false,
+      position: 'center',
       showConfirmButton: false,
       timer: 3000
     });

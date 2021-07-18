@@ -217,6 +217,7 @@ $pageTitle = "CSWD | PWD Form";
 				</tr>																			
 			</tbody>
 		</table>
+		
 		<center>
 			<div class="col-4" style="margin-top: 30px">
 				<strong><u><?= $rows['pwd_signature']?></u></strong>

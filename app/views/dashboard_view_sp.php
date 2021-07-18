@@ -43,6 +43,7 @@ include(ROOT . 'templates/header.php');
                     <th>Age</th>
                     <th>Sex</th>
                     <th>Address</th>
+                    <th>Barangay</th>
                     <th>Occupation</th>
                     <th>Current Status</th>
                     <th>Valid Until</th>
@@ -57,17 +58,20 @@ include(ROOT . 'templates/header.php');
                     <td><?=$row['sp_firstname'].' '.$row['sp_middlename'].' '.$row['sp_lastname']?></td>
                     <td><?=$row['sp_age']?></td>
                     <td><?=$row['sp_sex']?></td>
-                    <td><?=$row['sp_address'].', '.$row['sp_brgy'].', '.$row['sp_city'].', '.$row['sp_province']?></td>
+                    <td><?=$row['sp_address'].', '.$row['sp_city'].', '.$row['sp_province']?></td>
+                    <td><?=$row['sp_brgy']?></td>
                     <td><?=$row['sp_occupation']?></td>
                     <td><?=$row['sp_curr_status']?></td>
                     <td><?= date('M d, Y',strtotime($row['expiration_date'])); ?></td>
-                    <td><?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?></td>
+                    <td>
+                      <?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?>
+                  </td>
                     <td>
                       <div class="btn-group btn-group-sm">
                         <a href="<?=site_url('admin/sp_delrecords/'.$row['sp_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         <a href="<?=site_url('admin/edit_records/'.$row['sp_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                        <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-print"></i></a>                     
-                      </div>                      
+                        <a href="<?=site_url('admin/pdf_view/'.$row['sp_id'].'')?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-fw fa-print"></i></a>
+                      </div>                    
                     </td>
                   </td>
                 </tr>

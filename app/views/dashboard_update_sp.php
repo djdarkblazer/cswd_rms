@@ -397,7 +397,7 @@
 									<div class="row">
 										<div class="col-3 form-group">
 											<label for="expiration_date">Expirate Date <span style="color: red">*</span></label>
-											<input type="date" class="form-control pull-right" name="expiration_date" value="<?php echo date('Y-m-d',strtotime("+6 months")); ?>">
+											<input type="date" class="form-control pull-right" name="expiration_date" value="<?php echo date('Y-m-d',strtotime("+12 months")); ?>">
 										</div>	
 										<div class="col-3">
 											<label>Request Status</label>

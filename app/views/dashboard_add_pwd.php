@@ -25,7 +25,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="container-fluid">
-				<form action="<?= site_url('admin/pwd_insert'); ?>" method="POST" enctype="multipart/form-data">
+				<form action="<?= site_url('admin/pwd_insert'); ?>" method="POST" enctype="multipart/form-data" id="pwd_validate">
 					<div class="row">
 						<div class="col-12">
 							<div class="card card-primary">
@@ -219,7 +219,11 @@
 										<div class="col-3 form-group" >
 											<label for="fileToUpload">Attach 1x1 ID Picture <span style="color: red">*</span></label>
 											<input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px">
-										</div>						
+										</div>
+										<div class="col-3 form-group" >
+											<label for="UploadtoResidency">Attach Certification of Residency <span style="color: red">*</span></label>
+											<input type="file" name="UploadtoResidency" id="UploadtoResidency" class="form-control" style="padding: 3px">
+										</div>																
 									</div>
 								</div>							
 							</div>						

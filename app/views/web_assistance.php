@@ -37,7 +37,25 @@ include(ROOT . 'includes/topnav.php');
 									&nbsp;
 									<i class="fas fa-calendar"> <?php echo date("F d, Y"); ?></i>
 								</div>
-							</div>                            
+							</div>
+							<div class="post">
+								<img class="slider-image" src="<?= SITE_URL('assets/img/sscs.jpg')?>" alt="cswdlogo">
+								<div class="post-info">
+									<h4><a href="<?= site_url('website/view_req_sscs')?>">Securing Social Case Study Report</a></h4>
+									<i class="fas fa-file"> CSWD Form</i>
+									&nbsp;
+									<i class="fas fa-calendar"> <?php echo date("F d, Y"); ?></i>
+								</div>
+							</div>
+							<div class="post">
+								<img class="slider-image" src="<?= SITE_URL('assets/img/pmc.jpg')?>" alt="cswdlogo">
+								<div class="post-info">
+									<h4><a href="<?= site_url('website/view_req_pmc')?>">Conduct of Pre-Marriage Counseling (PMC)</a></h4>
+									<i class="fas fa-file"> CSWD Form</i>
+									&nbsp;
+									<i class="fas fa-calendar"> <?php echo date("F d, Y"); ?></i>
+								</div>
+							</div>														                            
 						</div>
 
 					</div>

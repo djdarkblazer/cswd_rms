@@ -7,7 +7,7 @@
         <a href="<?= SITE_URL('website/'); ?>" id="liveToastBtn">
           <img class="awards" src="<?= SITE_URL()?>assets/img/logo.png" height="70px" width="70px">
         </a>
-        <h5 style="color: white; padding-left: 10px;">Calapan City Social Welfare and Development</h5>
+        <h5 style="color: white; padding-left: 10px;">City Social Welfare and Development</h5>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>

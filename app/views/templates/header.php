@@ -52,13 +52,16 @@
   }
 </style>  
 </head>
-<body class="hold-transition sidebar-mini sidebar-fixed">
+<body class="sidebar-mini layout-fixed sidebar-closed sidebar-collapse" style="height: auto;">
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+<!--     <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="<?= site_url(); ?>assets/img/logo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
+    </div> -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="<?= site_url(); ?>assets/img/logo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>    
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand  navbar-primary navbar-dark">
@@ -77,7 +80,7 @@
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
             <img src="<?php echo BASE_URL .'uploads/image/user_pic/'. $this->session->userdata('image'); ?>" class="user-image img-circle elevation-2" alt="User Image">
-            <span class="d-none d-md-inline"></span>
+            <span class="d-none d-md-inline"><?php echo $this->session->userdata('username'); ?></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right mt-2">
             <!-- User image -->
@@ -101,7 +104,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4 " >
       <!-- Brand Logo -->
       <?php if($this->session->userdata('role') == "Administrator") :?>
         <a href="<?= site_url(); ?>admin" class="brand-link">
@@ -117,25 +120,15 @@
 
 
       <!-- Sidebar -->
-      <div class="sidebar mt-2">
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="sidebar">
+
 
         <!-- Sidebar Menu -->
 
         <?php if($this->session->userdata('role') == "Administrator") :?>
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-flat " data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-header accent-blue"><strong>RECORDS PANEL</strong></li>     
@@ -167,7 +160,19 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add PWD</p>
                 </a>
-              </li>                            
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>pmcrecord/viewpmc" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add PMC</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url();?>sscsrecord/add_sscs" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add SSCS</p>
+                </a>
+              </li>                                                        
             </ul>
           </li>
           <li class="nav-item">
@@ -190,16 +195,63 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>View PWD Records</p>
                 </a>
-              </li>              
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>pmcrecord/pmc_viewrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View PMC Records</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>sscsrecord/view_sscs" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View SCSS Records</p>
+                </a>
+              </li>                                                                      
             </ul>
             <li class="nav-item">
-              <a href="<?= site_url('admin/view_reports');?>" class="nav-link">
-                <i class="nav-icon fas fa-server"></i>
+              <a href="<?= site_url('requestuploads/view_request_adminfile'); ?>" class="nav-link">
+                <i class="nav-icon fas fa-upload"></i>
                 <p>
-                  Reports
+                  View File Request
                 </p>
               </a>
             </li>             
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-server"></i>
+              <p>
+                Reports
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>reports/sp_records" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solo Parent Reports</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>reports/pwd_records" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>PWD Reports</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>reports/pmc_records" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>PMC Reports</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>reports/sscs_records" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>SSCS Reports</p>
+                </a>
+              </li>                                                        
+            </ul>
+          </li>            
           </li>
           <li class="nav-header"><strong>WEBSITE PANEL</strong></li>
           <li class="nav-item">
@@ -258,7 +310,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url('admin/manage_useraccount'); ?>" class="nav-link">
+                <a href="<?= site_url('user/manage_useraccount'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage User</p>
                 </a>
@@ -271,7 +323,7 @@
     <?php elseif ($this->session->userdata('role') == "Employee") :?> 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
            <li class="nav-header accent-blue"><strong>RECORDS PANEL</strong></li>     
@@ -303,7 +355,19 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add PWD</p>
                 </a>
-              </li>                            
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>pmcrecord/viewpmc" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add PMC</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url();?>sscsrecord/add_sscs" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add SSCS</p>
+                </a>
+              </li>                                                        
             </ul>
           </li>
           <li class="nav-item">
@@ -326,10 +390,22 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>View PWD Records</p>
                 </a>
-              </li>              
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>pmcrecord/pmc_viewrecords" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View PMC Records</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url(); ?>sscsrecord/view_sscs" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View SCSS Records</p>
+                </a>
+              </li>                                                                      
             </ul>
             <li class="nav-item">
-              <a href="<?= site_url('admin/request_adminfile'); ?>" class="nav-link">
+              <a href="<?= site_url('requestuploads/request_adminfile'); ?>" class="nav-link">
                 <i class="nav-icon fas fa-upload"></i>
                 <p>
                   Upload File Request

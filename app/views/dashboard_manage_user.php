@@ -56,8 +56,8 @@ include(ROOT . 'templates/header.php');
                     <td><?php if ($row['status']=="Activated") {?><div class="badge badge-success">Activated</div><?php } elseif($row['status']=="Deactivated") {?><div class="badge badge-danger">Deactivated</div><?php } ?></td>
                     <td>
                       <div class="btn-group btn-group-sm">
-                        <a href="<?=site_url('admin/del_multiuser/'.$row['id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
-                        <a href="" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>                    
+                        <a href="<?=site_url('user/del_multiuser/'.$row['id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                        <a href="<?=site_url('user/edit_fetch_user/'.$row['id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>                    
                       </div>                      
                     </td>                      
                   </tr>

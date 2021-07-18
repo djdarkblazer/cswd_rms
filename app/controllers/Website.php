@@ -40,7 +40,18 @@ class Website extends Controller
 	public function view_req_pwd()
 	{
 	    $this->call->view('web_req_pwd');
+	}
+
+	public function view_req_pmc()
+	{
+	    $this->call->view('web_req_pmc');
+	}
+
+	public function view_req_sscs()
+	{
+	    $this->call->view('web_req_sscs');
 	}	
+
 
 
 

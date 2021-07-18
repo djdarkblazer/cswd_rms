@@ -41,8 +41,8 @@ include(ROOT . 'includes/topnav.php');
 <div class="welcome-banner h-100 d-inline-block w-100 p-2">
   <div class="w-100 p-2">
     <hr/>
-    <h1 class="text-center" style="color: white;">Calapan City Social Welfare and Development</h1>
-    <p class="text-center" style="color: white;">The Department of Calapan City Social Welfare and Development (CSWD) is the primary government agency mandated to develop, implement, and coordinate social protection and poverty-reduction solutions for and with the poor, vulnerable, and disadvantaged.</p>    
+    <h1 class="text-center" style="color: white;">City Social Welfare and Development Department</h1>
+    <p class="text-center" style="color: white;">The Department of City Social Welfare and Development (CSWD) is the primary government agency mandated to develop, implement, and coordinate social protection and poverty-reduction solutions for and with the poor, vulnerable, and disadvantaged.</p>    
     <hr/>  
     <div class="jumbotron">
       <h3>Featured Videos: </h3>
@@ -65,7 +65,7 @@ include(ROOT . 'includes/topnav.php');
                   <!-- 4:3 aspect ratio -->
                   <div class="embed-responsive embed-responsive-4by3">
                     <video width="auto" height="auto" controls>
-                      <source src="<?= SITE_URL('assets/video/vid2.mp4'); ?>" type="video/mp4">
+                      <source src="<?= SITE_URL('uploads/video/vid2.mp4'); ?>" type="video/mp4">
                         Your browser does not support the video tag.
                       </video>
                     </div>

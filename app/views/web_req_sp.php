@@ -109,10 +109,11 @@ define("ROOT", __DIR__ ."/");
 					<div class="post-slider">
 						<h1 class="slider-title">SOLO PARENT APPLICATION FORM</h1>
 						<hr>
+		<!-- Main content -->
 		<section class="content">
 			<div class="container-fluid"> 
 				<div class="row">
-					<form action="<?= site_url('admin/sp_insert_request'); ?>" method="POST" enctype="multipart/form-data">					
+					<form action="<?= site_url('admin/sp_insert_request'); ?>" method="POST" enctype="multipart/form-data" id="sp_validate">					
 						<!-- left column -->
 						<div class="col-md-12">
 
@@ -123,58 +124,77 @@ define("ROOT", __DIR__ ."/");
 
 								<div class="card-body">
 									<div class="row">
-
-										<div class="col-4">
-											<label for="sp_fullname">Full Name</label>
-											<input type="text" class="form-control" placeholder="Full Name*" name="sp_fullname">
+										<div class="col-3 form-group">
+											<label for="sp_lastname">Last Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_lastname">
 										</div>
-										<div class="col-2">
+										<div class="col-3 form-group">
+											<label for="sp_firstname">First Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_firstname">
+										</div>									
+										<div class="col-2 form-group">
+											<label for="sp_middlename">Middle Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_middlename">
+										</div>											
+										<div class="col-2 form-group">
 											<label for="sp_age">Age</label>
 											<div class="input-group">
 												<input type="text" class="form-control" placeholder="Auto Calculate" name="sp_age" id="age" readonly="">
 											</div>	
 										</div>
-										<div class="col-2">
-											<label for="sp_sex">Sex</label>
+										<div class="col-2 form-group">
+											<label for="sp_sex">Sex <span style="color: red">*</span></label>
 											<select name="sp_sex" class="form-control">
 												<option value="none" selected >---SELECT---</option>
 												<option value="Male">Male</option>
 												<option value="Female">Female</option>
 											</select>
 										</div>										
-										<div class="col-4">
-											<label for="sp_dob">Date of Birth</label>
+										<div class="col-4 form-group">
+											<label for="sp_dob">Date of Birth <span style="color: red">*</span></label>
 											<input type="date" class="form-control pull-right" name="sp_dob" id="bday">
 										</div>
-										<div class="col-4">
-											<label for="sp_pob">Place of Birth</label>
-											<input type="text" class="form-control" placeholder="Place of Birth*" name="sp_pob">
+										<div class="col-4 form-group">
+											<label for="sp_pob">Place of Birth <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_pob">
 										</div>  									    
-										<div class="col-4">
-											<label for="sp_address">Address</label>
-											<input type="text" class="form-control" placeholder="Address*" name="sp_address">
-										</div> 
-										<div class="col-4">
-											<label for="sp_email">Email Address</label>
-											<input type="text" class="form-control" placeholder="Email Address*" name="sp_email">
+										<div class="col-4 form-group">
+											<label for="sp_address">Address Street/Number <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_address">
 										</div>
-										<div class="col-4">
-											<label for="sp_mobilenum">Mobile Number</label>
-											<div class="input-group">											
-												<input type="text" class="form-control" placeholder="Mobile Number*" name="sp_mobilenum">
-
-											</div>										
+										<div class="col-4 form-group">
+											<label for="sp_brgy">Barangay <span style="color: red">*</span></label>
+											<select id="rec_mode" class="form-control" name="sp_brgy">
+											</select>
+										</div>									
+										<div class="col-2 form-group">
+											<label for="sp_city">City/Municipality <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Calapan City" name="sp_city" readonly>
+										</div>
+										<div class="col-2 form-group">
+											<label for="sp_province">Province <span style="color: red">*</span></label>
+											<input type="text" class="form-control" value="Oriental Mindoro" name="sp_province" readonly>
+										</div>	 
+										<div class="col-4 form-group">
+											<label for="sp_email">Email Address <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_email">
+										</div>
+										<div class="col-4 form-group">
+											<label for="sp_mobilenum">Mobile Number <span style="color: red">*</span></label>
+											<div class="input-group">	
+												<input type="text" class="form-control" placeholder="Start with 09..." name="sp_mobilenum">
+											</div>
 										</div>																		
-										<div class="col-4">
-											<label for="sp_educational">Highest Educational Attainment</label>
-											<input type="text" class="form-control" placeholder="Highest Educational Attainment*" name="sp_educational">
+										<div class="col-4 form-group">
+											<label for="sp_educational">Highest Educational Attainment <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_educational">
 										</div>
-										<div class="col-4">
-											<label for="sp_occupation">Occupation</label>
-											<input type="text" class="form-control" placeholder="Occupation*" name="sp_occupation">
+										<div class="col-4 form-group">
+											<label for="sp_occupation">Occupation <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_occupation">
 										</div> 
-										<div class="col-4">
-											<label for="sp_monthlyincome">Estimated Monthly Income</label>
+										<div class="col-4 form-group">
+											<label for="sp_monthlyincome">Estimated Monthly Income <span style="color: red">*</span></label>
 											<input type="text" class="form-control" placeholder="(Ex. 20,000 - 50,000)*" name="sp_monthlyincome">
 										</div>
 
@@ -350,7 +370,7 @@ define("ROOT", __DIR__ ."/");
 										</table>
 										<div class="col-md-12">
 
-											<h5 class="callout callout-warning">*Include family members and other members of the household.</h5>
+											<h5 class="callout callout-warning"><span style="color: red">*</span>Include family members and other members of the household.</h5>
 											<!-- /.card-tools -->
 										</div>
 										<!-- /.row -->		
@@ -371,8 +391,8 @@ define("ROOT", __DIR__ ."/");
 								</div>
 								<div class="card-body" style="align-items: center;">	
 									<div class="row">
-										<div class="col-2 mb-4">
-											<label for="sp_curr_status">Current Status</label>
+										<div class="col-2 mb-4 form-group">
+											<label for="sp_curr_status">Current Status <span style="color: red">*</span></label>
 											<select name="sp_curr_status" class="form-control">
 												<option >----------------------------</option>
 												<option value="Widow">Widow</option>
@@ -436,14 +456,14 @@ define("ROOT", __DIR__ ."/");
 									<div class="row">
 										<div class="col-4">
 											<label for="curr_date">Date Today</label>
-											<input type="date" class="form-control pull-right" name="curr_date" value="<?php echo date("Y-m-d"); ?>">
+											<input type="date" class="form-control pull-right" name="curr_date" value="<?php echo date("Y-m-d"); ?>" readonly>
 										</div>
-										<div class="col-4" >
-											<label for="sp_signature">PRINTED NAME</label>
-											<input type="text" class="form-control" placeholder="PRINTED NAME*" name="sp_signature">
+										<div class="col-4 form-group" >
+											<label for="sp_signature">Printed Name <span style="color: red">*</span></label>
+											<input type="text" class="form-control" name="sp_signature">
 										</div>										
 										<div class="col-4" >
-											<label for="fileToUpload">Upload Any Size ID Picture</label>
+											<label for="fileToUpload">Upload Any Size ID Picture <span style="color: red">*</span></label>
 											<input type="file" name="fileToUpload" id="fileToUpload" class="form-control" style="padding: 3px">
 										</div>												
 									</div>
@@ -456,14 +476,13 @@ define("ROOT", __DIR__ ."/");
 					<!-- /.row -->
 					<div class="card-footer">
 						<center>
-						<button type="submit" class="btn btn-primary">Submit Application Form</button>
+							<button type="submit" class="btn btn-primary">Submit Application Form</button>
 						</center>
 					</div>				
 				</form>
 			</div><!-- /.container-fluid -->
-		</section>		
-					</div>
-					<!-- //Post -->
+		</section>
+		<!-- /.content -->
 				</div>       
 					<div class="mt-4">
 						<center>

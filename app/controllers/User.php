@@ -28,6 +28,7 @@ class User extends Controller
 		);		
 		$this->call->library('email', $config);
 		$this->call->model('user');
+		$this->call->model('record');
 	}
 
 	public function add_user()
@@ -38,6 +39,25 @@ class User extends Controller
 			$this->call->view('dashboard_login'); 
 		}	    
 	}
+
+	public function manage_useraccount()
+	{
+		if($this->auth->is_logged_in()){
+			$data = $this->record->user_accounts();
+			$this->call->view('dashboard_manage_user',$data);
+		} else {
+			$this->call->view('dashboard_login_v2'); 
+		}
+	}	
+
+	public function update_user()
+	{
+		if($this->auth->is_logged_in()){
+			$this->call->view('dashboard_update_user');
+		} else {
+			$this->call->view('dashboard_login'); 
+		}	    
+	}		
 
 	public function insert_user()
 	{
@@ -94,7 +114,7 @@ class User extends Controller
 							basename( $_FILES["fileToUpload"]["name"]));
 
 						$this->session->set_flashdata(array('success' => 'UserData Added Successfully.'));
-						redirect('user/add_user');	
+						redirect('user/manage_useraccount');	
 						exit();																											
 					}
 					else
@@ -111,6 +131,67 @@ class User extends Controller
 	//End
 	}
 
+	public function edit_fetch_user($id)
+	{
+		if($this->auth->is_logged_in()){
+			$data = $this->user->fetch_single_user($id);
+			$this->call->view('dashboard_update_user',$data);
+		} else {
+			$this->call->view('dashboard_login_v2'); 
+		}
+	}
+
+	public function update_user_data()
+	{	
+		if ($this->form_validation->submitted()) {
+			if ($this->form_validation->run()) {
+				// code..
+				$this->user->update_useracc(
+					$this->io->post('id'),
+					$this->io->post('lastname'),
+					$this->io->post('firstname'),
+					$this->io->post('middlename'),
+					$this->io->post('email'),
+					$this->io->post('username'),
+					$this->io->post('role'),
+					$this->io->post('status'));
+
+				$this->session->set_flashdata(array('success' => 'UserData Updated Successfully.'));
+				redirect('user/manage_useraccount');	
+				exit();
+			}
+			else
+			{
+				$this->session->set_flashdata(array('error' => 'An Error Occured. Please Check your Information.'));
+				redirect('user/update_user');
+				exit();
+			}
+		}
+		$this->call->view('dashboard_update_user');
+	//end	
+	}
+	public function del_multiuser($id)
+	{
+		if($this->auth->is_logged_in()){
+			$img = $this->record->get_single_userdata($id);
+			$pathFile ="/uploads/image/user_pic/";
+			$dirto = getcwd();
+			$data = $dirto.$pathFile.$img['image'];
+
+			if(!empty($data))
+			{
+				unlink($data);
+			}
+			if($this->record->delete_userdata($id))
+			{
+				$this->session->set_flashdata(array('delete' => 'User Data Deleted Successfully.'));
+				redirect('user/manage_useraccount');
+				exit();
+			}
+		} else {
+			$this->call->view('dashboard_login_v2'); 
+		}     
+	}
 
 //.End	
 }

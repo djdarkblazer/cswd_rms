@@ -12,11 +12,11 @@ class Account extends Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'smtp.mailtrap.io',
           'smtp_port' => 2525,
-          'smtp_user' => '8dbae642832f52',
-          'smtp_pass' => '64fb14eb6d8af3',
+          'smtp_user' => '8f951b23a6d856',
+          'smtp_pass' => '19b2f60bdc371d',
           'crlf' => "\r\n",
           'newline' => "\r\n"
-        );
+      );
         $this->call->library('email', $config);
     }
 
@@ -75,8 +75,8 @@ class Account extends Controller {
             {
                 if($this->account->email_exists($this->io->post('email')))
                 {
-                 if($this->account->check_if_verified($this->io->post('email')))
-                 {
+                   if($this->account->check_if_verified($this->io->post('email')))
+                   {
                     if($this->auth->login($this->io->post('email'), $this->io->post('password')))
                     {
                         $data=$this->auth->login($this->io->post('email'), $this->io->post('password'));
@@ -95,7 +95,7 @@ class Account extends Controller {
 
                     }
                 } else {
-                    $this->session->set_flashdata(array('error' => 'Verify your account First!'));
+                    $this->session->set_flashdata(array('error' => 'Activate your account with the permission of the Admin.'));
                     $this->call->view('dashboard_login_v2');
                 }
             } else {
@@ -273,8 +273,8 @@ public function reset_verification()
 
 public function change_password()
 {
-   if($this->form_validation->submitted())
-   {
+ if($this->form_validation->submitted())
+ {
     $this->form_validation
     ->name('password')->required()
     ->min_length(8)
@@ -287,7 +287,7 @@ public function change_password()
             if($this->account->change_password($this->io->post('password'), $this->session->userdata('user_email')))
             {
                 $this->session->set_flashdata(array('success' => 'Password Changed. You can Login now'));                        
-               $this->call->view('dashboard_login_v2');
+                $this->call->view('dashboard_login_v2');
                 exit();
             }
         }

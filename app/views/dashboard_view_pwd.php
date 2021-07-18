@@ -42,6 +42,7 @@ include(ROOT . 'templates/header.php');
                     <th>Type of Disability</th>
                     <th>Specific Disability</th>
                     <th>Address</th>
+                    <th>Barangay</th>
                     <th>Request Status</th>
                     <th style="text-align: center;">Action</th>
                   </tr>
@@ -55,13 +56,15 @@ include(ROOT . 'templates/header.php');
                     <td><?= date('M d, Y',strtotime($row['pwd_dob'])); ?></td>
                     <td><?= $row['pwd_typedis']; ?></td>
                     <td><?= $row['pwd_typespecify']; ?></td>
-                    <td><?= $row['pwd_address']; ?>, Brgy.<?= $row['pwd_brgy']; ?>, <?= $row['pwd_city']; ?>, <?= $row['pwd_province']; ?></td>
+                    <td><?= $row['pwd_address']; ?>, <?= $row['pwd_city']; ?>, <?= $row['pwd_province']; ?></td>
+                    <td><?= $row['pwd_brgy']; ?></td>
                     <td><?php if($row['request_status']=="Pending") {?><div class="badge badge-warning">Pending</div><?php }elseif($row['request_status']=="Approved") { ?><div class="badge badge-success">Approved</div> <?php }elseif($row['request_status']=="Disapproved") {?><div class="badge badge-danger">Disapproved</div> <?php }elseif($row['request_status']=="Incomplete") {?><div class="badge badge-info">Incomplete</div><?php } ?></td>
                     <td>
                       <div class="btn-group btn-group-sm">
                         <a href="<?=site_url('admin/pwd_delrecords/'.$row['pwd_id'].'')?>" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
                         <a href="<?=site_url('admin/edit_pwd_records/'.$row['pwd_id'].'')?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                        <a href="<?=site_url('admin/pdf_view_pwd/'.$row['pwd_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-print"></i></a>                     
+                        <a href="<?=site_url('admin/pdf_view_pwd/'.$row['pwd_id'].'')?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-fw fa-print"></i></a>
+                        <a href="<?php echo BASE_URL .'uploads/image/pwd_idpic/residency/'. $row['image_residency']; ?>" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-fw fa-eye"></i></a>                                              
                       </div>                      
                     </td>
                    </td>
